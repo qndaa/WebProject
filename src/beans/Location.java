@@ -1,0 +1,55 @@
+package beans;
+
+public class Location {
+
+    public double geographicalWidth;
+    public double geographicalLength;
+    public Address address;
+    
+    public Location() {
+    	
+    	
+    }
+    
+    
+	public Location(double geographicalWidth, double geographicalLength, Address address) {
+		super();
+		this.geographicalWidth = geographicalWidth;
+		this.geographicalLength = geographicalLength;
+		this.address = address;
+	}
+
+
+	public double getGeographicalWidth() {
+		return geographicalWidth;
+	}
+
+
+	public void setGeographicalWidth(double geographicalWidth) {
+		this.geographicalWidth = geographicalWidth;
+	}
+
+
+	public double getGeographicalLength() {
+		return geographicalLength;
+	}
+
+
+	public void setGeographicalLength(double geographicalLength) {
+		this.geographicalLength = geographicalLength;
+	}
+
+
+	public Address getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+    
+    
+    
+	
+}
