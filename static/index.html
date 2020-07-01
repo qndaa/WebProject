@@ -1,73 +1,90 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <title>ApartmentApp</title>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-	<meta charset="utf-8">
-  		
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-	
-	<script type="text/javascript">
-	
-		$(document).ready(function(){
-			$("button#registationGuest").click(function(){
-				
-				window.location.href = "/registration.html";
-				
-				
-			})
-		});
-		
-		
-		
-	
-	
-	</script>
+  <style type="text/css">
+  	
+	.nav-pills>a.active {
+		border-style: solid !important;
+  		border-color: : floralwhite !important;
+ 	 	background: dodgerblue !important;
+	}
+  </style>
+
+
+ 
+
+
+
+
+
+
+
+
 
 </head>
-
-
 <body>
 
 
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded text-dark">
+  		<a class="navbar-brand" href="#/">ApartmantApp</a>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Apartmani d.o.o</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  		
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Pocetna <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Apartmani</a>
-      </li>
-    </ul>
-    
-    <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="button">Prijavi se</button>
-      
-      <button id="registationGuest" class="btn btn-outline-success my-2 my-sm-0"  type="button">Registracija gosta</button>
-    </form>
-  </div>
-</nav>
+		<div class="container nav nav-pills mr-auto" role="tablist" id="ul_right">
 
 
+		    
+		    	<a class="nav-link bg-light ml-2 active" data-toggle="pill" href="#home">Pocetna</a>
+		   
+		    
+
+		    
+		    	<a class="nav-link bg-light ml-2" data-toggle="pill" href="#help">Pomoc</a>
+		    
+
+			
+		    
+			
+		    	<a  class="nav-link bg-light ml-auto " data-toggle="pill" href="#registrationGuest">Registrovanje gosta</a>
+		    
+		    
+
+		    
+		    	<a  class="nav-link bg-light ml-2 mr-1" data-toggle="pill" href="#login">Prijavljivanje</a>
+		    
+
+		    
+
+		</div>	
+			
+
+		
+
+	
+		
+	</nav>
 
 
+	<div class="tab-content ">
+  		<div class="tab-pane container-fluid active" id="home">Pocetna</div>  		
+  		<div class="tab-pane container-fluid fade" id="help">Help</div>
 
-
+  		<div class="tab-pane container-fluid fade" id="registrationGuest">Registracija</div>
+  		<div class="tab-pane container-fluid fade" id="login">Prijavljivanje</div>
+	</div>
 
 
 
 
 
 </body>
-
-
 </html>
