@@ -2,10 +2,10 @@ package beans;
 
 public class Address {
 
-	public String street;
-	public int numberHouse;
-	public String city;
-	public int postNumber;
+	private String street;
+	private int numberHouse;
+	private String city;
+	private int postNumber;
 	
 	
 	public Address() {}

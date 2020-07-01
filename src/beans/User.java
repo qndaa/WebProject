@@ -3,19 +3,19 @@ package beans;
 import enums.TypeOfUser;
 
 public abstract class User {
-	public String userName;
-	public String password;
-	public String name;
-	public String surname;
-	public String gender;
-	public TypeOfUser typeOfUser;
+	private String username;
+	private String password;
+	private String name;
+	private String surname;
+	private String gender;
+	private TypeOfUser typeOfUser;
 	
 	public User() {}
 	
 	
-	public User(String userName, String password, String name, String surname, String gender, TypeOfUser typeOfUser) {
+	public User(String username, String password, String name, String surname, String gender, TypeOfUser typeOfUser) {
 		super();
-		this.userName = userName;
+		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.surname = surname;
@@ -24,11 +24,11 @@ public abstract class User {
 	}
 
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

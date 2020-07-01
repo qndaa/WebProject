@@ -1,7 +1,7 @@
 package enums;
 
 public enum TypeOfUser {
-	Administrator,
-	Guest,
-	Host	
+	ADMINISTRATOR,
+	GUEST,
+	HOST	
 }

@@ -8,15 +8,13 @@ import enums.StatusReservation;
 
 public class Reservation {
 
-	public Apartment reservedApartment;
-	public Date startTime;
-	public int numberOfNights;
-	public double price;
-	public String message;
-	public Guest guest;
-	public StatusReservation statusReseravation;
-	
-	
+	private Apartment reservedApartment;
+	private Date startTime;
+	private int numberOfNights;
+	private double price;
+	private String message;
+	private Guest guest;
+	private StatusReservation statusReseravation;
 	
 	
 	public Reservation() {

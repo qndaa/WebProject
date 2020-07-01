@@ -1,11 +1,9 @@
 package enums;
 
 public enum StatusReservation {
-	Create,
-	Decline,
-	Quited,
-	Accepted,
-	Completed
-	
-	
+	CREATE,
+	DECLINE,
+	QUITED,
+	ACCEPTED,
+	COMPLETED
 }

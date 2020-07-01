@@ -2,9 +2,9 @@ package beans;
 
 public class Location {
 
-    public double geographicalWidth;
-    public double geographicalLength;
-    public Address address;
+    private double geographicalWidth;
+    private double geographicalLength;
+    private Address address;
     
     public Location() {
     	
