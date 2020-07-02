@@ -9,8 +9,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <script src="js/vue.js"></script>
-  <script src="js/axios.js"></script>
+
 
   <style type="text/css">
   	
@@ -25,15 +24,19 @@
 
  <script type="text/javascript">
  
- 	
- 	
- 	$(function() {
- 		$('#login').load('login.html');
- 	});
-
- 	$(function() {
- 		$('#registrationGuest').load('registration.html');
- 	});
+ $(document).ready(function(){
+	
+	 
+	 		$('#logout').click(function() {
+	 			window.location.href = "../../";
+	 			
+	 		});
+	 	
+	 
+	 
+ });
+ 
+ 
 
 
  </script>
@@ -48,23 +51,19 @@
 		    
 		    	<a class="nav-link bg-light ml-2 mr-2 active" data-toggle="pill" href="#home">Pocetna stranica</a>
 		       
-		    	<a class="nav-link bg-light ml-2 mr-auto" data-toggle="pill" href="#help">Pomoc</a>
 		   
-		    	<a  class="nav-link bg-light ml-auto mr-2 " data-toggle="pill" href="#registrationGuest">Registrovanje gosta</a>
+		    	<a  class="nav-link bg-light ml-auto mr-2 " data-toggle="pill" href="#profile">Profil</a>
 		    
-		    	<a  class="nav-link bg-light ml-2 mr-2" data-toggle="pill" href="#login">Prijavljivanje</a>		    
+		    	<a id="logout" class="nav-link bg-light ml-2 mr-2" data-toggle="pill" href="#logout">Odjavi se</a>		    
 		</div>			
 	</nav>
 
 
 	<div class="tab-content ">
-  		<div class="tab-pane container-fluid active" id="home"></div>  		
-  		<div class="tab-pane container-fluid fade" id="registrationGuest"></div>
-  		<div class="tab-pane container-fluid fade" id="login"></div>
+  		<div class="tab-pane container-fluid active" id="#home"></div>  		
+  		<div class="tab-pane container-fluid fade" id="#profile"></div>
+  		<div class="tab-pane container-fluid fade" id="#logout"></div>
 	</div>
-
-
-
 
 
 </body>
