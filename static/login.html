@@ -1,31 +1,61 @@
-<!DOCTYPE html>
-<html>
+
 <head>
-  <script src="js/jquery.min.js"></script>
-  <script src="script/login.js"></script>
-  <title>Login</title>
+  
+ <link href="login.css" rel="stylesheet">
+ <script type="text/javascript" src="script/login.js"></script>
+
+ <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
 </head>
-<body>
-
-<h3>Login</h3>
 
 
-<form id="formaLogin" method="post">
-<table style="border: solid 1px">
-  <tr>
-    <td>Korisnicko ime</td>
-    <td> <input  type="text" required  name="username"></td>
-  </tr>
-   <tr>
-    <td>Sifra</td>
-    <td> <input  type="password" required="" name="password"></td>
-  </tr>
-  <tr>
-      <td colspan="2" align="right"><input type="submit"   value="posalji" /></td>
-      </tr>
+<body class="text-center">
+  
+  
+  <form class="form-login" id="formaLogin" method="post" >
+    
 
-</table>
-</form>
+    <div class="py-5 text-center">
+        <h2 class="h2 mb-3 text-primary text-center">Prijavite se</h2>
+    </div>
+
+
+    <div class="mb-3">
+       <label for="inputEmail" class="sr-only">Korisnicko ime</label>
+      <input type="text" name="username" class="form-control" placeholder="Korisnicko ime" required autofocus/>
+    
+
+    
+    
+      <label for="inputPassword" class="sr-only">Sifra</label>
+      <input type="password"  name="password" class="form-control" placeholder="Sifra" required/>
+    
+
+    </div>
+    <label for="error" class="sr-only"> </label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Prijava</button>
+  </form>
+
+
 
 </body>
-</html>
+
+
+
+
+
