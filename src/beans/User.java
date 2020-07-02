@@ -1,8 +1,13 @@
 package beans;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import enums.TypeOfUser;
 
-public abstract class User {
+
+public class User  {
+	
+	
 	private String username;
 	private String password;
 	private String name;
@@ -10,7 +15,9 @@ public abstract class User {
 	private String gender;
 	private TypeOfUser typeOfUser;
 	
-	public User() {}
+	public User() {
+		super();
+	}
 	
 	
 	public User(String username, String password, String name, String surname, String gender, TypeOfUser typeOfUser) {
@@ -69,6 +76,13 @@ public abstract class User {
 
 	public void setTypeOfUser(TypeOfUser typeOfUser) {
 		this.typeOfUser = typeOfUser;
+	}
+
+
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", name=" + name + ", surname=" + surname
+				+ ", gender=" + gender + ", typeOfUser=" + typeOfUser + "]";
 	}
 
 

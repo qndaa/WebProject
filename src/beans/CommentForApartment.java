@@ -1,8 +1,15 @@
 package beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class CommentForApartment {
+	
+	
 	public Guest guest;
+	
+	@JsonIgnoreProperties(value = {"comments"})
 	public Apartment apartment;
+	
 	public String text;
 	public int mark;
 	

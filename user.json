@@ -1,0 +1,15 @@
+[ "java.util.ArrayList", [ [ "beans.Administrator", {
+  "password" : "simke1998",
+  "name" : "Aca",
+  "surname" : "Simic",
+  "gender" : "Muski",
+  "typeOfUser" : "ADMINISTRATOR",
+  "userName" : "simke98"
+} ], [ "beans.Administrator", {
+  "password" : "qndaa123",
+  "name" : "Djordjije",
+  "surname" : "Kundacina",
+  "gender" : "Muski",
+  "typeOfUser" : "ADMINISTRATOR",
+  "userName" : "qndaa"
+} ] ] ]

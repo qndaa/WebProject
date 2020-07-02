@@ -2,17 +2,23 @@ package beans;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import enums.StatusReservation;
 
 
 
 public class Reservation {
 
+	@JsonIgnoreProperties(value = "reservations")
 	private Apartment reservedApartment;
+	
 	private Date startTime;
 	private int numberOfNights;
 	private double price;
 	private String message;
+	
+	@JsonIgnoreProperties(value = {"resevration"})
 	private Guest guest;
 	private StatusReservation statusReseravation;
 	

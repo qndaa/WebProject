@@ -1,6 +1,7 @@
 package beans;
 
 public class ContentOfApartment {
+	
 	private long id;
 	private String name;
 	

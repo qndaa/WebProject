@@ -15,6 +15,14 @@ public class Administrator extends User {
 		
 	}
 
+	@Override
+	public String toString() {
+		return "Administrator [getUserName()=" + getUserName() + ", getPassword()=" + getPassword() + ", getName()="
+				+ getName() + ", getSurname()=" + getSurname() + ", getGender()=" + getGender() + ", getTypeOfUser()="
+				+ getTypeOfUser() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
+	}
+
 	
 	
 	
