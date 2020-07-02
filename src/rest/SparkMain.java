@@ -9,6 +9,7 @@ import java.io.File;
 
 import com.google.gson.Gson;
 
+import beans.Administrator;
 import beans.User;
 import dto.AdministratorDTO;
 import dto.GuestDTO;
@@ -20,7 +21,7 @@ public class SparkMain {
 	
 
 	public static void main(String[] args) throws Exception {
-		port(8080);
+		port(9001);
 		
 		staticFiles.externalLocation(new File("./static").getCanonicalPath()); 
 		
@@ -29,12 +30,16 @@ public class SparkMain {
 			return "Works";
 		});
 		
+		
 		post("/login", (req,res) -> {
 			res.type("application/json");
-			String userName =  req.queryParams("username");
-			String password = req.queryParams("password");
-			Gson g = new Gson();
 			
+			//treba napraviti neku klasu koja ce biti samo korisnicko ime i sifra 
+			//i onda ce se citati svi korisnici i uporedjivati  username i password
+			String a = req.body(); //req.body vraca mapu kao sto si ti napisao u ajax pozivu data
+			Gson g = new Gson();
+			Administrator admin = g.fromJson(a, Administrator.class);
+			System.out.println(admin.getUserName()  + " " + admin.getPassword());
 			return  g.toJson(true);
 			
 		});

@@ -3,7 +3,9 @@
   
  <link href="login.css" rel="stylesheet">
  <script type="text/javascript" src="script/login.js"></script>
-
+ <script src="js/vue.js"></script>
+ <script src="js/axios.js"></script>
+ <script src="js/jquery.min.js"></script>
  <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -26,7 +28,7 @@
 
 <body class="text-center">
   
-  
+  <div id="login">
   <form class="form-login" id="formaLogin" method="post" >
     
 
@@ -37,20 +39,20 @@
 
     <div class="mb-3">
        <label for="inputEmail" class="sr-only">Korisnicko ime</label>
-      <input type="text" name="username" class="form-control" placeholder="Korisnicko ime" required autofocus/>
+      <input type="text" name="username" class="form-control" placeholder="Korisnicko ime" v-model="name" required autofocus/>
     
 
     
     
       <label for="inputPassword" class="sr-only">Sifra</label>
-      <input type="password"  name="password" class="form-control" placeholder="Sifra" required/>
+      <input type="password"  name="password" class="form-control" v-model="password" placeholder="Sifra" required/>
     
 
     </div>
     <label for="error" class="sr-only"> </label>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Prijava</button>
+    <button class="btn btn-lg btn-primary btn-block" v-on:click="isvalid">Prijava</button>
   </form>
-
+</div>
 
 
 </body>
