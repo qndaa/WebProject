@@ -3,6 +3,9 @@ package beans;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import enums.StatusApartment;
 import enums.TypeOfApartment;
 
@@ -11,12 +14,16 @@ public class Apartment {
 	private TypeOfApartment typeOfApartment;
 	private int numberOfRoom;
 	private int numberOfGuests;
-	private Location location;
 	
+	private Location location;
 	private ArrayList<Date> releaseDates;
 	
+	@JsonIgnoreProperties(value = {"aparment"})
 	private Host host;
+	
+	@JsonIgnoreProperties(value = {"apartment"})
 	private ArrayList<CommentForApartment> comments;
+	
 	private ArrayList<String> urlImages;
 	private double pricePerNight;
 	
@@ -24,7 +31,10 @@ public class Apartment {
 	private Date checkOutTime;
 	
 	private StatusApartment status;
+	
 	private ArrayList<ContentOfApartment> content;
+	
+	@JsonIgnoreProperties(value = {"reservedApartment"})
 	private ArrayList<Reservation> reservations;
 	
 	
@@ -32,6 +42,25 @@ public class Apartment {
 	public Apartment() {
 		
 	}
+
+	
+
+
+	public Apartment(TypeOfApartment typeOfApartment, int numberOfRoom, int numberOfGuests, Location location,
+			Host host, double pricePerNight, Date checkInTime, Date checkOutTime,
+			StatusApartment status) {
+		super();
+		this.typeOfApartment = typeOfApartment;
+		this.numberOfRoom = numberOfRoom;
+		this.numberOfGuests = numberOfGuests;
+		this.location = location;
+		this.host = host;
+		this.pricePerNight = pricePerNight;
+		this.checkInTime = checkInTime;
+		this.checkOutTime = checkOutTime;
+		this.status = status;
+	}
+
 
 
 

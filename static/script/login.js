@@ -1,19 +1,37 @@
-var login = new Vue({
-	el: '#login',
-	data :{
-		user : null,
-	},
-	methods: {
-		isvalid : function(){
-			let userName = this.name;
-			let password = this.password;
-			axios.post("/login",{"username": userName, "password": password})
-			.then(response=> alert("Vrati nesto"));
-		}
-
-	}
 
 
+$(document).ready(function() {
+	var btn = $("#loginBtn");
+	btn.click(function(event) {
+		event.preventDefault();
+
+		let username = $("input[name=username]").val();
+		let password = $("input[name=password]").val();
 
 
-})
+		$.ajax({
+			url: '/login',
+			type: 'post',
+			data: {"username": username ,"password": password},
+			success : function(answer){
+
+				if(answer == null){
+					alert("Username ili password pogresan");
+	
+				}else{
+					if(answer.typeOfUser === "ADMINISTRATOR"){
+						window.location.href = "/users/administrator.html";
+					}else if (answer.typeOfUser === "GUEST") {
+						window.location.href = "/users/guest.html";
+					}else if (answer.typeOfUser === "HOST") {
+						window.location.href = "/users/host.html";
+					}
+				}
+
+			
+		}})
+		
+
+	});
+	
+});
