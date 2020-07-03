@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import beans.User;
 
 import dto.UserDTO;
+import enums.TypeOfUser;
 import spark.Request;
 import spark.Session;
 
@@ -66,34 +67,78 @@ public class SparkMain {
 		
 		
 		
-		post("checkAdministrator", (req,res) ->{
+		post("checkUser", (req,res) ->{
 			res.type("application/json");
 			
-			Gson g = new Gson();
 			Session ss =req.session(true);
 			User userSession = ss.attribute("user");
 			
 			if(userSession == null) {
-				
-		
-				 res.redirect("",403);
-				 return null;
+				return false;
 			}
-			 res.redirect("",200);
+			return true;
+		});
+		
+	
+		post("/checkAdministrator", (req,res) ->{
+			res.type("application/json");
 			
-				return null;
+			Session ss =req.session(true);
+			User userSession = ss.attribute("user");
+			
+			if(userSession == null) {
+				return false;
+			}
+			if(userSession.getTypeOfUser() == TypeOfUser.ADMINISTRATOR) {
+				return true;
+			}
+			
+			return false;
+		});
+		
+		post("/checkHost", (req,res) ->{
+			res.type("application/json");
+			
+			Session ss =req.session(true);
+			User userSession = ss.attribute("user");
+			
+			if(userSession == null) {
+				return false;
+			}
+			if(userSession.getTypeOfUser() == TypeOfUser.HOST) {
+				return true;
+			}
+			
+			return false;
 		});
 		
 		
+		post("/checkGuest", (req,res) ->{
+			res.type("application/json");
+			
+			Session ss =req.session(true);
+			User userSession = ss.attribute("user");
+			
+			if(userSession == null) {
+				return false;
+			}
+			if(userSession.getTypeOfUser() == TypeOfUser.GUEST) {
+				return true;
+			}
+			
+			return false;
+		});
 		
-		
-		
-		
-		
-		
-		
-		
-		
+		get("/logout", (req, res) -> {
+			res.type("application/json");
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			if (user != null) {
+				ss.invalidate();
+			}
+			return true;
+		});
 		
 	}
 }

@@ -24,17 +24,38 @@
 
  <script type="text/javascript">
  
- $(document).ready(function(){
+ 	$(window).ready(function() {
+	    $.ajax({
+	      url: '/checkHost',
+	      type: 'post',
+	      contentType: "application/json",
+	      success : function(answer) {
+	    	  if(answer == true ) {
+	    		  $("#content").css("visibility", "visible");
+	    		  $("#error").css("visibility", "collapse")
+	    	  } else {
+	    		  $("#content").css("visibility", "collapse");
+	    		  $("#error").css("visibility", "visible")
+	    	  }
+	      }
+	 });
+	    
+	   
+	    
+	    
+	    
+ 	});
+
 	
+ 	 $('#logout').click(function() {
+			window.location.href = "../../";
+			
+	});
+	
+	 		
 	 
-	 		$('#logout').click(function() {
-	 			window.location.href = "../../";
-	 			
-	 		});
-	 	
 	 
-	 
- });
+
  
  
 
@@ -44,6 +65,7 @@
 </head>
 <body>
 
+	<div id="content" style ="visibility : collapse">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded text-dark">
   		<a class="navbar-brand" href="#/">ApartmantApp</a>
 
@@ -64,7 +86,11 @@
   		<div class="tab-pane container-fluid fade" id="#profile"></div>
   		<div class="tab-pane container-fluid fade" id="#logout"></div>
 	</div>
+</div>
 
+<div id="error" class="container">
+		<h2>Error 304!</h2>
+	</div>
 
 </body>
 </html>

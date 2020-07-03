@@ -23,25 +23,49 @@
 
  <script type="text/javascript">
  
-  $(window).load(function() {
+  $(document).ready(function() {
     $.ajax({
       url: '/checkAdministrator',
       type: 'post',
       contentType: "application/json",
-      statusCode : {403 : function(){
-        alert("403");
-      }, 200 : function(){
-          alert("200");
-      }}
+      success : function(answer) {
+    	  
+
+    	  
+    	  if(answer == true ) {
+    		  $("#content").css("visibility", "visible");
+    		  $("#error").css("visibility", "collapse")
+    	  } else {
+    		  $("#content").css("visibility", "collapse");
+    		  $("#error").css("visibility", "visible")
+    	  }
+      }
+    });
+    
+    
+    $('#logout').click(function() {
+		window.location.href = "../../";
+		
+	});
+    
+    $("#logoutBtn").on('click', function(){
+    	alert("JDole");
+    	 $.ajax({
+   	      url: '/logout',
+   	      type: 'get',
+   	      contentType: "application/json",
+   	      success : function(answer) {
+   	    	  
+   	    	 	window.location.href = "../../index.html";
+   	      }
+   	    });
     });
     
     
   });
 
- 	$(function() {
- 		$('#login').load('login.html');
- 	});
-
+ 	
+	
  	$(function() {
  		$('#registrationGuest').load('registration.html');
  	});
@@ -51,17 +75,19 @@
 </head>
 <body>
 
+	<div id="content" style="visibility : collapse">
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded text-dark">
   		<a class="navbar-brand" href="#/">ApartmantApp</a>
 
-		<div class="container-fluid nav nav-pills" role="tablist" id="ul_right">
+		<div class="container-fluid nav nav-pills" role="tablist" >
 		    
 		    	<a class="nav-link bg-light ml-2 mr-2 active" data-toggle="pill" href="#home">Pocetna stranica</a>
 		       
 		   
 		    	<a  class="nav-link bg-light ml-auto mr-2 " data-toggle="pill" href="#profile">Profil</a>
 		    
-		    	<a  class="nav-link bg-light ml-2 mr-2" data-toggle="pill" href="#logout">Odjavi se</a>		    
+		    	<a id="logoutBtn" class="nav-link bg-light ml-2 mr-2" data-toggle="pill" href="#logout">Odjavi se</a>		    
 		</div>			
 	</nav>
 
@@ -70,8 +96,12 @@
   		<div class="tab-pane container-fluid active" id="#home"></div>  		
   		<div class="tab-pane container-fluid fade" id="#profile"></div>
   		<div class="tab-pane container-fluid fade" id="#logout"></div>
+		</div>
 	</div>
 
+	<div id="error" class="container" style="visibility : collapse" >
+		<h2>Error 403!</h2>
+	</div>
 
 </body>
 </html>
