@@ -19,4 +19,11 @@
   "gender" : "Muski",
   "typeOfUser" : "GUEST",
   "userName" : "pera123"
+} ], [ "beans.User", {
+  "password" : "mara123",
+  "name" : "Marija",
+  "surname" : "Marijanovi",
+  "gender" : "Zenski",
+  "typeOfUser" : "GUEST",
+  "userName" : "mara123"
 } ] ] ]

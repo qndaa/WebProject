@@ -26,7 +26,8 @@ $(document).ready(function() {
 			data: JSON.stringify(dataGuest),
 		success: function(answer){
 				if(answer == true){
-					alert("svaka cast");
+					alert("Uspesno ste kreirali nalog");
+					window.location.href = "/users/guest.html";
 				}else{
 
 					alert("Korisnik postoji sa tim korisnickim imenom");

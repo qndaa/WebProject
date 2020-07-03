@@ -11,7 +11,6 @@ import javax.jws.soap.SOAPBinding.Use;
 
 import com.google.gson.Gson;
 
-
 import beans.User;
 import dto.ApartmentDTO;
 import dto.ReservationDTO;
@@ -20,132 +19,121 @@ import enums.TypeOfUser;
 import spark.Request;
 import spark.Session;
 
-
-
 public class SparkMain {
-	
+
 	public static UserDTO userDto = new UserDTO();
 	public static ApartmentDTO appartmentDto = new ApartmentDTO();
 	public static ReservationDTO reservationDto = new ReservationDTO();
 
 	public static void main(String[] args) throws Exception {
 		port(9001);
-		
-		staticFiles.externalLocation(new File("./static").getCanonicalPath()); 
 
-		
+		staticFiles.externalLocation(new File("./static").getCanonicalPath());
+
 		userDto.loadFile();
-		//appartmentDto.loadFile();
-	
-		
-		
+		// appartmentDto.loadFile();
+
 		get("/test", (req, res) -> {
 			return "Works";
 		});
-		
-		
-		post("/login", (req,res) -> {
+
+		post("/login", (req, res) -> {
 			res.type("application/json");
-			
+
 			Gson g = new Gson();
 			String username = req.queryParams("username");
-			String password =req.queryParams("password");
-			
-			User user = userDto.loginUser(username,password);
-			
-			if(user == null) {
-				return g.toJson(null);	
+			String password = req.queryParams("password");
+
+			User user = userDto.loginUser(username, password);
+
+			if (user == null) {
+				return g.toJson(null);
 			}
-			
-			Session ss =req.session(true);
+
+			Session ss = req.session(true);
 			User userSession = ss.attribute("user");
-			
-			if(userSession == null) {
+
+			if (userSession == null) {
 				userSession = user;
-				ss.attribute("user",userSession);
+				ss.attribute("user", userSession);
 			}
-			
-			return  g.toJson(userSession);
-			
+
+			return g.toJson(userSession);
+
 		});
-		
-		
-		
-		post("checkUser", (req,res) ->{
+
+		post("checkUser", (req, res) -> {
 			res.type("application/json");
-			
-			Session ss =req.session(true);
+
+			Session ss = req.session(true);
 			User userSession = ss.attribute("user");
-			
-			if(userSession == null) {
+
+			if (userSession == null) {
 				return false;
 			}
 			return true;
 		});
-		
-	
-		post("/checkAdministrator", (req,res) ->{
+
+		post("/checkAdministrator", (req, res) -> {
 			res.type("application/json");
-			
-			Session ss =req.session(true);
+
+			Session ss = req.session(true);
 			User userSession = ss.attribute("user");
-			
-			if(userSession == null) {
+
+			if (userSession == null) {
 				return false;
 			}
-			if(userSession.getTypeOfUser() == TypeOfUser.ADMINISTRATOR) {
+			if (userSession.getTypeOfUser() == TypeOfUser.ADMINISTRATOR) {
 				return true;
 			}
-			
+
 			return false;
 		});
-		
-		post("/checkHost", (req,res) ->{
+
+		post("/checkHost", (req, res) -> {
 			res.type("application/json");
-			
-			Session ss =req.session(true);
+
+			Session ss = req.session(true);
 			User userSession = ss.attribute("user");
-			
-			if(userSession == null) {
+
+			if (userSession == null) {
 				return false;
 			}
-			if(userSession.getTypeOfUser() == TypeOfUser.HOST) {
+			if (userSession.getTypeOfUser() == TypeOfUser.HOST) {
 				return true;
 			}
-			
+
 			return false;
 		});
-		
-		
-		post("/checkGuest", (req,res) ->{
+
+		post("/checkGuest", (req, res) -> {
 			res.type("application/json");
-			
-			Session ss =req.session(true);
+
+			Session ss = req.session(true);
 			User userSession = ss.attribute("user");
-			
-			if(userSession == null) {
+
+			if (userSession == null) {
 				return false;
 			}
-			if(userSession.getTypeOfUser() == TypeOfUser.GUEST) {
+			if (userSession.getTypeOfUser() == TypeOfUser.GUEST) {
 				return true;
 			}
-			
+
 			return false;
 		});
-		
+
 		get("/logout", (req, res) -> {
 			res.type("application/json");
 			Session ss = req.session(true);
 			User user = ss.attribute("user");
-			
+
 			if (user != null) {
 				ss.invalidate();
 			}
 			return true;
 		});
-		
-		
-		post("/registrationGuest",(req,res) ->{
+
+		post("/registrationGuest", (req, res) -> {
 			res.type("application/json");
 			Gson g = new Gson();
 			String playload = req.body();
@@ -154,22 +142,28 @@ public class SparkMain {
 
 			boolean fleg = true;
 			for (User u : userDto.getUsers()) {
-				if(u.getUserName().equals(user.getUserName())) {
+				if (u.getUserName().equals(user.getUserName())) {
 					fleg = false;
 					break;
 				}
 			}
 
-			if(fleg) {
-			userDto.getUsers().add(user);
-			userDto.saveFile();
+			if (fleg) {
+				userDto.getUsers().add(user);
+				userDto.saveFile();
+
+				Session ss = req.session(true);
+				User userSession = ss.attribute("user");
+
+				if (userSession == null) {
+					userSession = user;
+					ss.attribute("user", userSession);
+				}
+
 			}
-			
+
 			return g.toJson(fleg);
 		});
-		
-		
-		
-		
+
 	}
 }
