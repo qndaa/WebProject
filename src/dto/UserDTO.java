@@ -40,12 +40,12 @@ public class UserDTO {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enableDefaultTyping(DefaultTyping.NON_FINAL);
-		Administrator admin = new Administrator("simke98","simke1998","Aca","Simic","Muski", TypeOfUser.ADMINISTRATOR);
+		/*Administrator admin = new Administrator("simke98","simke1998","Aca","Simic","Muski", TypeOfUser.ADMINISTRATOR);
 		Administrator admin2 = new Administrator("qndaa","qndaa123","Djordjije","Kundacina","Muski", TypeOfUser.ADMINISTRATOR);
 	
 		users.add(admin);
 		users.add(admin2);
-
+		*/
 		
 		try {
 	

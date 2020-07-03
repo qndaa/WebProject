@@ -7,14 +7,14 @@ import static spark.Spark.post;
 
 import java.io.File;
 
-
-
+import javax.jws.soap.SOAPBinding.Use;
 
 import com.google.gson.Gson;
 
 
 import beans.User;
-
+import dto.ApartmentDTO;
+import dto.ReservationDTO;
 import dto.UserDTO;
 import enums.TypeOfUser;
 import spark.Request;
@@ -25,7 +25,8 @@ import spark.Session;
 public class SparkMain {
 	
 	public static UserDTO userDto = new UserDTO();
-	
+	public static ApartmentDTO appartmentDto = new ApartmentDTO();
+	public static ReservationDTO reservationDto = new ReservationDTO();
 
 	public static void main(String[] args) throws Exception {
 		port(9001);
@@ -34,6 +35,9 @@ public class SparkMain {
 
 		
 		userDto.loadFile();
+		//appartmentDto.loadFile();
+	
+		
 		
 		get("/test", (req, res) -> {
 			return "Works";
@@ -139,6 +143,33 @@ public class SparkMain {
 			}
 			return true;
 		});
+		
+		
+		post("/registrationGuest",(req,res) ->{
+			res.type("application/json");
+			Gson g = new Gson();
+			String playload = req.body();
+			User user = g.fromJson(playload, User.class);
+			user.setTypeOfUser(TypeOfUser.GUEST);
+
+			boolean fleg = true;
+			for (User u : userDto.getUsers()) {
+				if(u.getUserName().equals(user.getUserName())) {
+					fleg = false;
+					break;
+				}
+			}
+
+			if(fleg) {
+			userDto.getUsers().add(user);
+			userDto.saveFile();
+			}
+			
+			return g.toJson(fleg);
+		});
+		
+		
+		
 		
 	}
 }

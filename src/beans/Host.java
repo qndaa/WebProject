@@ -9,7 +9,7 @@ import enums.TypeOfUser;
 public class Host extends User {
 	
 	@JsonIgnoreProperties(value = {"host"})
-	private ArrayList<Apartment> aparment;
+	private ArrayList<Apartment> aparment = new ArrayList<Apartment>();
 	
 	
 	public Host() {

@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class CommentForApartment {
 	
 	
-	public Guest guest;
+	public Guest guest = new Guest();
 	
 	@JsonIgnoreProperties(value = {"comments"})
-	public Apartment apartment;
+	public Apartment apartment = new Apartment();
 	
 	public String text;
 	public int mark;

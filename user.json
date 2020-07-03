@@ -12,4 +12,11 @@
   "gender" : "Muski",
   "typeOfUser" : "ADMINISTRATOR",
   "userName" : "qndaa"
+} ], [ "beans.User", {
+  "password" : "pera123",
+  "name" : "Pera",
+  "surname" : "Peric",
+  "gender" : "Muski",
+  "typeOfUser" : "GUEST",
+  "userName" : "pera123"
 } ] ] ]

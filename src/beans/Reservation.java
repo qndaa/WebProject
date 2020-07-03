@@ -11,7 +11,7 @@ import enums.StatusReservation;
 public class Reservation {
 
 	@JsonIgnoreProperties(value = "reservations")
-	private Apartment reservedApartment;
+	private Apartment reservedApartment = new Apartment();
 	
 	private Date startTime;
 	private int numberOfNights;
@@ -19,7 +19,7 @@ public class Reservation {
 	private String message;
 	
 	@JsonIgnoreProperties(value = {"resevration"})
-	private Guest guest;
+	private Guest guest = new Guest();
 	private StatusReservation statusReseravation;
 	
 	

@@ -16,15 +16,15 @@ public class Apartment {
 	private int numberOfGuests;
 	
 	private Location location;
-	private ArrayList<Date> releaseDates;
+	private ArrayList<Date> releaseDates = new ArrayList<Date>();
 	
 	@JsonIgnoreProperties(value = {"aparment"})
-	private Host host;
+	private Host host = new Host();
 	
 	@JsonIgnoreProperties(value = {"apartment"})
-	private ArrayList<CommentForApartment> comments;
+	private ArrayList<CommentForApartment> comments = new ArrayList<CommentForApartment>();
 	
-	private ArrayList<String> urlImages;
+	private ArrayList<String> urlImages = new ArrayList<String>();
 	private double pricePerNight;
 	
 	private Date checkInTime;
@@ -32,10 +32,10 @@ public class Apartment {
 	
 	private StatusApartment status;
 	
-	private ArrayList<ContentOfApartment> content;
+	private ArrayList<ContentOfApartment> content = new ArrayList<ContentOfApartment>();
 	
 	@JsonIgnoreProperties(value = {"reservedApartment"})
-	private ArrayList<Reservation> reservations;
+	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	
 	
 	

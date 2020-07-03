@@ -4,7 +4,7 @@ public class Location {
 
     private double geographicalWidth;
     private double geographicalLength;
-    private Address address;
+    private Address address = new Address();
     
     public Location() {
     	

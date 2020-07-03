@@ -14,7 +14,7 @@ public class Guest extends User{
 	public ArrayList<Apartment> rentedApartment = new ArrayList<Apartment>();
 	
 	@JsonIgnoreProperties(value = {"guest"})
-	public ArrayList<Reservation> resevration;
+	public ArrayList<Reservation> resevration = new ArrayList<Reservation>();
 
 	public Guest() {
 		super();
