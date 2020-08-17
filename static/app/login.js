@@ -1,35 +1,4 @@
-Vue.component("login", {
-	
-	data : function () {
-		return {
-			sc : null
-		}
-		
-	},
-	template : `
-	
-	<div>
-		<p> Login </p>
-	
-	
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	`
-	
-	
-	
-	
-	
+Vue.component("log-in", {
+
+    template:'<div>Login </div>'
 });
-
-
-
-

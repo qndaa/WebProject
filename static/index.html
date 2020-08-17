@@ -1,91 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-  <title>ApartmentApp</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <script src="js/vue.js"></script>
-  <script src="js/axios.js"></script>
+   
+    <meta charset="utf-8"/>
 
-  <style type="text/css">
-  	
-	.nav-pills>a.active {
-		border-style: solid !important;
-  		border-color: : floralwhite !important;
- 	 	background-color: dodgerblue !important;
-	}
+</head> 
 
-  </style>
-
-
- <script type="text/javascript">
- 
- $(document).ready(function() {
-	    $.ajax({
-	      url: '/checkUser',
-	      type: 'post',
-	      contentType: "application/json",
-	      success : function(answer) {
-	    	  
-	    	  if(answer == false ) {
-	    		  $("#content").css("visibility", "visible");
-	    		  $("#error").css("visibility", "collapse")
-	    	  } else {
-	    		  $("#content").css("visibility", "collapse");
-	    		  $("#error").css("visibility", "visible")
-	    	  }
-	      }
-	    });
-	    
-	    
-	  });
-
- 	
- 	$(function() {
- 		$('#login').load('login.html');
- 	});
-
- 	$(function() {
- 		$('#registrationGuest').load('registration.html');
- 	});
-
-
- </script>
-
-</head>
 <body>
-	<div id="content" style ="visibility : collapse" >
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded text-dark">
-  		<a class="navbar-brand" href="#/">ApartmantApp</a>
-
-		<div class="container-fluid nav nav-pills" role="tablist">
-		    
-		    	<a class="nav-link bg-light ml-2 mr-2 active" data-toggle="pill" href="#home">Pocetna stranica</a>
-		       
-		    	<a class="nav-link bg-light ml-2 mr-auto" data-toggle="pill" href="#help">Pomoc</a>
-		   
-		    	<a  class="nav-link bg-light ml-auto mr-2 " data-toggle="pill" href="#registrationGuest">Registrovanje gosta</a>
-		    
-		    	<a  class="nav-link bg-light ml-2 mr-2" data-toggle="pill" href="#login">Prijavljivanje</a>		    
-		</div>			
-	</nav>
+<div id="aplication">
+	<h1>cao</h1>
+      <router-view></router-view>
+   
+</div>
 
 
-	<div class="tab-content ">
-  		<div class="tab-pane container-fluid active" id="home"></div>  		
-  		<div class="tab-pane container-fluid fade" id="registrationGuest"></div>
-  		<div class="tab-pane container-fluid fade" id="login"></div>
-	</div>
+<script src="js/vue.js"></script>
+<script src="app/login.js"></script>
+<script src="app/registration.js"></script>
+<script src="app/profile.js"></script>
+<script src="app/allUsers.js"></script>
+<script src="app/allReviews.js"></script>
+<script src="app/apartments.js"></script>
 
-	</div>
-	<div id="error" class="container" style ="visibility : collapse">
-		<h2>Error 403!</h2>
-	</div>
+<script src="app/reservation.js"></script>
+
+<script src="js/vue-router.js"></script>
+<script src="js/axios.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/toast.js"></script>
+<script src="app/app.js"></script>
 
 
 </body>

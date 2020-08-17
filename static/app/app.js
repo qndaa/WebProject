@@ -1,23 +1,30 @@
-const Home = {template : '<home></home>'}
-const Login = {template : '<login></login>'}
+
+const Login = { template: '<log-in></log-in>' }
+const Registration = { template: '<registration></registration>' }
+const Profile = { template: '<profile></profile>' }
+const AllUsers = {template : '<all-users> </all-users>'}
+const AllReviews = {template : '<all-reviews> </all-reviews>'}
+const Apartments = {template : '<apartments> </apartments>'}
+const Reservation = {template : '<reservation> </reservation>'}
+
+
 
 const router = new VueRouter({
-	mode : 'hash',
-	routes: [
-		{path : '/home', component : Home },
-		{path : '/', component : Login }
-		
-	]
+      mode: 'hash',
+      routes: [
+   	  	 { path: '/', component: Apartments},
+        { path: '/login', component: Login},
+        { path: '/registration', component: Registration },
+        { path: '/profile', component: Profile },
+        { path: '/allUsers', component: AllUsers },
+        { path: '/allReviews', component: AllReviews},
+        { path: '/apartments', component: Apartments},
+        { path: '/reservation', component: Reservation}
+      ]
 });
-
 
 var app = new Vue({
-	router,
-	el: '#ApartmantApp',
-	data : {
-		MODE : {status :"NO_LOGIN" }
-		
-		
-	}
-});
+    router,
+    el: '#aplication',
 
+});
