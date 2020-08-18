@@ -26,4 +26,18 @@
   "gender" : "Zenski",
   "typeOfUser" : "GUEST",
   "userName" : "mara123"
+} ], [ "beans.User", {
+  "password" : "",
+  "name" : "",
+  "surname" : "",
+  "gender" : "Muski",
+  "typeOfUser" : "GUEST",
+  "userName" : "qndaa@uns.ac.rs"
+} ], [ "beans.User", {
+  "password" : "",
+  "name" : "dsa",
+  "surname" : "fdsaf",
+  "gender" : "",
+  "typeOfUser" : "GUEST",
+  "userName" : ""
 } ] ] ]

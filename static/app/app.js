@@ -10,9 +10,9 @@ const Reservation = {template : '<reservation> </reservation>'}
 
 
 const router = new VueRouter({
-      mode: 'hash',
-      routes: [
-   	  	 { path: '/', component: Apartments},
+    mode: 'hash',
+    routes: [
+   	  	{ path: '/', component: Apartments},
         { path: '/login', component: Login},
         { path: '/registration', component: Registration },
         { path: '/profile', component: Profile },
@@ -20,11 +20,17 @@ const router = new VueRouter({
         { path: '/allReviews', component: AllReviews},
         { path: '/apartments', component: Apartments},
         { path: '/reservation', component: Reservation}
-      ]
+    ]
 });
 
 var app = new Vue({
     router,
     el: '#aplication',
+    data : function () {
+    	return {
+     	 mode: 'NO_LOGIN'
+    	}
+  	}
+    
 
 });
