@@ -3,5 +3,6 @@ package enums;
 public enum TypeOfUser {
 	ADMINISTRATOR,
 	GUEST,
-	HOST	
+	HOST,
+	NO_LOGIN
 }

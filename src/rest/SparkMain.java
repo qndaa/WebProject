@@ -138,7 +138,6 @@ public class SparkMain {
 			res.type("application/json");
 			Gson g = new Gson();
 			String playload = req.body();
-			System.out.println(playload);
 			User user = g.fromJson(playload, User.class);
 			user.setTypeOfUser(TypeOfUser.GUEST);
 
@@ -166,6 +165,23 @@ public class SparkMain {
 
 			return g.toJson(fleg);
 		});
+		
+		
+		get("/sesion", (req, res) -> {
+			res.type("application/json");
+			
+			Gson g = new Gson();
+			
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			if(user == null) {
+				user = new User();
+				user.setTypeOfUser(TypeOfUser.NO_LOGIN);
+				return  g.toJson(user);
+			}
+			return g.toJson(user);
+		});
+		
 
 	}
 }

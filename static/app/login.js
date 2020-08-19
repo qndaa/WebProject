@@ -30,7 +30,8 @@ Vue.component("log-in", {
         users :{
           username : "",
           password : ""
-        }
+        },
+        mode : ""
       }
     },
     methods : {
@@ -39,29 +40,19 @@ Vue.component("log-in", {
           alert("Morate popuniti sva polja");
           return;
         }
+        
+         
 
         axios.post('/login', {"username" : this.users.username , "password" : this.users.password})
         .then(function(response){
-            alert(response.data.username);
             if (response.data == null) {
               alert("Username ili password pogresan");
             }else{
-              if (response.data.typeOfUser === "ADMINISTRATOR") {
-                alert("admin");
-                //treba da se promeni lokacija samo na koju idu nakon logovanja
-                //ja sam stavio da ide na apartmane
-                window.location.href = "/#/apartments";
-              }else if (response.data.typeOfUser === "GUEST") {
-                alert("gost");
-                window.location.href = "/#/apartments";
-              }else if (response.data.typeOfUser === "HOST") {
-                alert("domacin");
-                window.location.href = "/#/apartments";
-              }
+                window.location.href = "/#/apartments";            
             }
 
-        })
-      
+        });
+
 
       }
     }

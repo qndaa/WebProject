@@ -30,7 +30,11 @@ var app = new Vue({
     	return {
      	 mode: 'NO_LOGIN'
     	}
-  	}
-    
+  	},
+    updated(){
+         axios
+          .get('/sesion')
+          .then(response => (this.mode = response.data.typeOfUser))
+    }
 
 });
