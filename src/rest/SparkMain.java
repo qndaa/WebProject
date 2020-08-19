@@ -39,13 +39,14 @@ public class SparkMain {
 
 		post("/login", (req, res) -> {
 			res.type("application/json");
-
+			
 			Gson g = new Gson();
-			String username = req.queryParams("username");
-			String password = req.queryParams("password");
-
-			User user = userDto.loginUser(username, password);
-
+			
+			
+			String a = req.body();
+			User userLogin = g.fromJson(a, User.class);
+			User user = userDto.loginUser(userLogin.getUserName(), userLogin.getPassword());
+			
 			if (user == null) {
 				return g.toJson(null);
 			}
@@ -137,6 +138,7 @@ public class SparkMain {
 			res.type("application/json");
 			Gson g = new Gson();
 			String playload = req.body();
+			System.out.println(playload);
 			User user = g.fromJson(playload, User.class);
 			user.setTypeOfUser(TypeOfUser.GUEST);
 

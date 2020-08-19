@@ -27,17 +27,24 @@
   "typeOfUser" : "GUEST",
   "userName" : "mara123"
 } ], [ "beans.User", {
-  "password" : "",
-  "name" : "",
-  "surname" : "",
+  "password" : "jovana123",
+  "name" : "Jovana",
+  "surname" : "Jovanovic",
+  "gender" : "Zenski",
+  "typeOfUser" : "GUEST",
+  "userName" : "jovana123"
+} ], [ "beans.User", {
+  "password" : "ana123",
+  "name" : "Anastasija",
+  "surname" : "Vukovic",
+  "gender" : "Zenski",
+  "typeOfUser" : "GUEST",
+  "userName" : "ana123"
+} ], [ "beans.User", {
+  "password" : "nikola123",
+  "name" : "Nikola",
+  "surname" : "Nikolic",
   "gender" : "Muski",
   "typeOfUser" : "GUEST",
-  "userName" : "qndaa@uns.ac.rs"
-} ], [ "beans.User", {
-  "password" : "",
-  "name" : "dsa",
-  "surname" : "fdsaf",
-  "gender" : "",
-  "typeOfUser" : "GUEST",
-  "userName" : ""
+  "userName" : "nikola123"
 } ] ] ]

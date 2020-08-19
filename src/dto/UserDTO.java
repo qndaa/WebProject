@@ -96,7 +96,6 @@ public class UserDTO {
 
 
 	public User loginUser(String username, String password) {
-		
 		for (User user : users) {
 			if(user.getUserName().equals(username) && user.getPassword().equals(password)) {
 				return user;
