@@ -127,7 +127,6 @@ public class SparkMain {
 			res.type("application/json");
 			Session ss = req.session(true);
 			User user = ss.attribute("user");
-
 			if (user != null) {
 				ss.invalidate();
 			}
@@ -174,11 +173,13 @@ public class SparkMain {
 			
 			Session ss = req.session(true);
 			User user = ss.attribute("user");
+			
 			if(user == null) {
 				user = new User();
 				user.setTypeOfUser(TypeOfUser.NO_LOGIN);
 				return  g.toJson(user);
 			}
+			
 			return g.toJson(user);
 		});
 		

@@ -37,7 +37,7 @@
 
 			<a v-if="mode!='NO_LOGIN'" class="nav-link bg-light ml-auto mr-2" href="#/profile">Profil</a>
 		    
-		    <a v-if="mode!='NO_LOGIN'" class="nav-link bg-light ml-2 mr-2" href="#/logout">Odjavi se</a>
+		    <a v-if="mode!='NO_LOGIN'" class="nav-link bg-light ml-2 mr-2"   v-on:click.prevent="logout" href="#/login">Odjavi se</a>
 
 		</div>			
 	</nav>

@@ -35,6 +35,19 @@ var app = new Vue({
          axios
           .get('/sesion')
           .then(response => (this.mode = response.data.typeOfUser))
+    },
+    methods : {
+      logout : function(){
+        axios.get('/logout')
+        .then(function(response){
+          if(response.data == true){
+            this.mode= 'NO_LOGIN';
+            alert("udjes ovde i mod: " + this.mode);
+            window.location.href = "/#/login"; 
+          }
+        })
+
+      }
     }
 
 });
