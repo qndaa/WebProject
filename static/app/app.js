@@ -42,7 +42,6 @@ var app = new Vue({
         .then(function(response){
           if(response.data == true){
             this.mode= 'NO_LOGIN';
-            alert("udjes ovde i mod: " + this.mode);
             window.location.href = "/#/login"; 
           }
         })

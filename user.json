@@ -41,17 +41,17 @@
   "typeOfUser" : "GUEST",
   "userName" : "ana123"
 } ], [ "beans.User", {
-  "password" : "nikola123",
-  "name" : "Nikola",
-  "surname" : "Nikolic",
-  "gender" : "Muski",
-  "typeOfUser" : "GUEST",
-  "userName" : "nikola123"
-} ], [ "beans.User", {
   "password" : "marko123",
   "name" : "Marko",
   "surname" : "Markovic",
   "gender" : "Muski",
   "typeOfUser" : "GUEST",
   "userName" : "marko123"
+} ], [ "beans.User", {
+  "password" : "nikola123",
+  "name" : "Nikola",
+  "surname" : "Nikolic",
+  "gender" : "Muski",
+  "typeOfUser" : "GUEST",
+  "userName" : "nikola123"
 } ] ] ]

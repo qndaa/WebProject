@@ -1,6 +1,6 @@
 Vue.component("apartments", {
 
-    template:'<div>Apartments </div>'
+    template:`<div>Apartments </div>`
 
 
 

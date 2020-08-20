@@ -98,8 +98,9 @@ Vue.component("registration", {
     		axios.post('/registrationGuest',this.User)
         	.then( function (response) {
         		if(response.data === true){
-        			alert("Uspesno ste registrovali korisnika");
         			window.location.href = "/#/apartments";
+        			alert("Uspesno ste registrovali korisnika");
+        		
         			return;
         		}
         		

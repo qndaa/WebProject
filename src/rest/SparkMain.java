@@ -166,6 +166,36 @@ public class SparkMain {
 		});
 		
 		
+		
+		post("/saveChagesUser", (req,res)->{
+			res.type("application/json");
+			Gson g = new Gson();
+			
+			String playload = req.body();
+			User user = g.fromJson(playload, User.class);
+			
+			Session ss = req.session(true);
+			ss.attribute("user", user);
+			User userSesion = ss.attribute("user");
+			
+			boolean fleg = false;
+			for (User u : userDto.getUsers()) {
+				if (u.getUserName().equals(user.getUserName())) {
+					fleg = true;
+					userDto.getUsers().remove(u);
+					userDto.getUsers().add(user);
+					break;
+				}
+			}
+			
+			if(!fleg) {
+				return false;
+			}
+				
+			userDto.saveFile();	
+			return true;
+		});
+		
 		get("/sesion", (req, res) -> {
 			res.type("application/json");
 			
