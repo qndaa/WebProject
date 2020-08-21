@@ -73,6 +73,16 @@ Vue.component("profile", {
 
 		}
 	},
+	beforeMount(){
+		axios
+		.get('/validationAcces')
+		.then()
+		.catch(function(eror){
+			if(eror.response.status == 403){
+				 window.location.href = "/#/validationAcces"; 
+			}
+		})
+	},
 	mounted() {
 		 axios
           .get('/sesion')

@@ -16,6 +16,7 @@ import dto.ApartmentDTO;
 import dto.ReservationDTO;
 import dto.UserDTO;
 import enums.TypeOfUser;
+import spark.Redirect.Status;
 import spark.Request;
 import spark.Session;
 
@@ -213,6 +214,24 @@ public class SparkMain {
 			return g.toJson(user);
 		});
 		
-
+		get("/validationAcces", (req, res) -> {
+			res.type("application/json");
+			
+			Gson g = new Gson();
+			
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			if(user == null) {
+				res.status(403);
+				return res;
+			}
+			
+			return true;
+		});
+		
+		
+		
+	
 	}
 }
