@@ -54,4 +54,11 @@
   "gender" : "Muski",
   "typeOfUser" : "GUEST",
   "userName" : "nikola123"
+} ], [ "beans.User", {
+  "password" : "",
+  "name" : "",
+  "surname" : "",
+  "gender" : "",
+  "typeOfUser" : "GUEST",
+  "userName" : ""
 } ] ] ]

@@ -8,7 +8,7 @@ Vue.component("registration", {
 
 			<div class="d-flex justify-content-center">
 
-				<form id="form" class="needs-validation" novalidate style="width: 500px;" >
+				<form id="form" class="needs-validation" style="width: 500px;" >
 
 
 					<div class="mb-3">
@@ -47,19 +47,32 @@ Vue.component("registration", {
 	 				</div>
 
 
+	 				<div class="row">
+	 					<div class="col-md-6 mb-3">
+	 						<label for="grender">Pol</label>
+							<select id="grender" class="custom-select" v-model="User.gender" required>
+								<option value="">Izaberi</option>
+								<option>Muski</option>
+								<option>Zenski</option>
+							</select> 
+							<div class="invalid-feedback">
+									Izaberite pol!
+							</div>
 
+	 					</div>
 
-					<div class="mb-3">
-						<label for="grender">Pol</label>
-						<select id="grender" class="custom-select d-block w-100" v-model="User.gender" required>
-							<option value="">Izaberi</option>
-							<option>Muski</option>
-							<option>Zenski</option>
-						</select> 
-						<div class="invalid-feedback">
-								Izaberite pol!
+						<div class="col-md-6 mb-3">
+							<label for="checkPassword">Potrvrda sifre</label>
+							<input id="checkPassword" type="password" class="form-control" placeholder="" value="" required/>
+							<div class="invalid-feedback">
+								Lozinke se ne poklapaju.
+							</div>
 						</div>
-					</div>
+
+
+	 				</div>
+
+					
 
 						
 
