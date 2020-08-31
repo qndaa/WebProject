@@ -1,89 +1,79 @@
 Vue.component("registration", {
 
     template: `
-    	<div class="container">
-			<div class="py-5 text-center">
-				<h2 class="text-primary">Registracija korisnika</h2>
-			</div>
+    	<div class="container w-25 p-3">
+			
+			<form class="needs-validation" @submit="registration" method="post" novalidate>
 
-			<div class="d-flex justify-content-center">
+				<div class="py-5 text-center">
+        			<h2 class="h2 mb-3 text-primary">Registracija korisnika</h2>
+    			</div>
 
-				<form id="form" class="needs-validation" style="width: 500px;" >
-
-
-					<div class="mb-3">
-						<label for="name">Ime</label>
-						<input id="name" type="text" class="form-control" placeholder="" v-model="User.name" value="" required/>
+				<div class="form-row">
+					<div class="form-group col-md-6 mb-3">
+						<label for="name" class="text-primary">Ime</label>
+						<input v-bind:class="{'form-control' : true, 'is-invalid' : !validName() && Blured.nameBlured}" v-on:blur="Blured.nameBlured = true" id="name" type="text" class="form-control" v-model="User.name" value="" required/>
 						<div class="invalid-feedback">
 							Nepravilno uneseno ime.
 						</div>
 					</div>
 
-					<div class="mb-3">
-						<label for="surname">Prezime</label>
-						<input id="surname" type="text" class="form-control" placeholder="" value="" v-model="User.surname" required/>
+					<div class="form-group col-md-6 mb-3">
+						<label for="surname" class="text-primary">Prezime</label>
+						<input v-bind:class="{'form-control' : true, 'is-invalid' : !validSurName() && Blured.surnameBlured}" v-on:blur="Blured.surnameBlured = true" id="surname" type="text" class="form-control" placeholder="" value="" v-model="User.surname" required/>
 						<div class="invalid-feedback">
 							Nepravilno uneseno prezime.
 						</div>
 					</div>
 
-					<div class="row">
+				</div>
 
-						<div class="col-md-6 mb-3">
-							<label for="username">Korisnicko ime</label>
-							<input id="username" type="text" class="form-control" placeholder="" value="" v-model="User.username" required/>
-							<div class="invalid-feedback">
-								Nepravilno korisnicko ime.
-							</div>
+				<div class="form-row">
+					<div class="form-group col-md-6 mb-3">
+						<label for="username" class="text-primary">Korisnicko ime</label>
+						<input v-bind:class="{'form-control' : true, 'is-invalid' : !validUsername() && Blured.usernameBlured}" v-on:blur="Blured.usernameBlured = true" id="username" type="text" class="form-control" placeholder="" value="" v-model="User.username" required/>
+						<div class="invalid-feedback">
+							Duzina mora biti veca od 8 slova.
 						</div>
+					</div>
 
-						<div class="col-md-6 mb-3">
-							<label for="password">Sifra</label>
-							<input id="password" type="password" class="form-control" placeholder="" value="" v-model="User.password" required/>
-							<div class="invalid-feedback">
-								Nepravilna lozinka.
-							</div>
+					<div class="form-group col-md-6 mb-3">
+						<label for="password" class="text-primary">Sifra</label>
+						<input v-bind:class="{'form-control' : true, 'is-invalid' : !validPassword() && Blured.passwordBlured}" v-on:blur="Blured.passwordBlured = true" id="password" type="password" class="form-control" placeholder="" value="" v-model="User.password" required/>
+						<div class="invalid-feedback">
+							Nepravilna lozinka.
 						</div>
-	 				</div>
+					</div>
+	 			</div>
 
-
-	 				<div class="row">
-	 					<div class="col-md-6 mb-3">
-	 						<label for="grender">Pol</label>
-							<select id="grender" class="custom-select" v-model="User.gender" required>
-								<option value="">Izaberi</option>
-								<option>Muski</option>
-								<option>Zenski</option>
-							</select> 
-							<div class="invalid-feedback">
-									Izaberite pol!
-							</div>
-
-	 					</div>
-
-						<div class="col-md-6 mb-3">
-							<label for="checkPassword">Potrvrda sifre</label>
-							<input id="checkPassword" type="password" class="form-control" placeholder="" value="" required/>
-							<div class="invalid-feedback">
-								Lozinke se ne poklapaju.
-							</div>
+	 			<div class="form-row">	 				
+	 				<div class="form-group col-md-6 mb-3">
+	 					<label for="grender" class="text-primary">Pol</label>
+						<select v-bind:class="{'form-control' : true, 'is-invalid' : !validGrender() && Blured.genderBlured}" v-on:blur="Blured.genderBlured = true" id="grender" class="custom-select" v-model="User.gender"  required>
+							<option value="">Izaberi</option>
+							<option>Muski</option>
+							<option>Zenski</option>
+						</select> 
+						<div class="invalid-feedback">
+								Izaberite pol!
 						</div>
-
 
 	 				</div>
 
-					
+					<div class="form-group col-md-6 mb-3" >
+						<label for="checkPassword" class="text-primary">Potrvrda sifre</label>
+						<input v-bind:class="{'form-control':true, 'is-invalid' : !validCheckPassword() && Blured.checkPasswordBlured}" v-on:blur="Blured.checkPasswordBlured = true" id="checkPassword" type="password"  v-model="User.checkPassword" required/>
+						<div id="errorPassword" class="invalid-feedback">
+							Lozinke se ne poklapaju.
+						</div>
+					</div>
 
-						
+				</div>
 
-	 				<button id="btnSubmit" class="btn btn-primary btn-lg btn-block mt-5"   v-on:click.prevent="registration" type="submit">Registruj</button>
+	 				<button class="btn btn-primary btn-lg btn-block mt-5"  type="submit">Registruj</button>
 	 				
-
-
 	 			</form>
- 			</div>
-
-
+ 			
 		</div>
 
 
@@ -96,31 +86,72 @@ Vue.component("registration", {
 				surname : "",
 				username : "",
 				password : "",
-				gender : ""
-
-			}
+				gender : "",
+				checkPassword : ""
+			},
+				Blured : {
+					nameBlured : false,
+					surnameBlured : false,
+					usernameBlured : false,
+					passwordBlured : false,
+					genderBlured : false,
+					checkPasswordBlured : false
+				}
 		}
     },
 
     methods : {
-    	registration : function (){
-    		if(this.User.name == ""  || this.User.surName == "" || this.User.username == "" || this.User.password =="" || this.User.gender ==""){
-    			alert("Morate popuniti sva polja");
+    	registration : function (){	
+    		event.preventDefault();
+
+    		if(this.User.name == ""  || this.User.surName == "" || this.User.username == "" || this.User.password =="" || this.User.gender =="" || this.User.checkPassword == ""){
+    			this.Blured.nameBlured = true;
+				this.Blured.surnameBlured = true;
+				this.Blured.usernameBlured = true;
+				this.Blured.passwordBlured = true;
+				this.Blured.genderBlured = true;
+				this.Blured.checkPasswordBlured = true;
+				
+
     			return;
     		}
-    		axios.post('/registrationGuest',this.User)
-        	.then( function (response) {
-        		if(response.data === true){
-        			window.location.href = "/#/apartments";
-        			alert("Uspesno ste registrovali korisnika");
-        		
-        			return;
-        		}
-        		
-        		alert("Korisnik sa vec postoji sa tim korisnickim imenom");
-        		
-        	})  
 
+			axios.post('/registrationGuest',this.User)
+        		.then( function (response) {
+        			if(response.data === true){
+        				window.location.href = "/#/apartments";
+        				alert("Uspesno ste registrovali korisnika");       		
+       					return;
+        			}       		
+        			alert("Korisnik sa vec postoji sa tim korisnickim imenom");		
+        	});  
+    		 
+
+    	
+    	},
+
+    	validCheckPassword : function() {
+    		return (this.User.password === this.User.checkPassword) ? true : false;
+    	},
+
+    	validPassword : function() {
+    		return (this.User.password.length > 3) ? true : false;
+    	},
+
+    	validUsername : function() {
+    		return (this.User.username.length > 3) ? true : false;
+    	},
+
+    	validName : function() {
+    		return (this.User.name.length > 3) ? true : false;
+    	},
+
+    	validSurName : function() {
+    		return (this.User.surname.length > 3) ? true : false;
+    	},
+
+    	validGrender : function() {
+    		return (this.User.gender.length > 0) ? true : false;
     	}
     }
 });

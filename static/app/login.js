@@ -3,7 +3,7 @@ Vue.component("log-in", {
     template: `
 
 
-    	<div class="container w-25 p-3">
+    	<div class="container w-25 p-3 ">
 
   			<form class="needs-validation" @submit="login" method="post" novalidate>
     
@@ -12,7 +12,7 @@ Vue.component("log-in", {
     			</div>
 
 
-          <div class="form-row mb-3"> 
+          <div class="w-100 mb-3"> 
             <div class="col-mb-3">
               <label for="usernameInput" class="text-primary">Korsinicko ime </label>
               <input v-model="users.username" type="text" class="form-control" id="usernameInput" required />

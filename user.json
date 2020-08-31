@@ -55,10 +55,24 @@
   "typeOfUser" : "GUEST",
   "userName" : "nikola123"
 } ], [ "beans.User", {
-  "password" : "",
-  "name" : "",
-  "surname" : "",
-  "gender" : "",
+  "password" : "fdsa",
+  "name" : "dsa",
+  "surname" : "fsda",
+  "gender" : "Muski",
   "typeOfUser" : "GUEST",
-  "userName" : ""
+  "userName" : "fs"
+} ], [ "beans.User", {
+  "password" : "fsa",
+  "name" : "fdas",
+  "surname" : "fsa",
+  "gender" : "Muski",
+  "typeOfUser" : "GUEST",
+  "userName" : "fsa"
+} ], [ "beans.User", {
+  "password" : "marija123",
+  "name" : "Marija",
+  "surname" : "Markovic",
+  "gender" : "Muski",
+  "typeOfUser" : "GUEST",
+  "userName" : "marija123"
 } ] ] ]
