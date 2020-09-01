@@ -49,7 +49,8 @@ public class SparkMain {
 			User user = userDto.loginUser(userLogin.getUserName(), userLogin.getPassword());
 			
 			if (user == null) {
-				return g.toJson(null);
+				res.status(400);
+				return res;
 			}
 
 			Session ss = req.session(true);
@@ -230,6 +231,26 @@ public class SparkMain {
 			
 			return true;
 		});
+		
+		get("/validationAccesAdmin", (req, res) -> {
+			res.type("application/json");
+			
+			Gson g = new Gson();
+			
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			if(user == null) {
+				res.status(403);
+				return res;
+			}else if (user.getTypeOfUser() != TypeOfUser.ADMINISTRATOR) {
+				res.status(403);
+				return res;
+			}
+			
+			return true;
+		});
+		
 		
 		
 		get("/allUsers", (req, res) -> {

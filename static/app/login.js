@@ -74,13 +74,11 @@ Vue.component("log-in", {
         axios
         .post('/login', {"username" : this.users.username , "password" : this.users.password})
         .then(function(response){
-            if (response.data == null) {
-              lab.hidden = false;
-             
-            }else{
               window.location.href = "/#/apartments";            
+        }).catch(function(eror){
+            if(eror.response.status == 400){
+               lab.hidden = false;
             }
-
         });
         
 

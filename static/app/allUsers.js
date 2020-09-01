@@ -91,6 +91,17 @@ Vue.component("all-users", {
     	}
     },
 
+    beforeMount(){
+		axios
+		.get('/validationAccesAdmin')
+		.then()
+		.catch(function(eror){
+			if(eror.response.status == 403){
+				 window.location.href = "/#/validationAcces"; 
+			}
+		})
+	},
+
     mounted() {
     	axios
           .get('/sesion')
@@ -119,6 +130,5 @@ Vue.component("all-users", {
 
 
     }
-
 
 });
