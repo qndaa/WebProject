@@ -136,132 +136,57 @@ Vue.component("apartments", {
 
 		    <div class=" col-sm-8">
 
-		    	<div class=" row p-3 m-3 border rounded">
+		    	<div class=" row p-3 m-3 border rounded" v-for="a in appartments">
 		   			<div class="col">
-    					<img class="img-fluid border border-secondary" src="https://cf.bstatic.com/images/hotel/max1024x768/262/262456256.jpg"> 
+    					<img class="img-fluid border border-secondary" v-bind:src="a.urlImages[0]"> 
     				</div>
 
     				<div class="col">
+    					<p v-if="a.typeOfApartment == 'ROOM'">
+    					<label>Tip apartmana </label>: Soba
+    					</p>
+    					<p v-else>
+    					<label>Tip apartmana </label>: Ceo apartman 
+     					</p>
     					<p>
-    					<label>Tip apartmana </label>: NEKI TIP
+    					<label>Broj soba </label> : {{a.numberOfRoom}}
     					</p>
     					<p>
-    					<label>Broj soba </label> : 10
+    					<label>Broj Gostiju </label> : {{a.numberOfGuests}}
     					</p>
     					<p>
-    					<label>Broj Gostiju </label> : 100
-    					</p>
-    					<p>
-    					<label>Lokacija </label> : Negde tamo daleko
+    					<label class="" >Lokacija: <p>{{a.location.address.street}} {{a.location.address.numberHouse}}, {{a.location.address.city}} {{a.location.address.postNumber}}   </p></label> 
+    				
     					</p>
        				</div>
        				
        				<div class="col">
-       					<div><label> Cena: </label> 5468e </div>
+       					<div><label> Cena: </label> {{a.pricePerNight}} </div>
        					<div><button class="btn bg-primary"> Procitaj vise </button> </div>
        				</div>
 
 
     			</div>
-
-    			<div class=" row p-3 m-3 border rounded">
-		   			<div class="col">
-    					<img class="img-fluid border border-secondary" src="https://cf.bstatic.com/images/hotel/max1024x768/262/262456256.jpg"> 
-    				</div>
-
-    				<div class="col">
-    					<p>
-    					<label>Tip apartmana </label>: NEKI TIP
-    					</p>
-    					<p>
-    					<label>Broj soba </label> : 10
-    					</p>
-    					<p>
-    					<label>Broj Gostiju </label> : 100
-    					</p>
-    					<p>
-    					<label>Lokacija </label> : Negde tamo daleko
-    					</p>
-       				</div>
-       				
-       				<div class="col">
-       					<div><label> Cena: </label> 5468e </div>
-       					<div><button class="btn bg-primary"> Procitaj vise </button> </div>
-       				</div>
-
-       				
-    			</div>
-    			<div class=" row p-3 m-3 border rounded">
-		   			<div class="col">
-    					<img class="img-fluid border border-secondary" src="https://cf.bstatic.com/images/hotel/max1024x768/262/262456256.jpg"> 
-    				</div>
-
-    				<div class="col">
-    					<p>
-    					<label>Tip apartmana </label>: NEKI TIP
-    					</p>
-    					<p>
-    					<label>Broj soba </label> : 10
-    					</p>
-    					<p>
-    					<label>Broj Gostiju </label> : 100
-    					</p>
-    					<p>
-    					<label>Lokacija </label> : Negde tamo daleko
-    					</p>
-       				</div>
-       				
-       				<div class="col">
-       					<div><label> Cena: </label> 5468e </div>
-       					<div><button class="btn bg-primary"> Procitaj vise </button> </div>
-       				</div>
-
-       				
-    			</div>
-    			<div class=" row p-3 m-3 border rounded">
-		   			<div class="col">
-    					<img class="img-fluid border border-secondary" src="https://cf.bstatic.com/images/hotel/max1024x768/262/262456256.jpg"> 
-    				</div>
-
-    				<div class="col">
-    					<p>
-    					<label>Tip apartmana </label>: NEKI TIP
-    					</p>
-    					<p>
-    					<label>Broj soba </label> : 10
-    					</p>
-    					<p>
-    					<label>Broj Gostiju </label> : 100
-    					</p>
-    					<p>
-    					<label>Lokacija </label> : Negde tamo daleko
-    					</p>
-       				</div>
-       				
-       				<div class="col">
-       					<div><label> Cena: </label> 5468e </div>
-       					<div><button class="btn bg-primary"> Procitaj vise </button> </div>
-       				</div>
-
-       				
-    			</div>
-
-
-
 
 
 
 
 		    </div>
   		</div>
+    </div>`,
 
+    data : function(){
+    	return {
+    		appartments : []
     	
-    
+    	}
+    },
+    mounted() {
+    	axios.get('/allAppartmants')
+    	.then(response => this.appartments = response.data)
 
+    },   
 
-
-
-    </div>`
 
 
 

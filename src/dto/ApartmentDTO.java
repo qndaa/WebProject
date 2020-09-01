@@ -10,12 +10,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
 
+import beans.Address;
 import beans.Apartment;
 import beans.Host;
 import beans.Location;
 import beans.User;
 import enums.StatusApartment;
 import enums.TypeOfApartment;
+import enums.TypeOfUser;
 import sun.net.www.protocol.http.HttpURLConnection.TunnelState;
 
 public class ApartmentDTO {
@@ -34,8 +36,19 @@ public class ApartmentDTO {
 		mapper.enableDefaultTyping(DefaultTyping.NON_FINAL);
 		
 		try {
-			Apartment a = new Apartment(TypeOfApartment.ROOM,5,4,new Location(),new Host(),200,new Date(), new Date(),StatusApartment.ACTIVE );
+			/*
+			Apartment a = new Apartment(TypeOfApartment.ROOM,5,8,new Location(1, 2,new Address("Petkova",5,"Beograd",11000)),new Host("koki123","koki123","Koki","Koki","Muski",TypeOfUser.HOST),200,new Date(), new Date(),StatusApartment.ACTIVE );
+			Apartment a2 = new Apartment(TypeOfApartment.ROOM,2,4,new Location(1, 2,new Address("Perina",2,"Novi Sad",21000)),new Host("koki123","koki123","Koki","Koki","Muski",TypeOfUser.HOST),300,new Date(), new Date(),StatusApartment.ACTIVE );
+			Apartment a3 = new Apartment(TypeOfApartment.ROOM,3,6,new Location(1, 2,new Address("Mihajla",3,"Sabac",15000)),new Host("koki123","koki123","Koki","Koki","Muski",TypeOfUser.HOST),400,new Date(), new Date(),StatusApartment.ACTIVE );
+			Apartment a4 = new Apartment(TypeOfApartment.ROOM,1,2,new Location(1, 2,new Address("Koste",1,"Beograd",11000)),new Host("koki123","koki123","Koki","Koki","Muski",TypeOfUser.HOST),500,new Date(), new Date(),StatusApartment.ACTIVE );
+			Apartment a5 = new Apartment(TypeOfApartment.ROOM,5,10,new Location(1, 2,new Address("Petkova",15,"Beograd",11000)),new Host("koki123","koki123","Koki","Koki","Muski",TypeOfUser.HOST),600,new Date(), new Date(),StatusApartment.ACTIVE );
+			
 			appartment.add(a);
+			appartment.add(a2);
+			appartment.add(a3);
+			appartment.add(a4);
+			appartment.add(a5);
+			*/
 			
 			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("appartment.json"), appartment);
 			

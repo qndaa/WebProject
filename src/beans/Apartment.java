@@ -58,6 +58,7 @@ public class Apartment {
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
 		this.status = status;
+		
 	}
 
 

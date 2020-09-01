@@ -32,7 +32,10 @@ public class SparkMain {
 		staticFiles.externalLocation(new File("./static").getCanonicalPath());
 
 		userDto.loadFile();
-		// appartmentDto.loadFile();
+		appartmentDto.loadFile();
+		
+		appartmentDto.loadFile();
+		
 
 		get("/test", (req, res) -> {
 			return "Works";
@@ -258,6 +261,14 @@ public class SparkMain {
 			Gson g = new Gson();
 			
 			return g.toJson(userDto.getUsers());
+			
+		});
+		
+		get("/allAppartmants", (req, res) -> {
+			res.type("application/json");
+			Gson g = new Gson();
+			
+			return g.toJson(appartmentDto.getAppartment());
 			
 		});
 		
