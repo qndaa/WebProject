@@ -33,11 +33,17 @@ var app = new Vue({
      	 mode: 'NO_LOGIN'
     	}
   	},
-    updated(){
-         axios
+    beforeMount(){
+      axios
           .get('/sesion')
           .then(response => (this.mode = response.data.typeOfUser))
     },
+    updated(){
+         axios
+          .get('/sesion')
+          .then(response => (this.mode = response.data.typeOfUser))          
+    },
+
     methods : {
       logout : function(){
         axios.get('/logout')

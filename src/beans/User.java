@@ -1,7 +1,5 @@
 package beans;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 import enums.TypeOfUser;
 
 
@@ -13,6 +11,7 @@ public class User  {
 	private String name;
 	private String surname;
 	private String gender;
+	private String imagePath;
 	private TypeOfUser typeOfUser;
 	
 	public User() {
@@ -27,6 +26,7 @@ public class User  {
 		this.name = name;
 		this.surname = surname;
 		this.gender = gender;
+		this.setImagePath("/data/profile/qndaa.jpg");
 		this.typeOfUser = typeOfUser;
 	}
 
@@ -83,6 +83,16 @@ public class User  {
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", name=" + name + ", surname=" + surname
 				+ ", gender=" + gender + ", typeOfUser=" + typeOfUser + "]";
+	}
+
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 

@@ -3,7 +3,6 @@ package beans;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import enums.StatusApartment;
