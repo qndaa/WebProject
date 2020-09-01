@@ -140,6 +140,7 @@ public class SparkMain {
 			String playload = req.body();
 			User user = g.fromJson(playload, User.class);
 			user.setTypeOfUser(TypeOfUser.GUEST);
+			user.setImagePath("/data/profile/profile.jpg");
 
 			boolean fleg = true;
 			for (User u : userDto.getUsers()) {
@@ -228,6 +229,15 @@ public class SparkMain {
 			}
 			
 			return true;
+		});
+		
+		
+		get("/allUsers", (req, res) -> {
+			res.type("application/json");
+			Gson g = new Gson();
+			
+			return g.toJson(userDto.getUsers());
+			
 		});
 		
 		

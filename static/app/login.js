@@ -71,7 +71,8 @@ Vue.component("log-in", {
         }
 
 
-        axios.post('/login', {"username" : this.users.username , "password" : this.users.password})
+        axios
+        .post('/login', {"username" : this.users.username , "password" : this.users.password})
         .then(function(response){
             if (response.data == null) {
               lab.hidden = false;

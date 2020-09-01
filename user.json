@@ -3,6 +3,7 @@
   "name" : "Aca",
   "surname" : "Simic",
   "gender" : "Muski",
+  "imagePath" : "/data/profile/simke1998.jpg",
   "typeOfUser" : "ADMINISTRATOR",
   "userName" : "simke98"
 } ], [ "beans.Administrator", {
@@ -10,6 +11,7 @@
   "name" : "Djordjije",
   "surname" : "Kundacina",
   "gender" : "Muski",
+  "imagePath" : "/data/profile/qndaa.jpg",
   "typeOfUser" : "ADMINISTRATOR",
   "userName" : "qndaa"
 } ], [ "beans.User", {
@@ -17,6 +19,7 @@
   "name" : "Pera",
   "surname" : "Peric",
   "gender" : "Muski",
+  "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "GUEST",
   "userName" : "pera123"
 } ], [ "beans.User", {
@@ -24,6 +27,7 @@
   "name" : "Marija",
   "surname" : "Marijanovi",
   "gender" : "Zenski",
+  "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "GUEST",
   "userName" : "mara123"
 } ], [ "beans.User", {
@@ -31,6 +35,7 @@
   "name" : "Jovana",
   "surname" : "Jovanovic",
   "gender" : "Zenski",
+  "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "GUEST",
   "userName" : "jovana123"
 } ], [ "beans.User", {
@@ -38,6 +43,7 @@
   "name" : "Anastasija",
   "surname" : "Vukovic",
   "gender" : "Zenski",
+  "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "GUEST",
   "userName" : "ana123"
 } ], [ "beans.User", {
@@ -45,6 +51,7 @@
   "name" : "Marko",
   "surname" : "Markovic",
   "gender" : "Muski",
+  "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "GUEST",
   "userName" : "marko123"
 } ], [ "beans.User", {
@@ -52,27 +59,31 @@
   "name" : "Nikola",
   "surname" : "Nikolic",
   "gender" : "Muski",
+  "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "GUEST",
   "userName" : "nikola123"
-} ], [ "beans.User", {
-  "password" : "fdsa",
-  "name" : "dsa",
-  "surname" : "fsda",
-  "gender" : "Muski",
-  "typeOfUser" : "GUEST",
-  "userName" : "fs"
-} ], [ "beans.User", {
-  "password" : "fsa",
-  "name" : "fdas",
-  "surname" : "fsa",
-  "gender" : "Muski",
-  "typeOfUser" : "GUEST",
-  "userName" : "fsa"
 } ], [ "beans.User", {
   "password" : "marija123",
   "name" : "Marija",
   "surname" : "Markovic",
   "gender" : "Muski",
+  "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "GUEST",
   "userName" : "marija123"
+} ], [ "beans.User", {
+  "password" : "lidija123",
+  "name" : "Lidija ",
+  "surname" : "Vukovic",
+  "gender" : "Muski",
+  "imagePath" : "/data/profile/profile.jpg",
+  "typeOfUser" : "GUEST",
+  "userName" : "lidijaaa"
+} ], [ "beans.User", {
+  "password" : "bosnic",
+  "name" : "Jovan",
+  "surname" : "Bosnic",
+  "gender" : "Muski",
+  "imagePath" : "/data/profile/profile.jpg",
+  "typeOfUser" : "GUEST",
+  "userName" : "bosnic98"
 } ] ] ]
