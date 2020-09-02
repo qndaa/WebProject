@@ -1,5 +1,7 @@
 package beans;
 
+import java.io.File;
+
 import enums.TypeOfUser;
 
 

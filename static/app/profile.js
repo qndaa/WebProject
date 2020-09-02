@@ -1,75 +1,119 @@
 Vue.component("profile", {
 
     template:`
-		    <div class="container">
-				<div class="py-5 text-center">
-					<h2 class="text-primary">Uvid u podatke korisnika</h2>	
+		<div class="container">
+
+
+				<!-- Nalov -->
+				<div class="py-4 text-center">
+					<h1 class="text-primary">Profil korisnika</h1>	
 				</div>
 
-				<div class="row py-1 text-center  d-flex justify-content-center"> 
-					<div class="col-lg-4   "><label>Ime:</label></div>
-					<div class="col-lg-4 d-flex justify-content-start "> 
-					<input type="text" class="w-50" v-model="user.name" v-bind:disabled="mode=='NO_MODE'"> 
+				<!-- Slika i polje za upload -->
+				<div class= "row d-flex justify-content-center">
+					<img v-bind:src="user.imagePath" class="rounded-circle " alt="Profile picture" width="150" height="150"> </img>
+					
+				</div>
+
+
+
+				<div class= "row mt-2 d-flex justify-content-center">
+
+
+    						<div class="btn btn-primary btn-sm  w-25">
+      								<input type="file" @change="uploadImage" name="image" id="image" accept="image/*"/>
+    						</div>
+ 					
+					
+					
+
+
+
+
+				</div> 
+
+
+				<div class="row mt-5 text-center d-flex justify-content-center text-primary"> 
+					<div class="col-lg-3">
+						<label class="w-50 font-weight-bold" >Korisniko ime:</label>
+					</div>
+					<div class="col-lg-3"> 
+						<p class="w-50 font-weight-bold"> {{user.username}}</p>
 					</div>
 				</div>
-				<div class="row py-1 text-center  d-flex justify-content-center"> 
-					<div class="col-lg-4"><label>Prezime:</label></div>
-					<div class="col-lg-4 d-flex justify-content-start ">
-					 <input type="text" class="w-50" v-model="user.surname" v-bind:disabled="mode=='NO_MODE'">
-					 </div>
+
+				<div class="row mt-1 text-center d-flex justify-content-center text-primary"> 
+					<div class="col-lg-3">
+						<label>Ime:</label>
+					</div>
+					<div class="col-lg-3"> 
+						<input type="text" class="w-50 d-flex justify-content-center text-primary" v-model="user.name" v-bind:disabled="mode=='NO_MODE'"> 
+					</div>
 				</div>
-				<div class="row py-1 text-center  d-flex justify-content-center"> 
-					<div class="col-lg-4   "><label>Korisniko ime:</label></div>
-					<div class="col-lg-4 d-flex justify-content-start "> <p class="w-50"> {{user.username}}</p></div>
+
+				<div class="row mt-1 text-center d-flex justify-content-center text-primary"> 
+					<div class="col-lg-3">
+						<label>Prezime:</label>
+					</div>
+					<div class="col-lg-3">
+						<input type="text" class="w-50 d-flex justify-content-center text-primary" v-model="user.surname" v-bind:disabled="mode=='NO_MODE'">
+					</div>
 				</div>
-				<div class="row py-1 text-center  d-flex justify-content-center"> 
-					<div class="col-lg-4   "><label>Sifra:</label></div>
-					<div class="col-lg-4 d-flex justify-content-start "> 
-					<input type="password" class=" w-50" v-model="checkPassword1" v-bind:disabled="mode=='NO_MODE'">
+	
+				<div class="row mt-1 text-center d-flex justify-content-center text-primary"> 
+					<div class="col-lg-3">
+						<label>Nova sifra:</label>
+					</div>
+					<div class="col-lg-3 d-flex justify-content-start "> 
+						<input type="password" class="w-50 d-flex justify-content-center" v-model="checkPassword1" v-bind:disabled="mode=='NO_MODE'">
 
 					 </div>
 				</div>
-				<div class="row py-1 text-center  d-flex justify-content-center"> 
-					<div class="col-lg-4   "><label>Potvrdi sifru:</label></div>
-					<div class="col-lg-4 d-flex justify-content-start ">
-						<input id="password" type="password" class="w-50" placeholder="" value="" v-model="checkPassword2"  v-bind:disabled="mode=='NO_MODE'" required/>
+
+
+				<div class="row mt-1 text-center d-flex justify-content-center text-primary"> 
+					<div class="col-lg-3">
+						<label>Potvrdi sifru:
+					</label></div>
+					<div class="col-lg-3 d-flex justify-content-start ">
+						<input id="password" type="password" class="w-50 d-flex justify-content-center" v-model="checkPassword2"  v-bind:disabled="mode=='NO_MODE'" required/>
 					
 					</div>
 				</div>
-				<div class="row py-1 text-center  d-flex justify-content-center"> 
+				<div class="row py-1 text-center  d-flex justify-content-center  text-primary"> 
 
-					<div class="col-lg-4   "><label>Pol:</label></div>
-					<div class="col-lg-4 d-flex justify-content-start "> 
-						<select id="grender" class="custom-select d-block w-50" v-model="user.gender" v-bind:disabled="mode=='NO_MODE'" required>
+					<div class="col-lg-3"><label>Pol:</label></div>
+					<div class="col-lg-3 "> 
+						<select id="grender" class="custom-select d-block w-50 d-flex justify-content-center  " v-model="user.gender" v-bind:disabled="mode=='NO_MODE'" required>
 									<option value="">Izaberi</option>
 									<option>Muski</option>
 									<option>Zenski</option>
 								</select> 
 					</div>
 				</div>
+
 				<div class="row py-1 text-center  d-flex justify-content-center mt-3"> 
 					<div class="col-lg-2"> <button class="btn btn-primary btn-lg btn-block " v-on:click="decline">odustani</button></div>
 					<div class="col-lg-2"  v-if="mode!='EDIT'"> <button class="btn btn-primary btn-lg btn-block " v-on:click="saveData"> izmeni</button></div>
 					<div class="col-lg-2" v-if="mode==='EDIT'"> <button class="btn btn-primary btn-lg btn-block " v-on:click="confirmChanges">potvrdi</button></div>
 				</div>
 				
-			</div>
-	`,
-	data : function(){
+		</div>`
+	,data : function(){
 		return{
 			user : {
 				name : "",
 				surname : "",
 				username : "",
 				password : "",
-				gender : ""
+				gender : "",
+				imagePath : ""
 
 			},
 			checkPassword1 : '',
 			checkPassword2 : '',
 			backup : null,
-			mode:'NO_MODE'
-
+			mode:'NO_MODE',
 
 		}
 	},
@@ -142,9 +186,37 @@ Vue.component("profile", {
 				this.checkPassword1 = '';
 				this.checkPassword2 = '';
 				this.backup= null;			
+		},
+		uploadImage(event) {
+			
+			var img = event.target.files[0];
+
+			var formData = new FormData();
+
+			
+			formData.append("image", img);
 
 
-		}
-	}
+			axios.post('/uploadProfileImage',  formData, {
+    			headers: {
+      				'Content-Type': 'multipart/form-data'
+    			}
+			})
+			.then(response => {
+				window.location.reload(false);
+			
+
+		});
+
+
+
+
+
+
+
+
+
+	}}
+
 	
 });

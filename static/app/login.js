@@ -22,18 +22,14 @@ Vue.component("log-in", {
             </div>
 
             <div class="col-mb-3">
-              <label for="passwordInput" class="text-primary">Sifra </label>
+              <label for="passwordInput" class="text-primary mt-3">Sifra </label>
               <input v-model="users.password" type="password" class="form-control" id="passwordInput" required />
               <div class="invalid-feedback">
                 Unesite sifru!
               </div>
             </div>
 
-        
-
-
           </div>
-
 
           <div id="error" class="ml-1 mt-2" hidden="true"> 
             <label class="badge badge-danger">{{mode}}</label>

@@ -6,8 +6,19 @@ import static spark.Spark.staticFiles;
 import static spark.Spark.post;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.file.CopyOption;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Collection;
 
-import javax.jws.soap.SOAPBinding.Use;
+import javax.servlet.MultipartConfigElement;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 
@@ -16,9 +27,9 @@ import dto.ApartmentDTO;
 import dto.ReservationDTO;
 import dto.UserDTO;
 import enums.TypeOfUser;
-import spark.Redirect.Status;
-import spark.Request;
+import javaxt.utils.Base64.InputStream;
 import spark.Session;
+import spark.utils.IOUtils;
 
 public class SparkMain {
 
@@ -261,8 +272,47 @@ public class SparkMain {
 			
 		});
 		
-		
-		
+		post("/uploadProfileImage", (request, response) -> {
+			request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("static/data/profile"));
+						
+			Session ss = request.session(true);
+			User user = ss.attribute("user");
+			String fName = request.raw().getPart("image").getSubmittedFileName();
+			
+			Part uploadedFile = request.raw().getPart("image");
+			
+			
+			
+			//Path out = Paths.get("static/data/profile/" + uploadedFile.getSubmittedFileName());
+			
+			Path out = Paths.get("static/data/profile/" + user.getUserName() + ".jpg");
+
+			
 	
+		    try(final java.io.InputStream in = uploadedFile.getInputStream()){
+
+		    	
+		    	//Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
+		    	//user.setImagePath("/data/profile/" + uploadedFile.getSubmittedFileName());
+		    	
+		    	OutputStream outStream = new FileOutputStream(out.toString());		 
+		    	IOUtils.copy(in, outStream);
+		    	
+		    	outStream.close();
+		    	uploadedFile.delete();
+		    	in.close();
+		    	
+		    	
+		    } catch (Exception e) {
+		    	e.printStackTrace();
+		    }
+		    
+		    
+		    return "data/profile/" + user.getUserName() + ".jpg";
+			
+
+		}); 
+		
+		
 	}
 }

@@ -6,14 +6,6 @@
   "imagePath" : "/data/profile/simke1998.jpg",
   "typeOfUser" : "ADMINISTRATOR",
   "userName" : "simke98"
-} ], [ "beans.Administrator", {
-  "password" : "qndaa123",
-  "name" : "Djordjije",
-  "surname" : "Kundacina",
-  "gender" : "Muski",
-  "imagePath" : "/data/profile/qndaa.jpg",
-  "typeOfUser" : "ADMINISTRATOR",
-  "userName" : "qndaa"
 } ], [ "beans.User", {
   "password" : "pera123",
   "name" : "Pera",
@@ -86,4 +78,12 @@
   "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "GUEST",
   "userName" : "bosnic98"
+} ], [ "beans.User", {
+  "password" : "qndaa123",
+  "name" : "Djordjije",
+  "surname" : "Kundacina",
+  "gender" : "Muski",
+  "imagePath" : "/data/profile/qndaa.jpg",
+  "typeOfUser" : "ADMINISTRATOR",
+  "userName" : "qndaa"
 } ] ] ]
