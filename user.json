@@ -6,79 +6,7 @@
   "imagePath" : "/data/profile/simke1998.jpg",
   "typeOfUser" : "ADMINISTRATOR",
   "userName" : "simke98"
-} ], [ "beans.User", {
-  "password" : "pera123",
-  "name" : "Pera",
-  "surname" : "Peric",
-  "gender" : "Muski",
-  "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "GUEST",
-  "userName" : "pera123"
-} ], [ "beans.User", {
-  "password" : "mara123",
-  "name" : "Marija",
-  "surname" : "Marijanovi",
-  "gender" : "Zenski",
-  "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "GUEST",
-  "userName" : "mara123"
-} ], [ "beans.User", {
-  "password" : "jovana123",
-  "name" : "Jovana",
-  "surname" : "Jovanovic",
-  "gender" : "Zenski",
-  "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "GUEST",
-  "userName" : "jovana123"
-} ], [ "beans.User", {
-  "password" : "ana123",
-  "name" : "Anastasija",
-  "surname" : "Vukovic",
-  "gender" : "Zenski",
-  "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "GUEST",
-  "userName" : "ana123"
-} ], [ "beans.User", {
-  "password" : "marko123",
-  "name" : "Marko",
-  "surname" : "Markovic",
-  "gender" : "Muski",
-  "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "GUEST",
-  "userName" : "marko123"
-} ], [ "beans.User", {
-  "password" : "nikola123",
-  "name" : "Nikola",
-  "surname" : "Nikolic",
-  "gender" : "Muski",
-  "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "GUEST",
-  "userName" : "nikola123"
-} ], [ "beans.User", {
-  "password" : "marija123",
-  "name" : "Marija",
-  "surname" : "Markovic",
-  "gender" : "Muski",
-  "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "GUEST",
-  "userName" : "marija123"
-} ], [ "beans.User", {
-  "password" : "lidija123",
-  "name" : "Lidija ",
-  "surname" : "Vukovic",
-  "gender" : "Muski",
-  "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "GUEST",
-  "userName" : "lidijaaa"
-} ], [ "beans.User", {
-  "password" : "bosnic",
-  "name" : "Jovan",
-  "surname" : "Bosnic",
-  "gender" : "Muski",
-  "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "GUEST",
-  "userName" : "bosnic98"
-} ], [ "beans.User", {
+} ], [ "beans.Administrator", {
   "password" : "qndaa123",
   "name" : "Djordjije",
   "surname" : "Kundacina",
@@ -86,4 +14,147 @@
   "imagePath" : "/data/profile/qndaa.jpg",
   "typeOfUser" : "ADMINISTRATOR",
   "userName" : "qndaa"
+} ], [ "beans.Host", {
+  "password" : "koki123",
+  "name" : "Koki",
+  "surname" : "Koki",
+  "gender" : "Muski",
+  "imagePath" : "/data/profile/profile.jpg",
+  "typeOfUser" : "HOST",
+  "aparment" : [ "java.util.ArrayList", [ [ "beans.Apartment", {
+    "typeOfApartment" : "ROOM",
+    "numberOfRoom" : 5,
+    "numberOfGuests" : 8,
+    "location" : [ "beans.Location", {
+      "geographicalWidth" : 1.0,
+      "geographicalLength" : 2.0,
+      "address" : [ "beans.Address", {
+        "street" : "Petkova",
+        "numberHouse" : 5,
+        "city" : "Beograd",
+        "postNumber" : 11000
+      } ]
+    } ],
+    "releaseDates" : [ "java.util.ArrayList", [ ] ],
+    "comments" : [ "java.util.ArrayList", [ ] ],
+    "urlImages" : [ "java.util.ArrayList", ["https://cf.bstatic.com/images/hotel/max1024x768/262/262456256.jpg"  ] ],
+    "pricePerNight" : 200.0,
+    "checkInTime" : [ "java.util.Date", 1599041404904 ],
+    "checkOutTime" : [ "java.util.Date", 1599041404904 ],
+    "status" : "ACTIVE",
+    "content" : [ "java.util.ArrayList", [ ] ],
+    "reservations" : [ "java.util.ArrayList", [ ] ]
+  } ], [ "beans.Apartment", {
+    "typeOfApartment" : "ROOM",
+    "numberOfRoom" : 2,
+    "numberOfGuests" : 4,
+    "location" : [ "beans.Location", {
+      "geographicalWidth" : 1.0,
+      "geographicalLength" : 2.0,
+      "address" : [ "beans.Address", {
+        "street" : "Perina",
+        "numberHouse" : 2,
+        "city" : "Novi Sad",
+        "postNumber" : 21000
+      } ]
+    } ],
+    "releaseDates" : [ "java.util.ArrayList", [ ] ],
+    "comments" : [ "java.util.ArrayList", [ ] ],
+    "urlImages" : [ "java.util.ArrayList", [ "https://cf.bstatic.com/xdata/images/hotel/square200/107713471.jpg?k=9e177d8b7b7878344391f9215184bdf3125bb59de47f42a3a1a41701379b858c&o=" ] ],
+    "pricePerNight" : 300.0,
+    "checkInTime" : [ "java.util.Date", 1599041404905 ],
+    "checkOutTime" : [ "java.util.Date", 1599041404905 ],
+    "status" : "ACTIVE",
+    "content" : [ "java.util.ArrayList", [ ] ],
+    "reservations" : [ "java.util.ArrayList", [ ] ]
+  } ], [ "beans.Apartment", {
+    "typeOfApartment" : "ROOM",
+    "numberOfRoom" : 3,
+    "numberOfGuests" : 6,
+    "location" : [ "beans.Location", {
+      "geographicalWidth" : 1.0,
+      "geographicalLength" : 2.0,
+      "address" : [ "beans.Address", {
+        "street" : "Mihajla",
+        "numberHouse" : 3,
+        "city" : "Sabac",
+        "postNumber" : 15000
+      } ]
+    } ],
+    "releaseDates" : [ "java.util.ArrayList", [ ] ],
+    "comments" : [ "java.util.ArrayList", [ ] ],
+    "urlImages" : [ "java.util.ArrayList", [ "https://cf.bstatic.com/xdata/images/hotel/square200/242325121.jpg?k=858b345d6bfcb5a561a2f332c4eb78e1cda4b0d6edae2caf93146a60f3731c7c&o=" ] ],
+    "pricePerNight" : 400.0,
+    "checkInTime" : [ "java.util.Date", 1599041404905 ],
+    "checkOutTime" : [ "java.util.Date", 1599041404905 ],
+    "status" : "ACTIVE",
+    "content" : [ "java.util.ArrayList", [ ] ],
+    "reservations" : [ "java.util.ArrayList", [ ] ]
+  } ], [ "beans.Apartment", {
+    "typeOfApartment" : "ROOM",
+    "numberOfRoom" : 1,
+    "numberOfGuests" : 2,
+    "location" : [ "beans.Location", {
+      "geographicalWidth" : 1.0,
+      "geographicalLength" : 2.0,
+      "address" : [ "beans.Address", {
+        "street" : "Koste",
+        "numberHouse" : 1,
+        "city" : "Beograd",
+        "postNumber" : 11000
+      } ]
+    } ],
+    "releaseDates" : [ "java.util.ArrayList", [ ] ],
+    "comments" : [ "java.util.ArrayList", [ ] ],
+    "urlImages" : [ "java.util.ArrayList", [ "https://cf.bstatic.com/xdata/images/hotel/square200/261702888.jpg?k=041012dfb8edbac43cd2682908af4d2aeee44aac892f5ada4017c91a4af72edc&o=" ] ],
+    "pricePerNight" : 500.0,
+    "checkInTime" : [ "java.util.Date", 1599041404905 ],
+    "checkOutTime" : [ "java.util.Date", 1599041404905 ],
+    "status" : "ACTIVE",
+    "content" : [ "java.util.ArrayList", [ ] ],
+    "reservations" : [ "java.util.ArrayList", [ ] ]
+  } ], [ "beans.Apartment", {
+    "typeOfApartment" : "ROOM",
+    "numberOfRoom" : 5,
+    "numberOfGuests" : 10,
+    "location" : [ "beans.Location", {
+      "geographicalWidth" : 1.0,
+      "geographicalLength" : 2.0,
+      "address" : [ "beans.Address", {
+        "street" : "Petkova",
+        "numberHouse" : 15,
+        "city" : "Beograd",
+        "postNumber" : 11000
+      } ]
+    } ],
+    "releaseDates" : [ "java.util.ArrayList", [ ] ],
+    "comments" : [ "java.util.ArrayList", [ ] ],
+    "urlImages" : [ "java.util.ArrayList", [ "https://cf.bstatic.com/xdata/images/hotel/square200/238826579.jpg?k=f72beb98bf5e91f3abf2aa7e9850c5f62bc11e45eceac3876784cb431bea9225&o=" ] ],
+    "pricePerNight" : 600.0,
+    "checkInTime" : [ "java.util.Date", 1599041404905 ],
+    "checkOutTime" : [ "java.util.Date", 1599041404905 ],
+    "status" : "ACTIVE",
+    "content" : [ "java.util.ArrayList", [ ] ],
+    "reservations" : [ "java.util.ArrayList", [ ] ]
+  } ] ] ],
+  "userName" : "koki123"
+} ], [ "beans.Guest", {
+  "password" : "jo123",
+  "name" : "Jovana",
+  "surname" : "Jovic",
+  "gender" : "Zenski",
+  "imagePath" : "/data/profile/profile.jpg",
+  "typeOfUser" : "GUEST",
+  "rentedApartment" : [ "java.util.ArrayList", [ ] ],
+  "resevration" : [ "java.util.ArrayList", [ ] ],
+  "userName" : "jo123"
+} ], [ "beans.Host", {
+  "password" : "bosnic123",
+  "name" : "Jovan",
+  "surname" : "Bosnic",
+  "gender" : "Muski",
+  "imagePath" : "/data/profile/profile.jpg",
+  "typeOfUser" : "HOST",
+  "aparment" : [ "java.util.ArrayList", [ ] ],
+  "userName" : "bosnic123"
 } ] ] ]

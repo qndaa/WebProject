@@ -22,6 +22,7 @@ import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 
+import beans.Guest;
 import beans.User;
 import dto.ApartmentDTO;
 import dto.ReservationDTO;
@@ -43,7 +44,9 @@ public class SparkMain {
 		staticFiles.externalLocation(new File("./static").getCanonicalPath());
 
 		userDto.loadFile();
-		// appartmentDto.loadFile();
+		appartmentDto.loadFile();
+		
+		
 
 		get("/test", (req, res) -> {
 			return "Works";
@@ -58,6 +61,7 @@ public class SparkMain {
 			String a = req.body();
 			User userLogin = g.fromJson(a, User.class);
 			User user = userDto.loginUser(userLogin.getUserName(), userLogin.getPassword());
+			
 			
 			if (user == null) {
 				res.status(400);
@@ -150,7 +154,7 @@ public class SparkMain {
 			res.type("application/json");
 			Gson g = new Gson();
 			String playload = req.body();
-			User user = g.fromJson(playload, User.class);
+			Guest user = g.fromJson(playload, Guest.class);
 			user.setTypeOfUser(TypeOfUser.GUEST);
 			user.setImagePath("/data/profile/profile.jpg");
 
@@ -272,6 +276,7 @@ public class SparkMain {
 			
 		});
 		
+
 		post("/uploadProfileImage", (request, response) -> {
 			request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("static/data/profile"));
 						
@@ -281,20 +286,12 @@ public class SparkMain {
 			
 			Part uploadedFile = request.raw().getPart("image");
 			
-			
-			
-			//Path out = Paths.get("static/data/profile/" + uploadedFile.getSubmittedFileName());
-			
 			Path out = Paths.get("static/data/profile/" + user.getUserName() + ".jpg");
 
 			
 	
 		    try(final java.io.InputStream in = uploadedFile.getInputStream()){
 
-		    	
-		    	//Files.copy(in, out, StandardCopyOption.REPLACE_EXISTING);
-		    	//user.setImagePath("/data/profile/" + uploadedFile.getSubmittedFileName());
-		    	
 		    	OutputStream outStream = new FileOutputStream(out.toString());		 
 		    	IOUtils.copy(in, outStream);
 		    	
@@ -312,6 +309,26 @@ public class SparkMain {
 			
 
 		}); 
+
+		get("/allAppartmants", (req, res) -> {
+			res.type("application/json");
+			Gson g = new Gson();
+			
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			if(user == null || user.getTypeOfUser() == TypeOfUser.GUEST) {
+				return g.toJson(appartmentDto.getAllActiveApartment());
+			}else if(user.getTypeOfUser() == TypeOfUser.HOST) {
+				return g.toJson(userDto.getApartmentFromHost(user));
+			}else {
+				return g.toJson(appartmentDto.getAppartment());
+			}
+
+			
+		});
+		
+
 		
 		
 	}
