@@ -80,7 +80,7 @@ Vue.component("apartments", {
 			    		<hr>
 			    	</div>
 			    	<div class="d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"> Ceop apartman </p>
+			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"> Ceo apartman </p>
 			    		<span class="badge text-muted"> 10 </span>
 			    	</div>
 			    	<div class=" d-flex justify-content-between" >

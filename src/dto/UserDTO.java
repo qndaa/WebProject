@@ -1,5 +1,6 @@
 package dto;
 
+import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -107,6 +108,29 @@ public class UserDTO {
 	
 	
 	
+	public Host findeHost(User user) {
+		int i=0;
+		for (User u : users) {
+			if(u.getUserName().equals(user.getUserName()) && u.getTypeOfUser() == TypeOfUser.HOST) {
+				return (Host) users.get(i);
+			}
+			i++;
+		}
+		return null;
+	}
+	
+	public ArrayList<Apartment> getApartmentFromHost(User user){
+
+		return findeHost(user).getAparment();
+		 
+	}
+	
+	
+	public void createHost() {
+		Host h = new Host("Jovan","Bosnic","bosnic123","bosnic123","Muski",TypeOfUser.HOST);
+		users.add(h);
+		saveFile();
+	}
 	
 	
 }

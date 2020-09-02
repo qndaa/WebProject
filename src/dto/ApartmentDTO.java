@@ -91,6 +91,17 @@ public class ApartmentDTO {
 		this.appartment = appartment;
 	}
 	
+	public ArrayList<Apartment> getAllActiveApartment (){
+		ArrayList<Apartment> activeApartment = new ArrayList<Apartment>();
+		for (Apartment apartment : appartment) {
+			if(apartment.getStatus() == StatusApartment.ACTIVE) {
+				activeApartment.add(apartment);
+			}
+		}
+		
+		
+		return activeApartment;
+	}
 	
 	
 	

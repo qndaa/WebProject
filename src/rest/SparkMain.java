@@ -11,6 +11,7 @@ import javax.jws.soap.SOAPBinding.Use;
 
 import com.google.gson.Gson;
 
+import beans.Guest;
 import beans.User;
 import dto.ApartmentDTO;
 import dto.ReservationDTO;
@@ -34,7 +35,6 @@ public class SparkMain {
 		userDto.loadFile();
 		appartmentDto.loadFile();
 		
-		appartmentDto.loadFile();
 		
 
 		get("/test", (req, res) -> {
@@ -50,6 +50,7 @@ public class SparkMain {
 			String a = req.body();
 			User userLogin = g.fromJson(a, User.class);
 			User user = userDto.loginUser(userLogin.getUserName(), userLogin.getPassword());
+			
 			
 			if (user == null) {
 				res.status(400);
@@ -142,7 +143,7 @@ public class SparkMain {
 			res.type("application/json");
 			Gson g = new Gson();
 			String playload = req.body();
-			User user = g.fromJson(playload, User.class);
+			Guest user = g.fromJson(playload, Guest.class);
 			user.setTypeOfUser(TypeOfUser.GUEST);
 			user.setImagePath("/data/profile/profile.jpg");
 
@@ -268,7 +269,17 @@ public class SparkMain {
 			res.type("application/json");
 			Gson g = new Gson();
 			
-			return g.toJson(appartmentDto.getAppartment());
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			if(user == null || user.getTypeOfUser() == TypeOfUser.GUEST) {
+				return g.toJson(appartmentDto.getAllActiveApartment());
+			}else if(user.getTypeOfUser() == TypeOfUser.HOST) {
+				return g.toJson(userDto.getApartmentFromHost(user));
+			}else {
+				return g.toJson(appartmentDto.getAppartment());
+			}
+
 			
 		});
 		
