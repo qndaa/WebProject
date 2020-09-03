@@ -162,7 +162,7 @@ Vue.component("apartments", {
        				
        				<div class="col">
        					<div><label> Cena: </label> {{a.pricePerNight}} </div>
-       					<div><button class="btn bg-primary"> Procitaj vise </button> </div>
+       					<div><a href="#/apartments/222"><button class="btn bg-primary text-white"> Procitaj vise </button></a> </div>
        				</div>
 
 

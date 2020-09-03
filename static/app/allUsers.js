@@ -52,7 +52,7 @@ Vue.component("all-users", {
 					<div class="d-flex justify-content-center" >
 	        			<img :src="row[0].imagePath" class="rounded-circle " alt="Profile picture" width="150" height="150">
 	        		</div>        		
-	        		<h3 class="d-flex justify-content-center text-primary mt-3">{{row[0].name}}&nbsp;{{row[0].surname }}</h3>
+	        		<h3 class="d-flex justify-content-center text-primary mt-3" v-bind:class="{'text-success' : row[0].name[0] == 'A'}">{{row[0].name}}&nbsp;{{row[0].surname }}</h3>
 	        		<p class="d-flex justify-content-center text-primary"> Uloga: {{row[0].typeOfUser}} </p>
 	      		</div>
 

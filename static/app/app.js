@@ -7,12 +7,13 @@ const AllReviews = {template : '<all-reviews> </all-reviews>'}
 const Apartments = {template : '<apartments> </apartments>'}
 const Reservation = {template : '<reservation> </reservation>'}
 const ValidationAccess = {template : '<validation-acces> </validation-acces>'}
-
+const Apartment = {template : '<apartment></apartment>'}
 
 
 const router = new VueRouter({
     mode: 'hash',
     routes: [
+        
    	  	{ path: '/', component: Apartments},
         { path: '/login', component: Login},
         { path: '/registration', component: Registration },
@@ -20,6 +21,7 @@ const router = new VueRouter({
         { path: '/allUsers', component: AllUsers },
         { path: '/allReviews', component: AllReviews},
         { path: '/apartments', component: Apartments},
+        { path: '/apartment/:id', component: Apartment},
         { path: '/reservation', component: Reservation},
         { path: '/validationAcces', component: ValidationAccess}
     ]
@@ -52,8 +54,7 @@ var app = new Vue({
             this.mode= 'NO_LOGIN';
             window.location.href = "/#/login"; 
           }
-        })
-
+        });
       }
     }
 
