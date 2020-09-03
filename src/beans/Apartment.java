@@ -10,6 +10,8 @@ import enums.TypeOfApartment;
 
 public class Apartment {
 	
+	private int id;
+
 	private TypeOfApartment typeOfApartment;
 	private int numberOfRoom;
 	private int numberOfGuests;
@@ -33,16 +35,19 @@ public class Apartment {
 	
 	private ArrayList<ContentOfApartment> content = new ArrayList<ContentOfApartment>();
 	
+	
+	
+	
+	
 	@JsonIgnoreProperties(value = {"reservedApartment"})
 	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	
-	
+	private boolean isActivce = true;
 	
 	public Apartment() {
 		
 	}
 
-	
 
 
 	public Apartment(TypeOfApartment typeOfApartment, int numberOfRoom, int numberOfGuests, Location location,
@@ -58,6 +63,7 @@ public class Apartment {
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
 		this.status = status;
+		this.id=-1;
 		
 	}
 
@@ -230,7 +236,29 @@ public class Apartment {
 		this.reservations = reservations;
 	}
 	
-	
+	public int getId() {
+		return id;
+	}
+
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public boolean isActivce() {
+		return isActivce;
+	}
+
+
+
+	public void setActivce(boolean isActivce) {
+		this.isActivce = isActivce;
+	}
+
 	
 	
 }

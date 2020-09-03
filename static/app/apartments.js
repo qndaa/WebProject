@@ -4,6 +4,7 @@ Vue.component("apartments", {
     <div class="container text-primary">
 
     	<div class="row">
+
 		    <div class="col-sm-4">
 		    	
 		    	<div class="anyUsers card p-3 m-3"> 
@@ -168,24 +169,37 @@ Vue.component("apartments", {
 
     			</div>
 
-
-
-
+    			<div class="d-flex justify-content-end p-3"  v-if="mode=='HOST'" ><button class="btn bg-primary text-white" v-on:click="addApartment"> Dodaj novi apartman </button> </div>
 		    </div>
   		</div>
     </div>`,
 
     data : function(){
     	return {
-    		appartments : []
+    		appartments : [],
+    		mode : 'NO_MODE'
     	
     	}
     },
+    beforeMount(){
+ 		   axios
+          .get('/sesion')
+          .then(response => (this.mode = response.data.typeOfUser))
+
+    }
+    ,
     mounted() {
     	axios.get('/allAppartmants')
     	.then(response => this.appartments = response.data)
 
-    },   
+    },
+    methods :{
+    	addApartment : function(){
+    		
+    		window.location.href = "/#/createApartment"; 
+
+    	}
+    }  
 
 
 
