@@ -17,25 +17,25 @@ Vue.component("all-users", {
 	    		<div class="col-lg-4 mt-4 d-flex justify-content-center">
 
 	    			<div class="custom-control custom-checkbox custom-control-inline">
-					  <input type="checkbox" class="custom-control-input" checked id="defaultInline1">
-					  <label class="custom-control-label text-primary" for="defaultInline1">Administratori</label>
+					  <input v-model="administratorsCheckBox" type="checkbox" class="custom-control-input" checked id="administrators" @change="refreshUsers">
+					  <label class="custom-control-label text-primary" for="administrators">Administratori</label>
 					</div>
-
 					
 					<div class="custom-control custom-checkbox custom-control-inline">
-					  <input type="checkbox" class="custom-control-input" checked id="defaultInline2">
-					  <label class="custom-control-label text-primary" for="defaultInline2">Domacini</label>
+					  <input v-model="hostsCheckBox" type="checkbox" class="custom-control-input" checked id="hosts" @change="refreshUsers">
+					  <label class="custom-control-label text-primary" for="hosts">Domacini</label>
 					</div>
 
+
 					<div class="custom-control custom-checkbox custom-control-inline">
-					  <input type="checkbox" class="custom-control-input" checked id="defaultInline3">
-					  <label class="custom-control-label text-primary" for="defaultInline3">Gosti</label>
+					  <input v-model="guestsCheckBox" type="checkbox" class="custom-control-input" checked id="guests" @change="refreshUsers">
+					  <label class="custom-control-label text-primary" for="guests">Gosti</label>
 					</div>
 	    		</div>
 
 	    		<div class="col-lg-4 mt-2 ">
 	    			<form class="form-inline d-flex justify-content-center mt-2">
-        				<input class="form-control" type="text" placeholder="Search" aria-label="Search">
+        				<input v-model="searchInput" class="form-control" type="text" placeholder="Search" aria-label="Search" v-on:keyup="search">
       				</form>
 
 	    		</div>
@@ -87,7 +87,13 @@ Vue.component("all-users", {
     	return {
     		mode : 'NO_LOGIN',
     		users : [],
-    		rowUsers : []
+    		rowUsers : [],
+    		filteredUsers : [],
+    		searchUser : [],
+    		administratorsCheckBox : true,
+    		hostsCheckBox : true,
+    		guestsCheckBox : true,
+    		searchInput : ""
     	}
     },
 
@@ -110,22 +116,94 @@ Vue.component("all-users", {
           	axios
     	  	  .get('/allUsers')
           	  .then(response => {
-          	  	this.users = response.data
-          	  	this.getRowUsers();
+          	  	this.users = response.data;
+ 				this.filteredUsers = response.data;
+ 				this.searchUser = response.data;
+          	  	this.getRowUsers(this.getSearchAndFilterUsers());
           	  });  
           });
-    },   	                                                                          
+    },  	                                                                          
     		
     methods : {
-    	getRowUsers : function() {
+    	getRowUsers : function(users) {
     		var partsUsers = [];
     		var i,j,temparray,chunk = 3;
 
-			for (i=0,j=this.users.length; i<j; i+=chunk) {
-    			temparray = this.users.slice(i,i+chunk);
+			for (i=0,j=users.length; i<j; i+=chunk) {
+    			temparray = users.slice(i,i+chunk);
     			partsUsers.push(temparray);
 			}		
 			this.rowUsers = partsUsers;
+    	},
+    	refreshUsers : function() {
+
+    		this.filteredUsers = [];
+    		
+    		
+    		for(var user of this.users) {
+
+ 
+    			if(user.typeOfUser === "ADMINISTRATOR" && this.administratorsCheckBox === true) {
+    				this.filteredUsers.push(user);
+    			}
+
+    			if(user.typeOfUser === "HOST" && this.hostsCheckBox === true) {
+    				this.filteredUsers.push(user);
+    			}
+
+    			if(user.typeOfUser === "GUEST" && this.guestsCheckBox === true) {
+    				this.filteredUsers.push(user);
+    			}
+    		}
+    		this.getRowUsers(this.getSearchAndFilterUsers());
+    	},
+    	search : function(event) {
+    		this.searchUser = [];
+    		var search = this.searchInput.toLowerCase().trim();
+
+    		if(search.length == 0) {
+    			this.searchUser = this.users;
+    			this.getRowUsers(this.getSearchAndFilterUsers());
+    			return;
+    		}
+    		if(search.split(" ").length > 2){
+    			this.searchUser = [];
+    		} else if(search.split(" ").length == 1) {
+
+    			for(var user of this.users){
+    				if(user.name.toLowerCase().indexOf(search) !== -1 || user.surname.toLowerCase().indexOf(search) !== -1){
+    					this.searchUser.push(user);
+    				}
+    			}
+    		} else if(search.split(" ").length == 2) {
+    			var tokens = search.split(" ");
+
+    			for(var user of this.users){
+    				if(user.name.toLowerCase().indexOf(tokens[0]) !== -1 && user.surname.toLowerCase().indexOf(tokens[1]) !== -1) {
+    					this.searchUser.push(user);
+    				} else if(user.name.toLowerCase().indexOf(tokens[1]) !== -1 && user.surname.toLowerCase().indexOf(tokens[0]) !== -1) {
+    					this.searchUser.push(user);
+    				}
+    			}
+    		}
+
+    		this.getRowUsers(this.getSearchAndFilterUsers());
+
+    	},
+    	getSearchAndFilterUsers(){
+    		if(this.searchUser.length === 0 || this.filteredUsers.length === 0) return [];
+
+    		var searchAndFilteredUsers = [];
+
+    		for(var fUser of this.filteredUsers) {
+    			for(var sUser of this.searchUser) {
+    				if(fUser.username === sUser.username) {
+    					searchAndFilteredUsers.push(fUser);
+    				}
+    			}
+    		}
+
+    		return searchAndFilteredUsers;
     	}
 
 
