@@ -49,6 +49,13 @@ public class Address {
 	public void setPostNumber(int postNumber) {
 		this.postNumber = postNumber;
 	}
+
+	@Override
+	public String toString() {
+		return "Address [street=" + street + ", numberHouse=" + numberHouse + ", city=" + city + ", postNumber="
+				+ postNumber + "]";
+	}
+	
 	
 	
 }

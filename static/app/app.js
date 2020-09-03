@@ -7,6 +7,8 @@ const AllReviews = {template : '<all-reviews> </all-reviews>'}
 const Apartments = {template : '<apartments> </apartments>'}
 const Reservation = {template : '<reservation> </reservation>'}
 const ValidationAccess = {template : '<validation-acces> </validation-acces>'}
+const CreateApartment = {template : '<add-apartment> </add-apartment>'}
+
 
 
 
@@ -21,7 +23,8 @@ const router = new VueRouter({
         { path: '/allReviews', component: AllReviews},
         { path: '/apartments', component: Apartments},
         { path: '/reservation', component: Reservation},
-        { path: '/validationAcces', component: ValidationAccess}
+        { path: '/validationAcces', component: ValidationAccess},
+        { path: '/createApartment', component: CreateApartment}
     ]
 });
 

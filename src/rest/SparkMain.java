@@ -15,18 +15,29 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
+import beans.Address;
+import beans.Apartment;
+import beans.ContentOfApartment;
 import beans.Guest;
+import beans.Host;
+import beans.Location;
 import beans.User;
 import dto.ApartmentDTO;
 import dto.ReservationDTO;
 import dto.UserDTO;
+import enums.StatusApartment;
+import enums.TypeOfApartment;
 import enums.TypeOfUser;
 import javaxt.utils.Base64.InputStream;
 import spark.Session;
@@ -45,6 +56,7 @@ public class SparkMain {
 
 		userDto.loadFile();
 		appartmentDto.loadFile();
+		//userDto.createHost();
 		
 		
 
@@ -154,6 +166,7 @@ public class SparkMain {
 			res.type("application/json");
 			Gson g = new Gson();
 			String playload = req.body();
+			
 			Guest user = g.fromJson(playload, Guest.class);
 			user.setTypeOfUser(TypeOfUser.GUEST);
 			user.setImagePath("/data/profile/profile.jpg");
@@ -266,6 +279,26 @@ public class SparkMain {
 			return true;
 		});
 		
+		get("/validationAccesHost", (req, res) -> {
+			res.type("application/json");
+			
+			Gson g = new Gson();
+			
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			if(user == null) {
+				res.status(403);
+				return res;
+			}else if (user.getTypeOfUser() != TypeOfUser.HOST) {
+				res.status(403);
+				return res;
+			}
+			
+			return true;
+		});
+		
+		
 		
 		
 		get("/allUsers", (req, res) -> {
@@ -317,6 +350,7 @@ public class SparkMain {
 			Session ss = req.session(true);
 			User user = ss.attribute("user");
 			
+			/*
 			if(user == null || user.getTypeOfUser() == TypeOfUser.GUEST) {
 				return g.toJson(appartmentDto.getAllActiveApartment());
 			}else if(user.getTypeOfUser() == TypeOfUser.HOST) {
@@ -324,11 +358,55 @@ public class SparkMain {
 			}else {
 				return g.toJson(appartmentDto.getAppartment());
 			}
-
+				*/
+			return g.toJson(appartmentDto.getAppartment());
 			
 		});
 		
+		post("/addApartment", (req, res) -> {
+			res.type("application/json");
+			Gson g = new Gson();
+			String playload = req.body();
+			
+			ObjectMapper mapper = new ObjectMapper();
+			Map<String,Object> map = mapper.readValue(playload, Map.class);
+			
+			
+			TypeOfApartment type = ((String) map.get("typeOfApartment") == "Soba" ) ? TypeOfApartment.ROOM : TypeOfApartment.FULL_APARTMENT;
+			
+			Address address = new Address((String) map.get("street"),Integer.parseInt((String) map.get("numberHouse")),(String) map.get("city"),Integer.parseInt((String) map.get("postNumber")));
 
+			Location location = new Location(Double.parseDouble((String) map.get("geographicalWidth")),  Double.parseDouble((String) map.get("geographicalLength")),address);
+			
+			
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			Host h =  userDto.findeHost(user);
+			
+			
+			
+			Apartment a= new Apartment(type, Integer.parseInt((String) map.get("numberOfRoom")), Integer.parseInt((String) map.get("numberOfGuests")), location, h, Integer.parseInt((String) map.get("pricePerNight")), new Date(),new Date(), StatusApartment.PASSIVE);
+			
+			a.setId(appartmentDto.getAppartment().size()+1);
+			
+			int i=0;
+			for (String s :(ArrayList<String>) map.get("content")) {
+				a.getContent().add(new ContentOfApartment(++i,s));
+			}
+			
+			appartmentDto.getAppartment().add(a);
+			
+
+			h.getAparment().add(a);
+			
+			appartmentDto.saveFile();
+			userDto.saveFile();
+			
+			
+			return true;
+		});
+		
 		
 		
 	}
