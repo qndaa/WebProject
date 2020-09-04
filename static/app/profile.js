@@ -47,7 +47,16 @@ Vue.component("profile", {
 						<label>Ime:</label>
 					</div>
 					<div class="col-lg-3"> 
-						<input type="text" class="w-50 d-flex justify-content-center text-primary" v-model="user.name" v-bind:disabled="mode=='NO_MODE'"> 
+						<input type="text" class="w-50 d-flex justify-content-center text-primary"
+
+						v-bind:class="{'form-control' : true, 'is-invalid' : !validName() && Blured.nameBlured}"
+	 					v-on:blur="Blured.nameBlured = true"
+						
+						 v-model="user.name" v-bind:disabled="mode=='NO_MODE'"> 
+
+						<div class="invalid-feedback">
+							Morate isrpravno popuniti polje ime.
+						</div>
 					</div>
 				</div>
 
@@ -56,7 +65,21 @@ Vue.component("profile", {
 						<label>Prezime:</label>
 					</div>
 					<div class="col-lg-3">
-						<input type="text" class="w-50 d-flex justify-content-center text-primary" v-model="user.surname" v-bind:disabled="mode=='NO_MODE'">
+						<input type="text" class="w-50 d-flex justify-content-center text-primary" 
+
+						v-bind:class="{'form-control' : true, 'is-invalid' : !validSurName() && Blured.surnameBlured}" 
+						v-on:blur="Blured.surnameBlured = true"
+
+
+						v-model="user.surname" v-bind:disabled="mode=='NO_MODE'">
+
+
+
+						<div class="invalid-feedback">
+							Morate isrpravno popuniti polje prezime.
+						</div>
+
+
 					</div>
 				</div>
 	
@@ -65,8 +88,16 @@ Vue.component("profile", {
 						<label>Nova sifra:</label>
 					</div>
 					<div class="col-lg-3 d-flex justify-content-start "> 
-						<input type="password" class="w-50 d-flex justify-content-center" v-model="checkPassword1" v-bind:disabled="mode=='NO_MODE'">
+						<input type="password" class="w-50 d-flex justify-content-center"
 
+
+					v-bind:class="{'form-control' : true, 'is-invalid' : !validPassword() && Blured.passwordBlured}" 
+					v-on:blur="Blured.passwordBlured = true"
+
+						 v-model="checkPassword1" v-bind:disabled="mode=='NO_MODE'">
+						 <div class="invalid-feedback">
+							Nepravilna lozinka.
+						</div>
 					 </div>
 				</div>
 
@@ -76,19 +107,42 @@ Vue.component("profile", {
 						<label>Potvrdi sifru:
 					</label></div>
 					<div class="col-lg-3 d-flex justify-content-start ">
-						<input id="password" type="password" class="w-50 d-flex justify-content-center" v-model="checkPassword2"  v-bind:disabled="mode=='NO_MODE'" required/>
-					
+						<input id="password" type="password" class="w-50 d-flex justify-content-center" 
+
+						v-bind:class="{'form-control':true, 'is-invalid' : !validCheckPassword() && Blured.checkPasswordBlured}" 
+						v-on:blur="Blured.checkPasswordBlured = true"
+
+
+						v-model="checkPassword2"  v-bind:disabled="mode=='NO_MODE'" required/>
+
+
+
+
+						<div id="errorPassword" class="invalid-feedback">
+							Lozinke se ne poklapaju.
+						</div>
 					</div>
 				</div>
 				<div class="row py-1 text-center  d-flex justify-content-center  text-primary"> 
 
 					<div class="col-lg-3"><label>Pol:</label></div>
 					<div class="col-lg-3 "> 
-						<select id="grender" class="custom-select d-block w-50 d-flex justify-content-center  " v-model="user.gender" v-bind:disabled="mode=='NO_MODE'" required>
+						<select id="grender" class="custom-select d-block w-50 d-flex justify-content-center"
+						
+						v-bind:class="{'form-control' : true, 'is-invalid' : !validGrender() && Blured.genderBlured}" 
+						v-on:blur="Blured.genderBlured = true"
+
+
+						 v-model="user.gender" v-bind:disabled="mode=='NO_MODE'" required>
 									<option value="">Izaberi</option>
 									<option>Muski</option>
 									<option>Zenski</option>
 								</select> 
+
+						<div class="invalid-feedback">
+								Izaberite pol!
+						</div>
+
 					</div>
 				</div>
 
@@ -114,6 +168,15 @@ Vue.component("profile", {
 			checkPassword2 : '',
 			backup : null,
 			mode:'NO_MODE',
+
+			Blured : {
+					nameBlured : false,
+					surnameBlured : false,
+					passwordBlured : false,
+					genderBlured : false,
+					checkPasswordBlured : false
+				}
+
 
 		}
 	},
@@ -148,29 +211,26 @@ Vue.component("profile", {
 			this.mode='NO_MODE';
 		},
 		confirmChanges : function(){
-			if(this.user.name == '' || this.user.surname == ''){
-				alert("Polja ime i prezime ne smeju biti prazna");
-				return;
-			} 
 
-			if(this.checkPassword1 != '' && this.checkPassword2 == ''){
-				alert("Morate potvrdii sifru kada je menjate");
-				return;
-			}
+			if(this.user.name == "" || this.user.surname == "" || this.user.gender ==""){
+    			this.Blured.nameBlured = true;
+				this.Blured.surnameBlured = true;			
+				this.Blured.genderBlured = true;
 
-			if(this.checkPassword1 != this.checkPassword2){
-				alert("Sifre se razlikuju");
-				return;
-			}
+				if(this.checkPassword1 != '' && this.checkPassword2 == ''){
+					this.Blured.checkPasswordBlured = true;
+					this.Blured.passwordBlured = true;
+				}
+
+    			return;
+    		}
+
+
 			if (this.checkPassword1 === this.user.password) {
 				alert("password ne moze biti isti kao postojeci");
 				return;
 			}
 			
-			if(this.checkPassword1 === this.checkPassword2 && this.checkPassword1 != ''){
-				this.user.password = this.checkPassword1;
-			}
-
 
 			axios.post('/saveChagesUser', this.user)
 			.then(function(response){
@@ -187,6 +247,28 @@ Vue.component("profile", {
 				this.checkPassword2 = '';
 				this.backup= null;			
 		},
+		validName : function() {
+    		return (this.user.name.length > 3) ? true : false;
+    	},
+
+    	validSurName : function() {
+    		return (this.user.surname.length > 3) ? true : false;
+    	},
+    	validGrender : function() {
+    		return (this.user.gender.length > 0) ? true : false;
+    	},
+    	validCheckPassword : function() {
+    	
+    		return (this.checkPassword1 === this.checkPassword2) ? true : false;
+    	},
+    	validPassword : function() {
+    		return (this.checkPassword1.length > 3) ? true : false;
+    	},
+
+
+
+
+
 		uploadImage(event) {
 			
 			var img = event.target.files[0];
@@ -207,14 +289,6 @@ Vue.component("profile", {
 			
 
 		});
-
-
-
-
-
-
-
-
 
 	}}
 
