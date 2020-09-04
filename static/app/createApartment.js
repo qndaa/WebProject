@@ -373,6 +373,7 @@ Vue.component("add-apartment", {
     		}
 
 
+    		alert(this.Apartment.typeOfApartment);
 
     	axios.post('/addApartment',this.Apartment )
         .then(function(response){

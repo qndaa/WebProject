@@ -1,187 +1,44 @@
 [ "java.util.ArrayList", [ [ "beans.Apartment", {
   "id" : 1,
   "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 1,
-  "numberOfGuests" : 2,
+  "numberOfRoom" : 2,
+  "numberOfGuests" : 5,
   "location" : [ "beans.Location", {
-    "geographicalWidth" : 321.0,
-    "geographicalLength" : 123.0,
+    "geographicalWidth" : 1.0,
+    "geographicalLength" : 1.0,
     "address" : [ "beans.Address", {
-      "street" : "Masarikova",
+      "street" : "Kneza",
       "numberHouse" : 12,
       "city" : "Sabac",
       "postNumber" : 15000
     } ]
   } ],
   "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "host" : [ "beans.Host", {
-    "password" : "Bosnic",
-    "name" : "bosnic123",
-    "surname" : "bosnic123",
-    "gender" : "Muski",
-    "imagePath" : "/data/profile/qndaa.jpg",
-    "typeOfUser" : "HOST",
-    "userName" : "Jovan"
-  } ],
+  "idHost" : "b",
   "comments" : [ "java.util.ArrayList", [ ] ],
   "urlImages" : [ "java.util.ArrayList", [ ] ],
-  "pricePerNight" : 1000.0,
-  "checkInTime" : [ "java.util.Date", 1599160536694 ],
-  "checkOutTime" : [ "java.util.Date", 1599160536694 ],
+  "pricePerNight" : 5000.0,
+  "checkInTime" : [ "java.util.Date", 1599224657782 ],
+  "checkOutTime" : [ "java.util.Date", 1599224657782 ],
   "status" : "PASSIVE",
   "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
     "id" : 1,
-    "name" : "Wifi"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 2,
     "name" : "Topla voda"
   } ], [ "beans.ContentOfApartment", {
-    "id" : 3,
+    "id" : 2,
     "name" : "Osnovne stvari"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 4,
-    "name" : "Lift"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 5,
-    "name" : "Mesto za rad"
-  } ] ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "activce" : true
-} ], [ "beans.Apartment", {
-  "id" : 2,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 1,
-  "numberOfGuests" : 2,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 123.0,
-    "geographicalLength" : 213.0,
-    "address" : [ "beans.Address", {
-      "street" : "Kneza",
-      "numberHouse" : 23,
-      "city" : "Sabac",
-      "postNumber" : 15000
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "host" : [ "beans.Host", {
-    "password" : "Bosnic",
-    "name" : "bosnic123",
-    "surname" : "bosnic123",
-    "gender" : "Muski",
-    "imagePath" : "/data/profile/qndaa.jpg",
-    "typeOfUser" : "HOST",
-    "userName" : "Jovan"
-  } ],
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ ] ],
-  "pricePerNight" : 4332.0,
-  "checkInTime" : [ "java.util.Date", 1599160686789 ],
-  "checkOutTime" : [ "java.util.Date", 1599160686789 ],
-  "status" : "PASSIVE",
-  "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
-    "id" : 1,
-    "name" : "Topla voda"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 2,
-    "name" : "Wifi"
   } ], [ "beans.ContentOfApartment", {
     "id" : 3,
     "name" : "Aparat za kafu"
   } ], [ "beans.ContentOfApartment", {
     "id" : 4,
-    "name" : "Osnovne stvari"
-  } ] ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "activce" : true
-} ], [ "beans.Apartment", {
-  "id" : 3,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 3,
-  "numberOfGuests" : 5,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 123.0,
-    "geographicalLength" : 123.0,
-    "address" : [ "beans.Address", {
-      "street" : "Masarikova",
-      "numberHouse" : 12,
-      "city" : "Sabac",
-      "postNumber" : 123123
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "host" : [ "beans.Host", {
-    "password" : "Bosnic",
-    "name" : "bosnic123",
-    "surname" : "bosnic123",
-    "gender" : "Muski",
-    "imagePath" : "/data/profile/qndaa.jpg",
-    "typeOfUser" : "HOST",
-    "userName" : "Jovan"
-  } ],
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ ] ],
-  "pricePerNight" : 123123.0,
-  "checkInTime" : [ "java.util.Date", 1599161018797 ],
-  "checkOutTime" : [ "java.util.Date", 1599161018797 ],
-  "status" : "PASSIVE",
-  "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
-    "id" : 1,
-    "name" : "Wifi"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 2,
-    "name" : "TV"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 3,
-    "name" : "Grejanje"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 4,
-    "name" : "Klima"
+    "name" : "Mirko talasna"
   } ], [ "beans.ContentOfApartment", {
     "id" : 5,
-    "name" : "Topla voda"
-  } ] ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "activce" : true
-} ], [ "beans.Apartment", {
-  "id" : 4,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 1,
-  "numberOfGuests" : 2,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 123.0,
-    "geographicalLength" : 3123.0,
-    "address" : [ "beans.Address", {
-      "street" : "asd",
-      "numberHouse" : 3,
-      "city" : "Sabac",
-      "postNumber" : 31233
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "host" : [ "beans.Host", {
-    "password" : "Jovan",
-    "name" : "Jovan",
-    "surname" : "Bosnic2",
-    "gender" : "Muski",
-    "imagePath" : "/data/profile/qndaa.jpg",
-    "typeOfUser" : "HOST",
-    "userName" : "Jovan"
-  } ],
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ ] ],
-  "pricePerNight" : 333.0,
-  "checkInTime" : [ "java.util.Date", 1599161693129 ],
-  "checkOutTime" : [ "java.util.Date", 1599161693129 ],
-  "status" : "PASSIVE",
-  "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
-    "id" : 1,
     "name" : "Wifi"
   } ], [ "beans.ContentOfApartment", {
-    "id" : 2,
-    "name" : "Topla voda"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 3,
-    "name" : "Besplatan parking"
+    "id" : 6,
+    "name" : "TV"
   } ] ] ],
   "reservations" : [ "java.util.ArrayList", [ ] ],
   "activce" : true

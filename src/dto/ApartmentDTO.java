@@ -53,7 +53,7 @@ public class ApartmentDTO {
 			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("appartment.json"), appartment);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Jel me ti ujebes");
 		}
 		
 	}
@@ -104,6 +104,19 @@ public class ApartmentDTO {
 	}
 	
 	
+	
+	public ArrayList<Apartment> getAllApartmentFromHost(User user){
+		
+		ArrayList<Apartment> a = new ArrayList<Apartment>();
+		for (Apartment ap : appartment) {
+			if(ap.getIdHost().equals(user.getUserName())) {
+				a.add(ap);
+			}
+		}
+		
+		
+		return a;
+	}
 	
 	
 	

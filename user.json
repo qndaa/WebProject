@@ -15,46 +15,12 @@
   "typeOfUser" : "ADMINISTRATOR",
   "userName" : "qndaa"
 } ], [ "beans.Host", {
-  "password" : "Jovan",
-  "name" : "Jovan",
-  "surname" : "Bosnic2",
+  "password" : "b",
+  "name" : "J",
+  "surname" : "B",
   "gender" : "Muski",
   "imagePath" : "/data/profile/qndaa.jpg",
   "typeOfUser" : "HOST",
-  "aparment" : [ "java.util.ArrayList", [ [ "beans.Apartment", {
-    "id" : 4,
-    "typeOfApartment" : "FULL_APARTMENT",
-    "numberOfRoom" : 1,
-    "numberOfGuests" : 2,
-    "location" : [ "beans.Location", {
-      "geographicalWidth" : 123.0,
-      "geographicalLength" : 3123.0,
-      "address" : [ "beans.Address", {
-        "street" : "asd",
-        "numberHouse" : 3,
-        "city" : "Sabac",
-        "postNumber" : 31233
-      } ]
-    } ],
-    "releaseDates" : [ "java.util.ArrayList", [ ] ],
-    "comments" : [ "java.util.ArrayList", [ ] ],
-    "urlImages" : [ "java.util.ArrayList", [ ] ],
-    "pricePerNight" : 333.0,
-    "checkInTime" : [ "java.util.Date", 1599161693129 ],
-    "checkOutTime" : [ "java.util.Date", 1599161693129 ],
-    "status" : "PASSIVE",
-    "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
-      "id" : 1,
-      "name" : "Wifi"
-    } ], [ "beans.ContentOfApartment", {
-      "id" : 2,
-      "name" : "Topla voda"
-    } ], [ "beans.ContentOfApartment", {
-      "id" : 3,
-      "name" : "Besplatan parking"
-    } ] ] ],
-    "reservations" : [ "java.util.ArrayList", [ ] ],
-    "activce" : true
-  } ] ] ],
-  "userName" : "Jovan"
+  "idApartment" : [ "java.util.ArrayList", [ 1 ] ],
+  "userName" : "b"
 } ] ] ]

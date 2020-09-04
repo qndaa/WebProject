@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import beans.Address;
+import beans.Administrator;
 import beans.Apartment;
 import beans.ContentOfApartment;
 import beans.Guest;
@@ -199,16 +200,16 @@ public class SparkMain {
 			String playload = req.body();
 			User user = g.fromJson(playload, User.class);
 			
-			Session ss = req.session(true);
-			ss.attribute("user", user);
-			User userSesion = ss.attribute("user");
-			
 			boolean fleg = false;
 			for (User u : userDto.getUsers()) {
 				if (u.getUserName().equals(user.getUserName())) {
 					fleg = true;
-					userDto.getUsers().remove(u);
-					userDto.getUsers().add(user);
+					u.setName(user.getName());
+					u.setSurname(user.getSurname());
+					if(!user.getPassword().equals("")) {
+						u.setPassword(user.getPassword());
+					}
+				
 					break;
 				}
 			}
@@ -216,7 +217,8 @@ public class SparkMain {
 			if(!fleg) {
 				return false;
 			}
-				
+			
+			
 			userDto.saveFile();	
 			return true;
 		});
@@ -344,16 +346,17 @@ public class SparkMain {
 			Session ss = req.session(true);
 			User user = ss.attribute("user");
 			
-			/*
+			
 			if(user == null || user.getTypeOfUser() == TypeOfUser.GUEST) {
 				return g.toJson(appartmentDto.getAllActiveApartment());
 			}else if(user.getTypeOfUser() == TypeOfUser.HOST) {
-				return g.toJson(userDto.getApartmentFromHost(user));
+				
+				return g.toJson(appartmentDto.getAllApartmentFromHost(user));
 			}else {
 				return g.toJson(appartmentDto.getAppartment());
 			}
-				*/
-			return g.toJson(appartmentDto.getAppartment());
+			
+			
 			
 		});
 		
@@ -365,8 +368,11 @@ public class SparkMain {
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String,Object> map = mapper.readValue(playload, Map.class);
 			
+			System.out.println(map);
 			
-			TypeOfApartment type = ((String) map.get("typeOfApartment") == "Soba" ) ? TypeOfApartment.ROOM : TypeOfApartment.FULL_APARTMENT;
+			System.out.println(map.get("typeOfApartment").equals("Soba"));
+			
+			TypeOfApartment type = (map.get("typeOfApartment").equals("Soba")) ? TypeOfApartment.ROOM : TypeOfApartment.FULL_APARTMENT;
 			
 			Address address = new Address((String) map.get("street"),Integer.parseInt((String) map.get("numberHouse")),(String) map.get("city"),Integer.parseInt((String) map.get("postNumber")));
 
@@ -380,7 +386,7 @@ public class SparkMain {
 			
 			
 			
-			Apartment a= new Apartment(type, Integer.parseInt((String) map.get("numberOfRoom")), Integer.parseInt((String) map.get("numberOfGuests")), location, h, Integer.parseInt((String) map.get("pricePerNight")), new Date(),new Date(), StatusApartment.PASSIVE);
+			Apartment a= new Apartment(type, Integer.parseInt((String) map.get("numberOfRoom")), Integer.parseInt((String) map.get("numberOfGuests")), location, h.getUserName(), Integer.parseInt((String) map.get("pricePerNight")), new Date(),new Date(), StatusApartment.PASSIVE);
 			
 			a.setId(appartmentDto.getAppartment().size()+1);
 			
@@ -391,8 +397,8 @@ public class SparkMain {
 			
 			appartmentDto.getAppartment().add(a);
 			
-
-			h.getAparment().add(a);
+			
+			h.getIdApartment().add(a.getId());
 			
 			appartmentDto.saveFile();
 			userDto.saveFile();
