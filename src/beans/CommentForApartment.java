@@ -1,5 +1,6 @@
 package beans;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class CommentForApartment {
@@ -8,7 +9,11 @@ public class CommentForApartment {
 	public Guest guest = new Guest();
 	
 	@JsonIgnoreProperties(value = {"comments"})
+	@JsonBackReference
 	public Apartment apartment = new Apartment();
+	
+	
+	public int idApartment;
 	
 	public String text;
 	public int mark;

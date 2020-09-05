@@ -119,15 +119,11 @@ public class UserDTO {
 		return null;
 	}
 	
-	public ArrayList<Apartment> getApartmentFromHost(User user){
 
-		return findeHost(user).getAparment();
-		 
-	}
 	
 	
 	public void createHost() {
-		Host h = new Host("Jovan","Bosnic","bosnic123","bosnic123","Muski",TypeOfUser.HOST);
+		Host h = new Host("b","b","Jovan","Bosnic","Muski",TypeOfUser.HOST);
 		users.add(h);
 		saveFile();
 	}
