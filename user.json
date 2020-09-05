@@ -67,4 +67,5 @@
   "rentedApartment" : [ "java.util.ArrayList", [ ] ],
   "resevration" : [ "java.util.ArrayList", [ ] ],
   "userName" : "pero"
+
 } ] ] ]

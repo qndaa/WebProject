@@ -3,11 +3,15 @@ package beans;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.gson.annotations.Expose;
 
 import enums.StatusApartment;
 import enums.TypeOfApartment;
-
+@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Apartment {
 	
 	public int id;
@@ -18,12 +22,16 @@ public class Apartment {
 	
 	private Location location;
 	private ArrayList<Date> releaseDates = new ArrayList<Date>();
-	
+
 	@JsonIgnoreProperties(value = {"aparment"})
+	@JsonBackReference
 	private Host host = new Host();
-	
+	private String idHost;
 	@JsonIgnoreProperties(value = {"apartment"})
 	private ArrayList<CommentForApartment> comments = new ArrayList<CommentForApartment>();
+	
+	
+	
 	
 	private ArrayList<String> urlImages = new ArrayList<String>();
 	private double pricePerNight;
@@ -46,14 +54,15 @@ public class Apartment {
 	}
 
 	public Apartment(TypeOfApartment typeOfApartment, int numberOfRoom, int numberOfGuests, Location location,
-			Host host, double pricePerNight, Date checkInTime, Date checkOutTime,
+			String host, double pricePerNight, Date checkInTime, Date checkOutTime,
 			StatusApartment status) {
 		super();
 		this.typeOfApartment = typeOfApartment;
 		this.numberOfRoom = numberOfRoom;
 		this.numberOfGuests = numberOfGuests;
 		this.location = location;
-		this.host = host;
+		this.host = null;
+		this.idHost = host;
 		this.pricePerNight = pricePerNight;
 		this.checkInTime = checkInTime;
 		this.checkOutTime = checkOutTime;
@@ -254,6 +263,19 @@ public class Apartment {
 		this.isActivce = isActivce;
 	}
 
+
+
+	public String getIdHost() {
+		return idHost;
+	}
+
+
+
+	public void setIdHost(String idHost) {
+		this.idHost = idHost;
+	}
+
+	
 	
 	
 }
