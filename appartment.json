@@ -16,8 +16,8 @@
   "releaseDates" : [ "java.util.ArrayList", [ ] ],
   "host" : [ "beans.Host", {
     "password" : "Bosnic",
-    "name" : "bosnic123",
-    "surname" : "bosnic123",
+    "name" : "Jovan",
+    "surname" : "Bosnic",
     "gender" : "Muski",
     "imagePath" : "/data/profile/qndaa.jpg",
     "typeOfUser" : "HOST",
@@ -40,7 +40,7 @@
     "name" : "Osnovne stvari"
   } ], [ "beans.ContentOfApartment", {
     "id" : 4,
-    "name" : "Lift"
+    "name" : "TV"
   } ], [ "beans.ContentOfApartment", {
     "id" : 5,
     "name" : "Mesto za rad"
@@ -68,7 +68,7 @@
     "name" : "bosnic123",
     "surname" : "bosnic123",
     "gender" : "Muski",
-    "imagePath" : "/data/profile/qndaa.jpg",
+    "imagePath" : "/data/profile/profile.jpg",
     "typeOfUser" : "HOST",
     "userName" : "Jovan"
   } ],

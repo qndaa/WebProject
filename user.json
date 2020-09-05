@@ -17,9 +17,9 @@
 } ], [ "beans.Host", {
   "password" : "Jovan",
   "name" : "Jovan",
-  "surname" : "Bosnic2",
+  "surname" : "Bosnic",
   "gender" : "Muski",
-  "imagePath" : "/data/profile/qndaa.jpg",
+  "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "HOST",
   "aparment" : [ "java.util.ArrayList", [ [ "beans.Apartment", {
     "id" : 4,
@@ -57,4 +57,14 @@
     "activce" : true
   } ] ] ],
   "userName" : "Jovan"
+} ], [ "beans.Guest", {
+  "password" : "pero123",
+  "name" : "Pera",
+  "surname" : "Peric",
+  "gender" : "Muski",
+  "imagePath" : "/data/profile/profile.jpg",
+  "typeOfUser" : "GUEST",
+  "rentedApartment" : [ "java.util.ArrayList", [ ] ],
+  "resevration" : [ "java.util.ArrayList", [ ] ],
+  "userName" : "pero"
 } ] ] ]
