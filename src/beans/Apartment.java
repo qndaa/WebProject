@@ -14,7 +14,7 @@ import enums.TypeOfApartment;
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Apartment {
 	
-	private int id;
+	public int id;
 
 	private TypeOfApartment typeOfApartment;
 	private int numberOfRoom;
@@ -43,10 +43,7 @@ public class Apartment {
 	
 	private ArrayList<ContentOfApartment> content = new ArrayList<ContentOfApartment>();
 	
-	
-	
-	
-	
+
 	@JsonIgnoreProperties(value = {"reservedApartment"})
 	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	
@@ -55,8 +52,6 @@ public class Apartment {
 	public Apartment() {
 		
 	}
-
-
 
 	public Apartment(TypeOfApartment typeOfApartment, int numberOfRoom, int numberOfGuests, Location location,
 			String host, double pricePerNight, Date checkInTime, Date checkOutTime,

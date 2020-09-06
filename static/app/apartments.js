@@ -173,12 +173,8 @@ Vue.component("apartments", {
        				
        				<div class="col">
        					<div><label> Cena: </label> {{a.pricePerNight}} </div>
-       					<div><a href="#/apartments/222"><button class="btn bg-primary text-white"> Procitaj vise </button></a> </div>
 
-       					<div v-for="c in a.content">
-       						<p> {{c.name}} </p>
-       					</div>
-
+       					<div><a :href="'#/apartment/' + a.id"><button class="btn bg-primary text-white"> Procitaj vise </button></a> </div>
        				</div>
 
 
@@ -212,7 +208,7 @@ Vue.component("apartments", {
     	}
     },
     beforeMount(){
- 		   axios
+ 		axios
           .get('/sesion')
           .then(response => (this.mode = response.data.typeOfUser))
 

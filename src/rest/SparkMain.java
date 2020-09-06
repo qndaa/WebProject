@@ -18,6 +18,8 @@ import java.util.Map;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 
+import org.eclipse.jetty.websocket.api.SuspendToken;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
@@ -407,6 +409,13 @@ public class SparkMain {
 			return true;
 		});
 		
+		
+		post("/getApartment", (request, response) -> {
+			response.type("application/json");
+			Gson g = new Gson();			
+			int id =  Integer.parseInt(request.queryParams("id"));
+			return g.toJson(appartmentDto.getApartmentById(id));
+		});
 		
 		
 	}

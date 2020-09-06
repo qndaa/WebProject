@@ -104,6 +104,17 @@ public class ApartmentDTO {
 	}
 	
 	
+	public Apartment getApartmentById(int id) {
+		for(Apartment a : appartment) {
+			if(a.id == id) {
+				return a;
+			}
+		}
+		
+		return null;
+	}
+	
+	
 	
 	public ArrayList<Apartment> getAllApartmentFromHost(User user){
 		
