@@ -21,6 +21,6 @@
   "gender" : "Muski",
   "imagePath" : "/data/profile/qndaa.jpg",
   "typeOfUser" : "HOST",
-  "idApartment" : [ "java.util.ArrayList", [ 1 ] ],
+  "idApartment" : [ "java.util.ArrayList", [ 1, 2, 3 ] ],
   "userName" : "b"
 } ] ] ]

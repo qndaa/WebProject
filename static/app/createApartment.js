@@ -236,7 +236,7 @@ Vue.component("add-apartment", {
 					</div>
 
 					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Mirko talasna" v-model="Apartment.content" type="checkbox"/>
+						<input  id="checkbox" value="Mikro talasna" v-model="Apartment.content" type="checkbox"/>
 						<label for="checkbox" class="text-primary">Mikro talasna</label>
 					</div>
 				</div>
