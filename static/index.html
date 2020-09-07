@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  
+	<script src="https://unpkg.com/vue-toasted"></script>  
+
 </head> 
 
 <body>
@@ -25,6 +26,9 @@
 		   	<a v-if="mode==='HOST'" class="nav-link bg-light ml-2 mr-2"  href="#/allReviews">Korisnici</a>
 
 		   	<a v-if="mode!='NO_LOGIN'" class="nav-link bg-light ml-2 mr-2"  href="#/reservation">Rezervacije</a>
+
+		   	<a v-if="mode==='ADMINISTRATOR'" class="nav-link bg-light ml-2 mr-2"  href="#/contentsOfApartment">Sadrzaj apartmana</a>
+
 
 
 		     
@@ -55,6 +59,7 @@
 <script src="app/validationAcces.js"></script>
 <script src="app/apartment.js"></script>
 <script src="app/createApartment.js"></script>
+<script src="app/contentsOfApartment.js"></script>
 
 <script src="app/reservation.js"></script>
 <script src="js/vue-router.js"></script>

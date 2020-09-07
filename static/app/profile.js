@@ -18,17 +18,9 @@ Vue.component("profile", {
 
 
 				<div class= "row mt-2 d-flex justify-content-center">
-
-
-    						<div class="btn btn-primary btn-sm  w-25">
-      								<input type="file" @change="uploadImage" name="image" id="image" accept="image/*"/>
-    						</div>
- 					
-					
-					
-
-
-
+    				<div class="btn btn-primary btn-sm  w-25">
+      					<input type="file" @change="uploadImage" name="image" id="image" accept="image/*"/>
+    				</div>
 
 				</div> 
 
