@@ -71,10 +71,11 @@ Vue.component("log-in", {
         .post('/login', {"username" : this.users.username , "password" : this.users.password})
         .then(function(response){
 
-              window.location.href = "/#/apartments"; 
-              Vue.toasted.show('hola billo');
+          window.location.href = "/#/apartments"; 
+              
 
         }).catch(function(eror){
+            console.log(eror);
             if(eror.response.status == 400){
                lab.hidden = false;
             }

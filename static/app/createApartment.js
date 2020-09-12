@@ -219,75 +219,16 @@ Vue.component("add-apartment", {
 
 				</div>
 
-				<div class="form-row">	 				
+				<div class="form-row" >	 				
 	 				
-					<div class="form-group col-md-3  mb-3" >
-						<input  id="checkbox" value="Wifi" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Wifi</label>
+					<div class="form-group col-md-3  mb-3" v-for="c in listaContetn" >
+						<input  id="checkbox" v-bind:value="c.id" v-model="Apartment.content" type="checkbox"/>
+						<label for="checkbox" class="text-primary">{{c.name}}</label>
 					</div>
 
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="TV" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">TV</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Grejanje" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Grejanje</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Klima" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Klima</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Topla voda" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Topla voda</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Osnovne stvari" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Osnovne stvari</label>
-					</div>
-
-						<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Aparat za kafu" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Aparat za kafu</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Mikro talasna" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Mikro talasna</label>
-					</div>
 				</div>
 
-				<div class="form-row">	 				
-	 				
-					<div class="form-group col-md-3  mb-3" >
-						<input  id="checkbox" value="Besplatan parking" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Besplatan parking</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Lift" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Lift</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Mesto za rad" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Mesto za rad</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Kuhinja" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Kuhinja</label>
-					</div>
-
-				
-
-					
-				</div>
+			
 
 				<div class="form-row text-primary">	 				
 	 				
@@ -336,7 +277,7 @@ Vue.component("add-apartment", {
     	return {
     		urlImage: [],
     		lista : [],
-
+    		listaContetn : [],
     		Apartment : {
     			typeOfApartment : "",
     			numberOfRoom : "",
@@ -348,6 +289,7 @@ Vue.component("add-apartment", {
     			geographicalWidth : "",
     			geographicalLength :"",
     			pricePerNight : "",
+    			country : "",
 
     			content : []
     		},
@@ -483,6 +425,7 @@ Vue.component("add-apartment", {
 			this.Apartment.street = ROAD;
 			this.Apartment.postNumber = POSTECODE;
 			this.Apartment.numberHouse = NUMBERHOUSE;
+			this.Apartment.country = COUNTRY;
 			
 		}
 
@@ -500,6 +443,13 @@ Vue.component("add-apartment", {
 			}
 		})
 	},
+	mounted() {
+		axios
+        .post('/getContentsOfApartment')
+        .then(response => (this.listaContetn = response.data));
+          	
+
+	}
 
 
 

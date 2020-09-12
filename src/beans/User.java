@@ -15,6 +15,7 @@ public class User  {
 	private String gender;
 	private String imagePath;
 	private TypeOfUser typeOfUser;
+	private Boolean isBlocekd;
 	
 	public User() {
 		super();
@@ -30,6 +31,7 @@ public class User  {
 		this.gender = gender;
 		this.setImagePath("/data/profile/qndaa.jpg");
 		this.typeOfUser = typeOfUser;
+		this.isBlocekd = false;
 	}
 
 	public String getUserName() {
@@ -81,10 +83,14 @@ public class User  {
 	}
 
 
+	
+
+
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", name=" + name + ", surname=" + surname
-				+ ", gender=" + gender + ", typeOfUser=" + typeOfUser + "]";
+				+ ", gender=" + gender + ", imagePath=" + imagePath + ", typeOfUser=" + typeOfUser + ", isBlocekd="
+				+ isBlocekd + "]";
 	}
 
 
@@ -95,6 +101,16 @@ public class User  {
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+
+	public Boolean getIsBlocekd() {
+		return isBlocekd;
+	}
+
+
+	public void setIsBlocekd(Boolean isBlocekd) {
+		this.isBlocekd = isBlocekd;
 	}
 
 

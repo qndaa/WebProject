@@ -100,45 +100,10 @@ Vue.component("apartments", {
 			    		<h3 class="">Pogodnosti </h3>
 			    		<hr>
 			    	</div>
-			    	<div class="d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="Wifi" v-model="listOfEssentials" v-on:change="filters"> Wifi </p>
-			    		<span class="badge text-muted"> 10 </span>
+			    	<div class="d-flex justify-content-between" v-for="c in listOfContent" >
+			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" v-bind:value="c.name" v-model="listOfEssentials" v-on:change="filters"> {{c.name}} </p>
 			    	</div>
-			    	<div class=" d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="Mesto za rad" v-model="listOfEssentials" v-on:change="filters"> Mesto za rad </p>
-			    		<span class="badge text-muted"> 10 </span>
-			    	</div>
-
-			    	<div class=" d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="TV" v-model="listOfEssentials" v-on:change="filters"> TV </p>
-			    		<span class="badge text-muted"> 10 </span>
-			    	</div>
-
-			    	<div class=" d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="Klima" v-model="listOfEssentials" v-on:change="filters"> Klima </p>
-			    		<span class="badge text-muted"> 10 </span>
-			    	</div>
-
-			    	<div class=" d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="Besplatan parking" v-model="listOfEssentials" v-on:change="filters"> Besplatan parking </p>
-			    		<span class="badge text-muted"> 10 </span>
-			    	</div>
-
-			    	  
-			    	<div class=" d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="Mikro talasna" v-model="listOfEssentials" v-on:change="filters"> Mikro talasna </p>
-			    		<span class="badge text-muted"> 10 </span>
-			    	</div>
-
-			    	<div class=" d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="Topla voda" v-model="listOfEssentials" v-on:change="filters"> Topla voda </p>
-			    		<span class="badge text-muted"> 10 </span>
-			    	</div>
-
-			    	<div class=" d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="Osnovne stvari" v-model="listOfEssentials" v-on:change="filters"> Osnovne stvari </p>
-			    		<span class="badge text-muted"> 10 </span>
-			    	</div>
+			    	
 
 		    	</div>
 
@@ -204,7 +169,8 @@ Vue.component("apartments", {
     		filterList: [],
     		searcList: [],
     		flegFilters : false,
-    		flegSearch : false
+    		flegSearch : false,
+            listOfContent : []
 
     	
     	}
@@ -219,7 +185,11 @@ Vue.component("apartments", {
     mounted() {
     	axios.get('/allAppartmants')
     	.then(response => {this.withoutFilterApartments = response.data; this.appartments = this. withoutFilterApartments; });
-    	
+
+        axios
+        .post('/getContentsOfApartment')
+        .then(response => (this.listOfContent = response.data));
+
 
     },
     methods :{
@@ -323,7 +293,7 @@ Vue.component("apartments", {
     		if(this.maxPrice == ""){
     			this.maxPrice = Infinity;
     		}
-
+            alert("cao")
     		let list = [];
     		for(apartment of this.withoutFilterApartments){
     			if(apartment.pricePerNight>= this.minPrice && apartment.pricePerNight <= this.maxPrice){
@@ -406,16 +376,17 @@ Vue.component("apartments", {
 
     	filterCrossSearch : function(){
     		let list = [];
-    
-
+         
     		if(this.filterList.length == 0 && this.searcList.length == 0 && !this.flegSearch && !this.flegFilters){
+          
     			list = this.withoutFilterApartments;
     		}else if ( this.flegFilters  &&  this.searcList.length == 0 && !this.flegSearch) {
+               
     			list = this.filterList;
     		}else if (this.filterList.length == 0 && !this.flegFilters  && this.flegSearch) {
     			
     			list= this.searcList;
-    		}else {
+    		}else if(this.flegSearch && this.flegFilter){
     			for(filterApartment of this.filterList){
     				for(searchApartment of this.searcList){
     					if(filterApartment.id === searchApartment.id){
@@ -423,7 +394,9 @@ Vue.component("apartments", {
     					}
     				}
     			}
-    		}
+    		}else if (!this.flegSearch && !this.flegFilters){
+                list = this.withoutFilterApartments;
+            }
     		this.flegFilters = false;
     		//this.flegSearch  = false;
     		this.appartments = list;

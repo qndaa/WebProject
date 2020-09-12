@@ -6,6 +6,7 @@ public class Address {
 	private int numberHouse;
 	private String city;
 	private int postNumber;
+	private String country;
 	
 	
 	public Address() {}
@@ -48,6 +49,16 @@ public class Address {
 
 	public void setPostNumber(int postNumber) {
 		this.postNumber = postNumber;
+	}
+	
+	
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	@Override
