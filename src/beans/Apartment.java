@@ -41,6 +41,7 @@ public class Apartment {
 	private StatusApartment status;
 	
 	private ArrayList<ContentOfApartment> content = new ArrayList<ContentOfApartment>();
+	private ArrayList<Integer> idContetn = new ArrayList<Integer>();
 	
 
 	@JsonIgnoreProperties(value = {"reservedApartment"})
@@ -272,6 +273,14 @@ public class Apartment {
 
 	public void setIdHost(String idHost) {
 		this.idHost = idHost;
+	}
+
+	public ArrayList<Integer> getIdContetn() {
+		return idContetn;
+	}
+
+	public void setIdContetn(ArrayList<Integer> idContetn) {
+		this.idContetn = idContetn;
 	}
 
 	

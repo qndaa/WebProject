@@ -1,130 +1,29 @@
 [ "java.util.ArrayList", [ [ "beans.Apartment", {
   "id" : 1,
   "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 2,
-  "numberOfGuests" : 5,
+  "numberOfRoom" : 4,
+  "numberOfGuests" : 7,
   "location" : [ "beans.Location", {
-    "geographicalWidth" : 1.0,
-    "geographicalLength" : 1.0,
+    "geographicalWidth" : 2192888.870569583,
+    "geographicalLength" : 5580331.9034303995,
     "address" : [ "beans.Address", {
-      "street" : "Kneza",
+      "street" : "Mise Dimitrijevica",
       "numberHouse" : 12,
-      "city" : "Sabac",
-      "postNumber" : 15000
+      "city" : "Novi Sad",
+      "postNumber" : 21000,
+      "country" : "Serbia"
     } ]
   } ],
   "releaseDates" : [ "java.util.ArrayList", [ ] ],
   "idHost" : "b",
   "comments" : [ "java.util.ArrayList", [ ] ],
   "urlImages" : [ "java.util.ArrayList", [ ] ],
-  "pricePerNight" : 5000.0,
-  "checkInTime" : [ "java.util.Date", 1599224657782 ],
-  "checkOutTime" : [ "java.util.Date", 1599224657782 ],
+  "pricePerNight" : 3696.0,
+  "checkInTime" : [ "java.util.Date", 1599920764586 ],
+  "checkOutTime" : [ "java.util.Date", 1599920764586 ],
   "status" : "PASSIVE",
-  "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
-    "id" : 1,
-    "name" : "Topla voda"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 2,
-    "name" : "Osnovne stvari"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 3,
-    "name" : "Aparat za kafu"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 4,
-    "name" : "Mikro talasna"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 5,
-    "name" : "Wifi"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 6,
-    "name" : "TV"
-  } ] ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "activce" : true
-} ], [ "beans.Apartment", {
-  "id" : 2,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 2,
-  "numberOfGuests" : 4,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 1.0,
-    "geographicalLength" : 1.0,
-    "address" : [ "beans.Address", {
-      "street" : "Bukovska",
-      "numberHouse" : 13,
-      "city" : "Bukurest",
-      "postNumber" : 58796
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ ] ],
-  "pricePerNight" : 3000.0,
-  "checkInTime" : [ "java.util.Date", 1599249724654 ],
-  "checkOutTime" : [ "java.util.Date", 1599249724654 ],
-  "status" : "PASSIVE",
-  "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
-    "id" : 1,
-    "name" : "Wifi"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 2,
-    "name" : "Topla voda"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 3,
-    "name" : "Besplatan parking"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 4,
-    "name" : "Lift"
-  } ] ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "activce" : true
-} ], [ "beans.Apartment", {
-  "id" : 3,
-  "typeOfApartment" : "ROOM",
-  "numberOfRoom" : 1,
-  "numberOfGuests" : 1,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 1.0,
-    "geographicalLength" : 1.0,
-    "address" : [ "beans.Address", {
-      "street" : "Somborska",
-      "numberHouse" : 1,
-      "city" : "Sombro",
-      "postNumber" : 76543
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ ] ],
-  "pricePerNight" : 800.0,
-  "checkInTime" : [ "java.util.Date", 1599251816836 ],
-  "checkOutTime" : [ "java.util.Date", 1599251816836 ],
-  "status" : "PASSIVE",
-  "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
-    "id" : 1,
-    "name" : "Wifi"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 2,
-    "name" : "Osnovne stvari"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 3,
-    "name" : "Lift"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 4,
-    "name" : "Aparat za kafu"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 5,
-    "name" : "Grejanje"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 6,
-    "name" : "Klima"
-  } ], [ "beans.ContentOfApartment", {
-    "id" : 7,
-    "name" : "Mikro talasna"
-  } ] ] ],
+  "content" : [ "java.util.ArrayList", [ ] ],
+  "idContetn" : [ "java.util.ArrayList", [ 2, 3, 1 ] ],
   "reservations" : [ "java.util.ArrayList", [ ] ],
   "activce" : true
 } ] ] ]
