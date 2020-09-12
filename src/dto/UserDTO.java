@@ -123,7 +123,9 @@ public class UserDTO {
 	
 	
 	public void createHost() {
-		Host h = new Host("b","b","Jovan","Bosnic","Muski",TypeOfUser.HOST);
+		//Host h = new Host("b","b","Jovan","Bosnic","Muski",TypeOfUser.HOST);
+		Host h = new Host("a","a","Avater","Avaterovic","Muski",TypeOfUser.HOST);
+		h.setIsBlocekd(false);
 		users.add(h);
 		saveFile();
 	}

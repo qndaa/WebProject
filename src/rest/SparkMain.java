@@ -56,6 +56,8 @@ public class SparkMain {
 		contentsOfApartmentDTO.loadFile();
 		//userDto.createHost();
 
+		
+		
 
 		post("/login", (req, res) -> {
 			res.type("application/json");
@@ -102,7 +104,8 @@ public class SparkMain {
 			Guest user = g.fromJson(playload, Guest.class);
 			user.setTypeOfUser(TypeOfUser.GUEST);
 			user.setImagePath("/data/profile/profile.jpg");
-
+			user.setIsBlocekd(false);
+			
 			boolean fleg = true;
 			for (User u : userDto.getUsers()) {
 				if (u.getUserName().equals(user.getUserName())) {
@@ -306,14 +309,18 @@ public class SparkMain {
 			Map<String,Object> map = mapper.readValue(playload, Map.class);
 			
 			System.out.println(map);
-			
+			System.out.println(map.get("geographicalWidth"));
+			double aj = (double) map.get("geographicalWidth");
 			System.out.println(map.get("typeOfApartment").equals("Soba"));
 			
 			TypeOfApartment type = (map.get("typeOfApartment").equals("Soba")) ? TypeOfApartment.ROOM : TypeOfApartment.FULL_APARTMENT;
 			
 			Address address = new Address((String) map.get("street"),Integer.parseInt((String) map.get("numberHouse")),(String) map.get("city"),Integer.parseInt((String) map.get("postNumber")));
-
-			Location location = new Location(Double.parseDouble((String) map.get("geographicalWidth")),  Double.parseDouble((String) map.get("geographicalLength")),address);
+			
+			address.setCountry((String) map.get("country"));
+			System.out.println(address.getCountry());
+			
+			Location location = new Location((Double) map.get("geographicalWidth"),(Double) map.get("geographicalLength"),address);
 			
 			
 			Session ss = req.session(true);
@@ -328,14 +335,18 @@ public class SparkMain {
 			a.setId(appartmentDto.getAppartment().size()+1);
 			
 			int i=0;
-			for (String s :(ArrayList<String>) map.get("content")) {
-				a.getContent().add(new ContentOfApartment(++i,s, null));
+			//ovo treba da se sredi da budu samo id
+			for (Integer s :(ArrayList<Integer>) map.get("content")) {
+				System.out.println(s);
+				a.getIdContetn().add(s);
 			}
 			
 			appartmentDto.getAppartment().add(a);
 			
 			
 			h.getIdApartment().add(a.getId());
+			
+			
 			
 			appartmentDto.saveFile();
 			userDto.saveFile();

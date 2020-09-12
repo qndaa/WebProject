@@ -1,3 +1,10 @@
+var x=2192888.870569583;
+var y= 5580331.9034303995;
+var CITY= "";
+var ROAD = "";
+var COUNTRY="";
+var NUMBERHOUSE="";
+var POSTECODE="";
 Vue.component("add-apartment", {
 
     template:`
@@ -179,6 +186,19 @@ Vue.component("add-apartment", {
 
 
 					<div class="form-group col-md-6 mb-3" >
+					
+					</div>
+
+
+				</div>
+
+				<div class="form-row text-primary">	 				
+	 			
+
+					<div class="form-group col-md-12 mb-6" >
+					<div id="js-map" class="map w-100" style="height: 300px" tabindex="0" v-on:click="takeCoordinate">
+
+					</div>
 					</div>
 
 
@@ -193,80 +213,22 @@ Vue.component("add-apartment", {
 
 
 					<div class="form-group col-md-6 mb-3" >
+						
 					</div>
 
 
 				</div>
 
-				<div class="form-row">	 				
+				<div class="form-row" >	 				
 	 				
-					<div class="form-group col-md-3  mb-3" >
-						<input  id="checkbox" value="Wifi" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Wifi</label>
+					<div class="form-group col-md-3  mb-3" v-for="c in listaContetn" >
+						<input  id="checkbox" v-bind:value="c.id" v-model="Apartment.content" type="checkbox"/>
+						<label for="checkbox" class="text-primary">{{c.name}}</label>
 					</div>
 
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="TV" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">TV</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Grejanje" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Grejanje</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Klima" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Klima</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Topla voda" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Topla voda</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Osnovne stvari" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Osnovne stvari</label>
-					</div>
-
-						<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Aparat za kafu" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Aparat za kafu</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Mikro talasna" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Mikro talasna</label>
-					</div>
 				</div>
 
-				<div class="form-row">	 				
-	 				
-					<div class="form-group col-md-3  mb-3" >
-						<input  id="checkbox" value="Besplatan parking" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Besplatan parking</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Lift" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Lift</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Mesto za rad" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Mesto za rad</label>
-					</div>
-
-					<div class="form-group col-md-3 mb-3" >
-						<input  id="checkbox" value="Kuhinja" v-model="Apartment.content" type="checkbox"/>
-						<label for="checkbox" class="text-primary">Kuhinja</label>
-					</div>
-
-				
-
-					
-				</div>
+			
 
 				<div class="form-row text-primary">	 				
 	 				
@@ -315,7 +277,7 @@ Vue.component("add-apartment", {
     	return {
     		urlImage: [],
     		lista : [],
-
+    		listaContetn : [],
     		Apartment : {
     			typeOfApartment : "",
     			numberOfRoom : "",
@@ -327,6 +289,7 @@ Vue.component("add-apartment", {
     			geographicalWidth : "",
     			geographicalLength :"",
     			pricePerNight : "",
+    			country : "",
 
     			content : []
     		},
@@ -454,6 +417,16 @@ Vue.component("add-apartment", {
 
 			this.urlImage = this.urlImage.filter(url => url !== images);
 			
+		},
+		takeCoordinate : function(){
+			this.Apartment.geographicalWidth = x;
+			this.Apartment.geographicalLength = y;
+			this.Apartment.city = CITY;
+			this.Apartment.street = ROAD;
+			this.Apartment.postNumber = POSTECODE;
+			this.Apartment.numberHouse = NUMBERHOUSE;
+			this.Apartment.country = COUNTRY;
+			
 		}
 
 
@@ -470,6 +443,111 @@ Vue.component("add-apartment", {
 			}
 		})
 	},
+	mounted() {
+		axios
+        .post('/getContentsOfApartment')
+        .then(response => (this.listaContetn = response.data));
+          	
+
+	}
+
 
 
 });
+
+
+window.onload = init;
+
+function init(){
+    //alert(x + " " + y);
+    var place = [x,y];
+   // alert(place);
+    const map = new ol.Map({
+        view : new ol.View({
+                center: [x,y],
+                zoom : 5
+            }),
+           
+            target : 'js-map'
+            })
+        
+    const openLayer = new ol.layer.Tile({
+          source : new ol.source.OSM(),
+          visible : true,
+          title : "OSM"
+
+    })
+
+    const fillStyle = new ol.style.Fill({
+        color : 'blue'
+    })
+
+    const strokeStyle = new ol.style.Stroke({
+        color : 'black',
+        width : 1.2
+    })
+
+    const circleStyle = new ol.style.Circle({
+        fill : new ol.style.Fill({
+            color :'red'
+        }),
+        radius : 7,
+        stroke : strokeStyle
+    })
+
+    const pointers = new ol.layer.Vector({
+        source : new ol.source.Vector({
+           features : [new ol.Feature(new ol.geom.Point(place))] 
+        }),
+        visible: true,
+        style : new ol.style.Style({
+            fill : fillStyle,
+            stroke : strokeStyle,
+            image : circleStyle
+        })
+    })
+
+
+
+
+    map.addLayer(openLayer);
+
+      map.addLayer(pointers);
+
+
+
+	var geocoder = new Geocoder('nominatim', {
+	  provider: 'osm',
+	  lang: 'en',
+	  placeholder: 'Search for ...',
+	  limit: 5,
+	  debug: false,
+	  autoComplete: true,
+	  keepOpen: true
+	});
+	map.addControl(geocoder);
+
+	geocoder.on('addresschosen', function (evt) {
+	console.info(evt.address.details);
+	CITY = evt.address.details.city;
+	COUNTRY = evt.address.details.country;
+	NUMBERHOUSE = evt.address.details.houseNumber;
+	POSTECODE =  evt.address.details.postcode;
+	ROAD = evt.address.details.road
+
+
+	});
+
+
+	map.on('click', function(e){
+           // console.log(e.coordinate);
+          	 console.log(e);
+             console.log(x=e.coordinate[0]);
+             console.log(y=e.coordinate[1]);
+            
+
+        })
+
+
+
+}

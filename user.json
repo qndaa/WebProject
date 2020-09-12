@@ -5,6 +5,7 @@
   "gender" : "Muski",
   "imagePath" : "/data/profile/simke1998.jpg",
   "typeOfUser" : "ADMINISTRATOR",
+  "isBlocekd" : false,
   "userName" : "simke98"
 } ], [ "beans.Administrator", {
   "password" : "qndaa123",
@@ -13,6 +14,7 @@
   "gender" : "Muski",
   "imagePath" : "/data/profile/qndaa.jpg",
   "typeOfUser" : "ADMINISTRATOR",
+  "isBlocekd" : false,
   "userName" : "qndaa"
 } ], [ "beans.Host", {
   "password" : "b",
@@ -21,33 +23,50 @@
   "gender" : "Muski",
   "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "HOST",
-  "idApartment" : [ "java.util.ArrayList", [ 1, 2, 3 ] ],
+  "isBlocekd" : false,
+  "idApartment" : [ "java.util.ArrayList", [ 1 ] ],
   "userName" : "b"
-} ], [ "beans.Host", {
-  "password" : "marko",
-  "name" : "Marko",
-  "surname" : "Markovic",
+} ], [ "beans.Guest", {
+  "password" : "neko123",
+  "name" : "Neko",
+  "surname" : "Niko",
   "gender" : "Muski",
   "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "HOST",
-  "idApartment" : [ "java.util.ArrayList", [ ] ],
-  "userName" : "marko"
-} ], [ "beans.Host", {
-  "password" : "domacin",
-  "name" : "Domacin",
-  "surname" : "Domacin",
+  "typeOfUser" : "GUEST",
+  "isBlocekd" : false,
+  "rentedApartment" : [ "java.util.ArrayList", [ ] ],
+  "resevration" : [ "java.util.ArrayList", [ ] ],
+  "userName" : "neko123"
+} ], [ "beans.Guest", {
+  "password" : "proba123",
+  "name" : "Proba",
+  "surname" : "Proba",
   "gender" : "Muski",
   "imagePath" : "/data/profile/profile.jpg",
-  "typeOfUser" : "HOST",
-  "idApartment" : [ "java.util.ArrayList", [ ] ],
-  "userName" : "domacin"
-} ], [ "beans.Host", {
-  "password" : "janko",
-  "name" : "Janko",
-  "surname" : "Jankovic",
-  "gender" : "Zenski",
+  "typeOfUser" : "GUEST",
+  "isBlocekd" : false,
+  "rentedApartment" : [ "java.util.ArrayList", [ ] ],
+  "resevration" : [ "java.util.ArrayList", [ ] ],
+  "userName" : "proba123"
+} ], [ "beans.Guest", {
+  "password" : "jovan123",
+  "name" : "Jovan",
+  "surname" : "Jovanovic",
+  "gender" : "Muski",
   "imagePath" : "/data/profile/profile.jpg",
+  "typeOfUser" : "GUEST",
+  "isBlocekd" : false,
+  "rentedApartment" : [ "java.util.ArrayList", [ ] ],
+  "resevration" : [ "java.util.ArrayList", [ ] ],
+  "userName" : "jovan123"
+} ], [ "beans.Host", {
+  "password" : "a",
+  "name" : "Avater",
+  "surname" : "Avaterovic",
+  "gender" : "Muski",
+  "imagePath" : "/data/profile/qndaa.jpg",
   "typeOfUser" : "HOST",
+  "isBlocekd" : false,
   "idApartment" : [ "java.util.ArrayList", [ ] ],
-  "userName" : "janko"
+  "userName" : "a"
 } ] ] ]
