@@ -18,13 +18,10 @@ import java.util.Map;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 
-import org.eclipse.jetty.websocket.api.SuspendToken;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import beans.Address;
-import beans.Administrator;
 import beans.Apartment;
 import beans.ContentOfApartment;
 import beans.Guest;
@@ -32,6 +29,7 @@ import beans.Host;
 import beans.Location;
 import beans.User;
 import dto.ApartmentDTO;
+import dto.ContentsOfApartmentDTO;
 import dto.ReservationDTO;
 import dto.UserDTO;
 import enums.StatusApartment;
@@ -45,33 +43,29 @@ public class SparkMain {
 	public static UserDTO userDto = new UserDTO();
 	public static ApartmentDTO appartmentDto = new ApartmentDTO();
 	public static ReservationDTO reservationDto = new ReservationDTO();
+	public static ContentsOfApartmentDTO contentsOfApartmentDTO = new ContentsOfApartmentDTO(); 
 
 	public static void main(String[] args) throws Exception {
 		port(9001);
 
 		staticFiles.externalLocation(new File("./static").getCanonicalPath());
 
+
 		userDto.loadFile();
 		appartmentDto.loadFile();
+		contentsOfApartmentDTO.loadFile();
 		//userDto.createHost();
-		
-		
 
-		get("/test", (req, res) -> {
-			return "Works";
-		});
 
 		post("/login", (req, res) -> {
 			res.type("application/json");
 			
 			Gson g = new Gson();
-			
-			
+		
 			String a = req.body();
 			User userLogin = g.fromJson(a, User.class);
 			User user = userDto.loginUser(userLogin.getUserName(), userLogin.getPassword());
-			
-			
+				
 			if (user == null) {
 				res.status(400);
 				return res;
@@ -89,65 +83,6 @@ public class SparkMain {
 
 		});
 
-		post("checkUser", (req, res) -> {
-			res.type("application/json");
-
-			Session ss = req.session(true);
-			User userSession = ss.attribute("user");
-
-			if (userSession == null) {
-				return false;
-			}
-			return true;
-		});
-
-		post("/checkAdministrator", (req, res) -> {
-			res.type("application/json");
-
-			Session ss = req.session(true);
-			User userSession = ss.attribute("user");
-
-			if (userSession == null) {
-				return false;
-			}
-			if (userSession.getTypeOfUser() == TypeOfUser.ADMINISTRATOR) {
-				return true;
-			}
-
-			return false;
-		});
-
-		post("/checkHost", (req, res) -> {
-			res.type("application/json");
-
-			Session ss = req.session(true);
-			User userSession = ss.attribute("user");
-
-			if (userSession == null) {
-				return false;
-			}
-			if (userSession.getTypeOfUser() == TypeOfUser.HOST) {
-				return true;
-			}
-
-			return false;
-		});
-
-		post("/checkGuest", (req, res) -> {
-			res.type("application/json");
-
-			Session ss = req.session(true);
-			User userSession = ss.attribute("user");
-
-			if (userSession == null) {
-				return false;
-			}
-			if (userSession.getTypeOfUser() == TypeOfUser.GUEST) {
-				return true;
-			}
-
-			return false;
-		});
 
 		get("/logout", (req, res) -> {
 			res.type("application/json");
@@ -395,7 +330,7 @@ public class SparkMain {
 			
 			int i=0;
 			for (String s :(ArrayList<String>) map.get("content")) {
-				a.getContent().add(new ContentOfApartment(++i,s));
+				a.getContent().add(new ContentOfApartment(++i,s, null));
 			}
 			
 			appartmentDto.getAppartment().add(a);
@@ -416,6 +351,57 @@ public class SparkMain {
 			Gson g = new Gson();			
 			int id =  Integer.parseInt(request.queryParams("id"));
 			return g.toJson(appartmentDto.getApartmentById(id));
+		});
+		
+		
+		post("/getContentsOfApartment", (request, response) -> {
+			response.type("application/json");
+			Gson g = new Gson();
+			return g.toJson(contentsOfApartmentDTO.getContentsOfApartment());
+		});
+		
+		post("/deleteContentsOfApartment", (request, response) -> {
+			response.type("application/json");
+			Gson g = new Gson();
+			int id =  Integer.parseInt(request.queryParams("id"));
+			contentsOfApartmentDTO.deleteContentsOfApartmentById(id);
+			return g.toJson(contentsOfApartmentDTO.getContentsOfApartment());	
+		});
+		
+		post("/addContentsOfApartment", (request, response) -> {
+			response.type("application/json");
+			Gson g = new Gson();
+			request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("static/data/profile"));
+			String name = request.queryParams("newItemName");
+			
+			
+			
+			
+	
+			Part uploadedFile = request.raw().getPart("image");
+			
+			Path out = Paths.get("static/data/contentsOfApartment/" + name + ".jpg");
+
+			
+	
+		    try(final java.io.InputStream in = uploadedFile.getInputStream()){
+
+		    	OutputStream outStream = new FileOutputStream(out.toString());		 
+		    	IOUtils.copy(in, outStream);
+		    	
+		    	outStream.close();
+		    	uploadedFile.delete();
+		    	in.close();
+		    	
+		    	
+		    } catch (Exception e) {
+		    	e.printStackTrace();
+		    }
+			
+		    
+			contentsOfApartmentDTO.addContentsOfApartment(name, "/data/contentsOfApartment/" + name + ".jpg");
+			
+			return g.toJson(contentsOfApartmentDTO.getContentsOfApartment());	
 		});
 		
 		

@@ -1,0 +1,13 @@
+[ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
+  "id" : 1,
+  "name" : "Wi-Fi",
+  "imagePath" : "/data/contentsOfApartment/wifi_logo.jpg"
+} ], [ "beans.ContentOfApartment", {
+  "id" : 2,
+  "name" : "TV",
+  "imagePath" : "/data/contentsOfApartment/tv_logo.jpg"
+} ], [ "beans.ContentOfApartment", {
+  "id" : 3,
+  "name" : "Topla voda",
+  "imagePath" : "/data/contentsOfApartment/water_logo.jpg"
+} ] ] ]
