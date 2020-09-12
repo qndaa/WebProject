@@ -349,6 +349,8 @@ public class SparkMain {
 			response.type("application/json");
 			Gson g = new Gson();			
 			int id =  Integer.parseInt(request.queryParams("id"));
+			Apartment apartment = appartmentDto.getApartmentById(id);
+			apartment.setHost((Host)userDto.getUserById(apartment.getIdHost()));
 			return g.toJson(appartmentDto.getApartmentById(id));
 		});
 		
@@ -373,16 +375,10 @@ public class SparkMain {
 			request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("static/data/profile"));
 			String name = request.queryParams("newItemName");
 			
-			
-			
-			
-	
 			Part uploadedFile = request.raw().getPart("image");
 			
 			Path out = Paths.get("static/data/contentsOfApartment/" + name + ".jpg");
 
-			
-	
 		    try(final java.io.InputStream in = uploadedFile.getInputStream()){
 
 		    	OutputStream outStream = new FileOutputStream(out.toString());		 
@@ -401,6 +397,21 @@ public class SparkMain {
 			contentsOfApartmentDTO.addContentsOfApartment(name, "/data/contentsOfApartment/" + name + ".jpg");
 			
 			return g.toJson(contentsOfApartmentDTO.getContentsOfApartment());	
+		});
+		
+		
+		post("/createHost", (request, response) -> {
+			response.type("application/json");
+			Gson g = new Gson();
+			
+			String playload = request.body();
+			Host host = g.fromJson(playload, Host.class);
+			
+			userDto.deleteUser(host.getUserName());
+			userDto.addUser(host);
+			userDto.saveFile();
+			
+			return g.toJson(userDto.getUsers());
 		});
 		
 		

@@ -45,35 +45,24 @@ Vue.component("all-users", {
 
 
 
-	    	<div class="row" v-for="row in rowUsers" >
-
+	    	<div class="row mt-4"  >
 	    		
-	      		<div class="col-lg-4 mt-4" v-if="row[0]">
-					<div class="d-flex justify-content-center" >
-	        			<img :src="row[0].imagePath" class="rounded-circle " alt="Profile picture" width="150" height="150">
-	        		</div>        		
-	        		<h3 class="d-flex justify-content-center text-primary mt-3">{{row[0].name}}&nbsp;{{row[0].surname }}</h3>
-	        		<p class="d-flex justify-content-center text-primary"> Uloga: {{row[0].typeOfUser}} </p>
+	      		<div class="col-4 " v-for="row in getSearchAndFilterUsers()">
+                    <div class="m-3 border border-primary rounded">
+    					<div class="d-flex justify-content-center mt-4" >
+    	        			<img :src="row.imagePath" class="rounded-circle " alt="Profile picture" width="150" height="150">
+    	        		</div>        		
+    	        		<h3 class="d-flex justify-content-center text-primary mt-3">{{row.name}}&nbsp;{{row.surname }}</h3>
+    	        		<p class="d-flex justify-content-center text-primary"> Uloga: {{row.typeOfUser}} </p>
+
+                        <div v-if="row.typeOfUser == 'GUEST'" class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-outline-success " v-on:click="createHost(event, row)">Kreiraj domacina</button>
+                        </div>
+                    </div>
 	      		</div>
 
 
-	      		<div class="col-lg-4 mt-4" v-if="row[1]">
-	      			<div class="d-flex justify-content-center" >
-	        			<img :src="row[1].imagePath" class="rounded-circle " alt="Profile picture" width="150" height="150">
-	        		</div>
-	        		<h3 class="d-flex justify-content-center text-primary mt-3">{{row[1].name}} &nbsp; {{row[1].surname }}</h3>
-	        		<p class="d-flex justify-content-center text-primary"> Uloga: {{row[1].typeOfUser}} </p>
-	        	</div>
-
-
-	        	
-	      		<div class="col-lg-4 mt-4" v-if="row[2]" >
-					<div class="d-flex justify-content-center" >
-	        			<img :src="row[2].imagePath" class="rounded-circle " alt="Profile picture" width="150" height="150">
-	        		</div>        		
-	        		<h3  class="d-flex justify-content-center text-primary mt-3">{{row[2].name}} &nbsp; {{row[2].surname }}</h3>
-	        		<p class="d-flex justify-content-center text-primary"> Uloga: {{row[2].typeOfUser}} </p>
-	        	</div>
+	      		
 	        	
 	    	</div>
 
@@ -87,7 +76,6 @@ Vue.component("all-users", {
     	return {
     		mode : 'NO_LOGIN',
     		users : [],
-    		rowUsers : [],
     		filteredUsers : [],
     		searchUser : [],
     		administratorsCheckBox : true,
@@ -119,22 +107,12 @@ Vue.component("all-users", {
           	  	this.users = response.data;
  				this.filteredUsers = response.data;
  				this.searchUser = response.data;
-          	  	this.getRowUsers(this.getSearchAndFilterUsers());
+
           	  });  
           });
     },  	                                                                          
     		
     methods : {
-    	getRowUsers : function(users) {
-    		var partsUsers = [];
-    		var i,j,temparray,chunk = 3;
-
-			for (i=0,j=users.length; i<j; i+=chunk) {
-    			temparray = users.slice(i,i+chunk);
-    			partsUsers.push(temparray);
-			}		
-			this.rowUsers = partsUsers;
-    	},
     	refreshUsers : function() {
 
     		this.filteredUsers = [];
@@ -155,7 +133,6 @@ Vue.component("all-users", {
     				this.filteredUsers.push(user);
     			}
     		}
-    		this.getRowUsers(this.getSearchAndFilterUsers());
     	},
     	search : function(event) {
     		this.searchUser = [];
@@ -163,7 +140,7 @@ Vue.component("all-users", {
 
     		if(search.length == 0) {
     			this.searchUser = this.users;
-    			this.getRowUsers(this.getSearchAndFilterUsers());
+    			
     			return;
     		}
     		if(search.split(" ").length > 2){
@@ -187,10 +164,8 @@ Vue.component("all-users", {
     			}
     		}
 
-    		this.getRowUsers(this.getSearchAndFilterUsers());
-
     	},
-    	getSearchAndFilterUsers(){
+    	getSearchAndFilterUsers : function(){
     		if(this.searchUser.length === 0 || this.filteredUsers.length === 0) return [];
 
     		var searchAndFilteredUsers = [];
@@ -204,7 +179,16 @@ Vue.component("all-users", {
     		}
 
     		return searchAndFilteredUsers;
-    	}
+    	},
+
+        createHost : function(event, user) {
+
+            user.typeOfUser = 'HOST';
+            axios
+                .post('/createHost', user)
+                .then(response => (this.users = response.data));
+        }
+
 
 
     }

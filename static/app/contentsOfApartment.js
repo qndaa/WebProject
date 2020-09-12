@@ -48,7 +48,7 @@ Vue.component("contents-of-apartment", {
 
 
 					<div class="row">
-						<div class="col-3 m-3" v-for="item in data" v-if="item.imagePath !== false">
+						<div class="col-2 m-3" v-for="item in data" v-if="item.imagePath !== false">
 							<div class= "d-flex justify-content-center">
                                 <img v-bind:src="item.imagePath"  alt="Logo" width="120" height="120"> </img>
 							</div>

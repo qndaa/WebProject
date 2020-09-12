@@ -128,5 +128,28 @@ public class UserDTO {
 		saveFile();
 	}
 	
+	public User getUserById(String username) {
+		for(User user : users) {
+			if(user.getUserName().equals(username)) {
+				return user;
+			}
+		}
+		
+		return null;
+	}
+	
+	public void deleteUser(String username) {
+		for(User user : users) {
+			if(user.getUserName().equals(username)) {
+				users.remove(user);
+				break;
+			}
+		}
+	}
+	
+	
+	public void addUser(User user) {
+		users.add(user);
+	}
 	
 }
