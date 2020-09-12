@@ -202,7 +202,9 @@ Vue.component("apartments", {
     		city : "",
     		country : "",
     		filterList: [],
-    		searcList: []
+    		searcList: [],
+    		flegFilters : false,
+    		flegSearch : false
 
     	
     	}
@@ -256,7 +258,8 @@ Vue.component("apartments", {
     		let list = [];
 
     		if(this.typeOfAccommodation.length == 0 || this.typeOfAccommodation.length == 2) return this.withoutFilterApartments;
-    		
+    		//ovde ako je prosao prvi uslov znaci ima neki filter
+    		this.flegFilters = true;
     		for (apartment of this.withoutFilterApartments) {
     			if(this.typeOfAccommodation[0] == apartment.typeOfApartment){
     		
@@ -276,6 +279,9 @@ Vue.component("apartments", {
     		let i = 0;
     		
     		if(this.listOfEssentials.length == 0) return listOfApartments;
+    		//ovde mi treba neki fleg da znam da i ako je lista prazna da je filter postavljen
+    		//postavim ga na true
+    		this.flegFilters = true;
     		for(apartment of listOfApartments){
     			i=0;
     			if(apartment.content.length >= this.listOfEssentials.length){
@@ -292,7 +298,7 @@ Vue.component("apartments", {
     				}
     			}
     		}
-
+    		
     		return list;
 
     	},
@@ -310,11 +316,13 @@ Vue.component("apartments", {
     	},
     	searchPrice : function (){
     		if(this.minPrice == 0 && this.maxPrice == Infinity) return this.withoutFilterApartments;
+    		
+    		//ako ima pretragu treba da ga stavi na true
+    		this.flegSearch = true;
 
     		if(this.maxPrice == ""){
     			this.maxPrice = Infinity;
     		}
-
 
     		let list = [];
     		for(apartment of this.withoutFilterApartments){
@@ -330,6 +338,7 @@ Vue.component("apartments", {
     	searchRoom : function (){
     		if(this.minRoom == 0 && this.maxRoom == Infinity) return this.searcList;
 
+    		this.flegSearch = true;
     		if(this.maxRoom == ""){
     			this.maxRoom = Infinity;
     		}
@@ -348,6 +357,7 @@ Vue.component("apartments", {
     	searchPeople : function (){
     		if(this.minPeople == 0 && this.maxPeople == Infinity) return this.searcList;
 
+    		this.flegSearch = true;
     		if(this.maxPeople == ""){
     			this.maxPeople = Infinity;
     		}
@@ -370,6 +380,7 @@ Vue.component("apartments", {
 
     		let list = [];
 
+    		this.flegSearch = true;
     		for(apartment of this.searcList){
     			if((apartment.location.address.city.toLowerCase() === this.city.trim().toLowerCase())){
     				list.push(apartment);
@@ -394,12 +405,15 @@ Vue.component("apartments", {
     	},
 
     	filterCrossSearch : function(){
-    		let list = []
-    		if(this.filterList.length == 0 && this.searcList.length == 0){
+    		let list = [];
+    
+
+    		if(this.filterList.length == 0 && this.searcList.length == 0 && !this.flegSearch && !this.flegFilters){
     			list = this.withoutFilterApartments;
-    		}else if (this.filterList.length != 0  && this.searcList.length == 0) {
+    		}else if ( this.flegFilters  &&  this.searcList.length == 0 && !this.flegSearch) {
     			list = this.filterList;
-    		}else if (this.filterList.length == 0  && this.searcList.length != 0) {
+    		}else if (this.filterList.length == 0 && !this.flegFilters  && this.flegSearch) {
+    			
     			list= this.searcList;
     		}else {
     			for(filterApartment of this.filterList){
@@ -410,6 +424,8 @@ Vue.component("apartments", {
     				}
     			}
     		}
+    		this.flegFilters = false;
+    		//this.flegSearch  = false;
     		this.appartments = list;
     		this.sortApartments();
     	}

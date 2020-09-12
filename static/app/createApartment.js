@@ -1,3 +1,10 @@
+var x=2192888.870569583;
+var y= 5580331.9034303995;
+var CITY= "";
+var ROAD = "";
+var COUNTRY="";
+var NUMBERHOUSE="";
+var POSTECODE="";
 Vue.component("add-apartment", {
 
     template:`
@@ -179,6 +186,19 @@ Vue.component("add-apartment", {
 
 
 					<div class="form-group col-md-6 mb-3" >
+					
+					</div>
+
+
+				</div>
+
+				<div class="form-row text-primary">	 				
+	 			
+
+					<div class="form-group col-md-12 mb-6" >
+					<div id="js-map" class="map w-100" style="height: 300px" tabindex="0" v-on:click="takeCoordinate">
+
+					</div>
 					</div>
 
 
@@ -193,6 +213,7 @@ Vue.component("add-apartment", {
 
 
 					<div class="form-group col-md-6 mb-3" >
+						
 					</div>
 
 
@@ -454,6 +475,15 @@ Vue.component("add-apartment", {
 
 			this.urlImage = this.urlImage.filter(url => url !== images);
 			
+		},
+		takeCoordinate : function(){
+			this.Apartment.geographicalWidth = x;
+			this.Apartment.geographicalLength = y;
+			this.Apartment.city = CITY;
+			this.Apartment.street = ROAD;
+			this.Apartment.postNumber = POSTECODE;
+			this.Apartment.numberHouse = NUMBERHOUSE;
+			
 		}
 
 
@@ -472,4 +502,102 @@ Vue.component("add-apartment", {
 	},
 
 
+
 });
+
+
+window.onload = init;
+
+function init(){
+    //alert(x + " " + y);
+    var place = [x,y];
+   // alert(place);
+    const map = new ol.Map({
+        view : new ol.View({
+                center: [x,y],
+                zoom : 5
+            }),
+           
+            target : 'js-map'
+            })
+        
+    const openLayer = new ol.layer.Tile({
+          source : new ol.source.OSM(),
+          visible : true,
+          title : "OSM"
+
+    })
+
+    const fillStyle = new ol.style.Fill({
+        color : 'blue'
+    })
+
+    const strokeStyle = new ol.style.Stroke({
+        color : 'black',
+        width : 1.2
+    })
+
+    const circleStyle = new ol.style.Circle({
+        fill : new ol.style.Fill({
+            color :'red'
+        }),
+        radius : 7,
+        stroke : strokeStyle
+    })
+
+    const pointers = new ol.layer.Vector({
+        source : new ol.source.Vector({
+           features : [new ol.Feature(new ol.geom.Point(place))] 
+        }),
+        visible: true,
+        style : new ol.style.Style({
+            fill : fillStyle,
+            stroke : strokeStyle,
+            image : circleStyle
+        })
+    })
+
+
+
+
+    map.addLayer(openLayer);
+
+      map.addLayer(pointers);
+
+
+
+	var geocoder = new Geocoder('nominatim', {
+	  provider: 'osm',
+	  lang: 'en',
+	  placeholder: 'Search for ...',
+	  limit: 5,
+	  debug: false,
+	  autoComplete: true,
+	  keepOpen: true
+	});
+	map.addControl(geocoder);
+
+	geocoder.on('addresschosen', function (evt) {
+	console.info(evt.address.details);
+	CITY = evt.address.details.city;
+	COUNTRY = evt.address.details.country;
+	NUMBERHOUSE = evt.address.details.houseNumber;
+	POSTECODE =  evt.address.details.postcode;
+	ROAD = evt.address.details.road
+
+
+	});
+
+
+	map.on('click', function(e){
+           // console.log(e.coordinate);
+          	 console.log(e);
+             console.log(x=e.coordinate[0]);
+             console.log(y=e.coordinate[1]);
+            
+
+        })
+
+
+
+}

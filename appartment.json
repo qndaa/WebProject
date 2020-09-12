@@ -4,8 +4,8 @@
   "numberOfRoom" : 2,
   "numberOfGuests" : 5,
   "location" : [ "beans.Location", {
-    "geographicalWidth" : 1.0,
-    "geographicalLength" : 1.0,
+    "geographicalWidth" : 2192888.870569583,
+    "geographicalLength" : 5580331.9034303995,
     "address" : [ "beans.Address", {
       "street" : "Kneza",
       "numberHouse" : 12,
@@ -20,7 +20,7 @@
   "pricePerNight" : 5000.0,
   "checkInTime" : [ "java.util.Date", 1599224657782 ],
   "checkOutTime" : [ "java.util.Date", 1599224657782 ],
-  "status" : "PASSIVE",
+  "status" : "ACTIVE",
   "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
     "id" : 1,
     "name" : "Topla voda"
@@ -64,7 +64,7 @@
   "pricePerNight" : 3000.0,
   "checkInTime" : [ "java.util.Date", 1599249724654 ],
   "checkOutTime" : [ "java.util.Date", 1599249724654 ],
-  "status" : "PASSIVE",
+  "status" : "ACTIVE",
   "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
     "id" : 1,
     "name" : "Wifi"
@@ -102,7 +102,7 @@
   "pricePerNight" : 800.0,
   "checkInTime" : [ "java.util.Date", 1599251816836 ],
   "checkOutTime" : [ "java.util.Date", 1599251816836 ],
-  "status" : "PASSIVE",
+  "status" : "ACTIVE",
   "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
     "id" : 1,
     "name" : "Wifi"
@@ -124,6 +124,53 @@
   } ], [ "beans.ContentOfApartment", {
     "id" : 7,
     "name" : "Mikro talasna"
+  } ] ] ],
+  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "activce" : true
+} ], [ "beans.Apartment", {
+  "id" : 4,
+  "typeOfApartment" : "ROOM",
+  "numberOfRoom" : 4,
+  "numberOfGuests" : 7,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2192888.870569583,
+    "geographicalLength" : 5580331.9034303995,
+    "address" : [ "beans.Address", {
+      "street" : "Mise Dimitrijevica",
+      "numberHouse" : 12,
+      "city" : "Novi Sad",
+      "postNumber" : 21000
+    } ]
+  } ],
+  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ ] ],
+  "pricePerNight" : 3500.0,
+  "checkInTime" : [ "java.util.Date", 1599903360833 ],
+  "checkOutTime" : [ "java.util.Date", 1599903360833 ],
+  "status" : "PASSIVE",
+  "content" : [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
+    "id" : 1,
+    "name" : "Osnovne stvari"
+  } ], [ "beans.ContentOfApartment", {
+    "id" : 2,
+    "name" : "Lift"
+  } ], [ "beans.ContentOfApartment", {
+    "id" : 3,
+    "name" : "Besplatan parking"
+  } ], [ "beans.ContentOfApartment", {
+    "id" : 4,
+    "name" : "TV"
+  } ], [ "beans.ContentOfApartment", {
+    "id" : 5,
+    "name" : "Aparat za kafu"
+  } ], [ "beans.ContentOfApartment", {
+    "id" : 6,
+    "name" : "Klima"
+  } ], [ "beans.ContentOfApartment", {
+    "id" : 7,
+    "name" : "Wifi"
   } ] ] ],
   "reservations" : [ "java.util.ArrayList", [ ] ],
   "activce" : true

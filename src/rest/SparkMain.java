@@ -371,14 +371,15 @@ public class SparkMain {
 			Map<String,Object> map = mapper.readValue(playload, Map.class);
 			
 			System.out.println(map);
-			
+			System.out.println(map.get("geographicalWidth"));
+			double aj = (double) map.get("geographicalWidth");
 			System.out.println(map.get("typeOfApartment").equals("Soba"));
 			
 			TypeOfApartment type = (map.get("typeOfApartment").equals("Soba")) ? TypeOfApartment.ROOM : TypeOfApartment.FULL_APARTMENT;
 			
 			Address address = new Address((String) map.get("street"),Integer.parseInt((String) map.get("numberHouse")),(String) map.get("city"),Integer.parseInt((String) map.get("postNumber")));
 
-			Location location = new Location(Double.parseDouble((String) map.get("geographicalWidth")),  Double.parseDouble((String) map.get("geographicalLength")),address);
+			Location location = new Location((Double) map.get("geographicalWidth"),(Double) map.get("geographicalLength"),address);
 			
 			
 			Session ss = req.session(true);
