@@ -55,9 +55,7 @@ Vue.component("log-in", {
     methods : {
       login : function(event) {
         var lab = document.getElementById("error");
-
         lab.hidden = true;
-
 
         event.preventDefault();
         event.target.classList.add('was-validated');
@@ -71,10 +69,17 @@ Vue.component("log-in", {
         .post('/login', {"username" : this.users.username , "password" : this.users.password})
         .then(function(response){
 
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Uspjesno logovanje!',
+            showConfirmButton: false,
+            timer: 1000
+          })
           window.location.href = "/#/apartments"; 
               
 
-        }).catch(function(eror){
+        }).catch(function(error){
             console.log(eror);
             if(eror.response.status == 400){
                lab.hidden = false;

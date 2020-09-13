@@ -5,6 +5,8 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -40,6 +42,7 @@ public class Apartment {
 	
 	private StatusApartment status;
 	
+	@JsonIgnore
 	private ArrayList<ContentOfApartment> content = new ArrayList<ContentOfApartment>();
 	private ArrayList<Integer> idContetn = new ArrayList<Integer>();
 	
@@ -47,7 +50,7 @@ public class Apartment {
 	@JsonIgnoreProperties(value = {"reservedApartment"})
 	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	
-	private boolean isActivce = true;
+	private boolean isActive = true;
 	
 	public Apartment() {
 		
@@ -253,14 +256,14 @@ public class Apartment {
 
 
 
-	public boolean isActivce() {
-		return isActivce;
+	public boolean isActive() {
+		return isActive;
 	}
 
 
 
-	public void setActivce(boolean isActivce) {
-		this.isActivce = isActivce;
+	public void setActive(boolean isActivce) {
+		this.isActive = isActivce;
 	}
 
 

@@ -112,7 +112,7 @@ Vue.component("apartments", {
 
 		    <div class=" col-sm-8">
 
-		    	<div class=" row p-3 m-3 border rounded" v-for="a in appartments">
+		    	<div class=" row p-3 m-3 border rounded" v-for="a in appartments" v-if='a.isActive'>
 		   			<div class="col">
     					<img class="img-fluid border border-secondary" v-bind:src="a.urlImages[0]"> 
     				</div>
@@ -137,9 +137,13 @@ Vue.component("apartments", {
        				</div>
        				
        				<div class="col">
-       					<div><label> Cena: </label> {{a.pricePerNight}} </div>
+       					<div><h5 class="font-weight-bold mb-3"> Cena:  {{a.pricePerNight}} &euro;</h5></div>
 
-       					<div><a :href="'#/apartment/' + a.id"><button class="btn bg-primary text-white"> Procitaj vise </button></a> </div>
+       					<div><a :href="'#/apartment/' + a.id"><button class="btn bg-primary text-white w-75 mt-3"> Procitaj vise </button></a> </div>
+
+                        <div>
+                            <button type="button" class="btn btn-outline-danger w-75 mt-5" v-on:click="deleteApartment($event, a.id)">Obrisi</button>
+                        </div>
        				</div>
 
 
@@ -148,6 +152,8 @@ Vue.component("apartments", {
     			<div class="d-flex justify-content-end p-3"  v-if="mode=='HOST'" ><button class="btn bg-primary text-white" v-on:click="addApartment"> Dodaj novi apartman </button> </div>
 		    </div>
   		</div>
+
+
     </div>`,
 
     data : function(){
@@ -180,6 +186,7 @@ Vue.component("apartments", {
           .get('/sesion')
           .then(response => (this.mode = response.data.typeOfUser))
 
+        
     }
     ,
     mounted() {
@@ -401,7 +408,19 @@ Vue.component("apartments", {
     		//this.flegSearch  = false;
     		this.appartments = list;
     		this.sortApartments();
-    	}
+    	},
+        deleteApartment : function(event, id) {
+            
+            axios.post('/deleteApartment', null, {params : {'id' : id}})
+                .then(response => {
+                    alert("Uspesno brisanje!")
+                    for(var item of this.appartments) {
+                        if(item.id === id) {
+                        item.isActive = false;
+                    }
+                }})
+                .catch(response =>(alert('Greska prilikom brisanja!'))); 
+        }   
 
 
 

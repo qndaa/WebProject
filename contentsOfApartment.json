@@ -1,13 +1,33 @@
 [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
   "id" : 1,
   "name" : "Wi-Fi",
-  "imagePath" : "/data/contentsOfApartment/wifi_logo.jpg"
+  "imagePath" : "/data/contentsOfApartment/Wi-Fi.jpg"
 } ], [ "beans.ContentOfApartment", {
   "id" : 2,
-  "name" : "TV",
-  "imagePath" : "/data/contentsOfApartment/tv_logo.jpg"
+  "name" : "Bazen",
+  "imagePath" : "/data/contentsOfApartment/Bazen.jpg"
 } ], [ "beans.ContentOfApartment", {
   "id" : 3,
+  "name" : "Terasa",
+  "imagePath" : "/data/contentsOfApartment/Terasa.jpg"
+} ], [ "beans.ContentOfApartment", {
+  "id" : 4,
+  "name" : "Parking za auto",
+  "imagePath" : "/data/contentsOfApartment/Parking za auto.jpg"
+} ], [ "beans.ContentOfApartment", {
+  "id" : 5,
   "name" : "Topla voda",
-  "imagePath" : "/data/contentsOfApartment/water_logo.jpg"
+  "imagePath" : "/data/contentsOfApartment/Topla voda.jpg"
+} ], [ "beans.ContentOfApartment", {
+  "id" : 6,
+  "name" : "Kuhinja",
+  "imagePath" : "/data/contentsOfApartment/Kuhinja.jpg"
+} ], [ "beans.ContentOfApartment", {
+  "id" : 7,
+  "name" : "TV",
+  "imagePath" : "/data/contentsOfApartment/TV.jpg"
+} ], [ "beans.ContentOfApartment", {
+  "id" : 8,
+  "name" : "Sef",
+  "imagePath" : "/data/contentsOfApartment/Sef.jpg"
 } ] ] ]

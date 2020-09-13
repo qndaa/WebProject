@@ -79,7 +79,7 @@ public class ContentsOfApartmentDTO {
 	}
 	
 	public long getMaxId() {
-		return contentsOfApartment.get(contentsOfApartment.size()-1).getId();
+		return (contentsOfApartment.isEmpty()) ? 0 : contentsOfApartment.get(contentsOfApartment.size()-1).getId();
 	}
 
 	public void addContentsOfApartment(String name, String path) {

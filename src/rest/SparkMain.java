@@ -7,10 +7,12 @@ import static spark.Spark.post;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
-
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -21,9 +23,9 @@ import javax.servlet.http.Part;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
+
 import beans.Address;
 import beans.Apartment;
-import beans.ContentOfApartment;
 import beans.Guest;
 import beans.Host;
 import beans.Location;
@@ -245,20 +247,44 @@ public class SparkMain {
 			
 		});
 		
+		post("/addApartmentPhotos", (request, response) ->{
+			request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("static/data/apartments"));			
+			if(!Files.exists(Paths.get("static/data/apartments/" + request.queryParams("id")))){
+				Files.createDirectory(Paths.get("static/data/apartments/" + request.queryParams("id")));
+			}
+				
+			int i = 0;
+			for(Part part : request.raw().getParts()) {
+				Path out = Paths.get("static/data/apartments/" + request.queryParams("id") + "/" + i + ".jpg");
+				
+				try(final InputStream in = part.getInputStream()){
+					OutputStream outStream = new FileOutputStream(out.toString());
+					IOUtils.copy(in, outStream);
+					outStream.close();
+					in.close();
+					part.delete();
+					
+					appartmentDto.addImagePath(Integer.parseInt(request.queryParams("id")), "/data/apartments/" + request.queryParams("id") + "/" + i++ + ".jpg");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			appartmentDto.saveFile();
+				
+			return null;
+		});
+		
 
 		post("/uploadProfileImage", (request, response) -> {
-			request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("static/data/profile"));
-						
+			request.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("static/data/profile"));					
 			Session ss = request.session(true);
-			User user = ss.attribute("user");
-			String fName = request.raw().getPart("image").getSubmittedFileName();
-			
+			User user = ss.attribute("user");			
 			Part uploadedFile = request.raw().getPart("image");
 			
 			Path out = Paths.get("static/data/profile/" + user.getUserName() + ".jpg");
 
-			
-	
 		    try(final java.io.InputStream in = uploadedFile.getInputStream()){
 
 		    	OutputStream outStream = new FileOutputStream(out.toString());		 
@@ -267,16 +293,13 @@ public class SparkMain {
 		    	outStream.close();
 		    	uploadedFile.delete();
 		    	in.close();
-		    	
-		    	
+		    	 	
 		    } catch (Exception e) {
 		    	e.printStackTrace();
 		    }
-		    
-		    
+		       
 		    return "data/profile/" + user.getUserName() + ".jpg";
 			
-
 		}); 
 
 		get("/allAppartmants", (req, res) -> {
@@ -308,17 +331,12 @@ public class SparkMain {
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String,Object> map = mapper.readValue(playload, Map.class);
 			
-			System.out.println(map);
-			System.out.println(map.get("geographicalWidth"));
 			double aj = (double) map.get("geographicalWidth");
-			System.out.println(map.get("typeOfApartment").equals("Soba"));
 			
 			TypeOfApartment type = (map.get("typeOfApartment").equals("Soba")) ? TypeOfApartment.ROOM : TypeOfApartment.FULL_APARTMENT;
 			
-			Address address = new Address((String) map.get("street"),Integer.parseInt((String) map.get("numberHouse")),(String) map.get("city"),Integer.parseInt((String) map.get("postNumber")));
-			
+			Address address = new Address((String) map.get("street"),Integer.parseInt((String) map.get("numberHouse")),(String) map.get("city"),Integer.parseInt((String) map.get("postNumber")));	
 			address.setCountry((String) map.get("country"));
-			System.out.println(address.getCountry());
 			
 			Location location = new Location((Double) map.get("geographicalWidth"),(Double) map.get("geographicalLength"),address);
 			
@@ -350,9 +368,8 @@ public class SparkMain {
 			
 			appartmentDto.saveFile();
 			userDto.saveFile();
-			
-			
-			return true;
+		
+			return a.getId();
 		});
 		
 		
@@ -360,7 +377,9 @@ public class SparkMain {
 			response.type("application/json");
 			Gson g = new Gson();			
 			int id =  Integer.parseInt(request.queryParams("id"));
-			Apartment apartment = appartmentDto.getApartmentById(id);
+			
+		
+			Apartment apartment =  appartmentDto.getApartmentById(id);
 			apartment.setHost((Host)userDto.getUserById(apartment.getIdHost()));
 			return g.toJson(appartmentDto.getApartmentById(id));
 		});
@@ -376,6 +395,7 @@ public class SparkMain {
 			response.type("application/json");
 			Gson g = new Gson();
 			int id =  Integer.parseInt(request.queryParams("id"));
+			
 			contentsOfApartmentDTO.deleteContentsOfApartmentById(id);
 			return g.toJson(contentsOfApartmentDTO.getContentsOfApartment());	
 		});
@@ -423,6 +443,13 @@ public class SparkMain {
 			userDto.saveFile();
 			
 			return g.toJson(userDto.getUsers());
+		});
+		
+		post("/deleteApartment", (request, response) -> {
+			int id = Integer.parseInt(request.queryParams("id"));
+			appartmentDto.delete(id);
+			return false;
+			
 		});
 		
 		

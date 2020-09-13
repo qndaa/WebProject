@@ -128,6 +128,27 @@ public class ApartmentDTO {
 		
 		return a;
 	}
+
+
+
+	public void addImagePath(int id, String path) {
+		Apartment apartment = getApartmentById(id);
+		apartment.getUrlImages().add(path);
+		
+	}
+
+
+
+	public void delete(int id) {
+		for(Apartment apartment : appartment) {
+			if(id == apartment.getId()) {
+				apartment.setActive(false);
+				saveFile();
+				return;
+			}
+		}
+		
+	}
 	
 	
 	

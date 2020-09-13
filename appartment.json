@@ -1,29 +1,55 @@
 [ "java.util.ArrayList", [ [ "beans.Apartment", {
   "id" : 1,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 4,
-  "numberOfGuests" : 7,
+  "typeOfApartment" : "ROOM",
+  "numberOfRoom" : 1,
+  "numberOfGuests" : 2,
   "location" : [ "beans.Location", {
     "geographicalWidth" : 2192888.870569583,
     "geographicalLength" : 5580331.9034303995,
     "address" : [ "beans.Address", {
-      "street" : "Mise Dimitrijevica",
-      "numberHouse" : 12,
+      "street" : "Bulevar Cara Lazara",
+      "numberHouse" : 2,
       "city" : "Novi Sad",
-      "postNumber" : 21000,
+      "postNumber" : 21102,
       "country" : "Serbia"
     } ]
   } ],
   "releaseDates" : [ "java.util.ArrayList", [ ] ],
   "idHost" : "b",
   "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ ] ],
-  "pricePerNight" : 3696.0,
-  "checkInTime" : [ "java.util.Date", 1599920764586 ],
-  "checkOutTime" : [ "java.util.Date", 1599920764586 ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/1/0.jpg", "/data/apartments/1/1.jpg" ] ],
+  "pricePerNight" : 15.0,
+  "checkInTime" : [ "java.util.Date", 1600010549909 ],
+  "checkOutTime" : [ "java.util.Date", 1600010549909 ],
   "status" : "PASSIVE",
-  "content" : [ "java.util.ArrayList", [ ] ],
-  "idContetn" : [ "java.util.ArrayList", [ 2, 3, 1 ] ],
+  "idContetn" : [ "java.util.ArrayList", [ 1, 5, 7, 8 ] ],
   "reservations" : [ "java.util.ArrayList", [ ] ],
-  "activce" : true
+  "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 2,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 3,
+  "numberOfGuests" : 6,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2192888.870569583,
+    "geographicalLength" : 5580331.9034303995,
+    "address" : [ "beans.Address", {
+      "street" : "Simina",
+      "numberHouse" : 27,
+      "city" : "Stari Grad Urban Municipality",
+      "postNumber" : 11108,
+      "country" : "Serbia"
+    } ]
+  } ],
+  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/2/0.jpg", "/data/apartments/2/1.jpg" ] ],
+  "pricePerNight" : 50.0,
+  "checkInTime" : [ "java.util.Date", 1600018862541 ],
+  "checkOutTime" : [ "java.util.Date", 1600018862541 ],
+  "status" : "PASSIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 1, 6, 5, 2, 7, 3, 4, 8 ] ],
+  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "active" : true
 } ] ] ]

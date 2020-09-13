@@ -102,33 +102,23 @@ Vue.component("apartment", {
 
             <div class=" col-sm-8 mt-3">
 
+
+
                 <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel" >
                   
                   <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-1z" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+                        <li data-target="#carousel-example-1z" v-bind="{'data-slide-to' : index}" :class="{'active' : index === 0, }" v-for="(item, index) in apartment.urlImages"></li>
+
                   </ol>
                   
                   <div class="carousel-inner" role="listbox">
-                    
-                    <div class="carousel-item active">
-                      <img class="d-block w-100" src="data/apartments/1/a1.jpg"
+
+                    <div class="carousel-item" :class="{'active' : index === 0}" v-for="(item,index) in apartment.urlImages">
+                      <img class="d-block w-100" :src="item"
                         alt="First slide">
                     </div>
                     
-                    <div class="carousel-item">
-                      <img class="d-block w-100" src="data/apartments/1/a2.jpg"
-                        alt="Second slide">
-                    </div>
-                    
-                    <div class="carousel-item">
-                      <img class="d-block w-100" src="data/apartments/1/a3.jpg"
-                        alt="Third slide">
-                    </div>
-                    <!--/Third slide-->
-                  </div>
-                 
+                
                   <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
@@ -139,6 +129,7 @@ Vue.component("apartment", {
                   </a>
                   
                 </div>
+
 
 
                 <div class="row mt-3">
@@ -194,69 +185,19 @@ Vue.component("apartment", {
                     <div class="row mt-3">
                         <div v-for="item of apartment.content" class="col-sm-3 d-flex justify-content-center w-25">
 
-                            
-                                <div v-if="item.name == 'TV'"  >
-                                      <div class="d-flex justify-content-center w-100">
-                                        <img src="data/sadrzaj_apartmana/tv_logo.jpg"  alt="" width="120" height="120"> </img>
-                                      </div>
-
-                                      <div class="d-flex justify-content-center mt-2 w-100">
-                                        <h5> {{item.name}} </h5>
-                                      </div>
-                                </div>
-
-                                <div  v-if="item.name == 'Wifi'" >
-                                      <div class="d-flex justify-content-center">
-                                        <img src="data/sadrzaj_apartmana/wifi_logo.jpg"  alt="" width="120" height="120"> </img>
-                                      </div>
-
-                                      <div class="d-flex justify-content-center mt-2">
-                                        <h5> {{item.name}} </h5>
-                                      </div>
-                                </div>
-
-
-                                <div v-if="item.name == 'Topla voda'"  >
-                                      <div class="d-flex justify-content-center">
-                                        <img src="data/sadrzaj_apartmana/water_logo.jpg "  alt="" width="120" height="120"> </img>
-                                      </div>
-
-                                      <div class="d-flex justify-content-center mt-2">
-                                        <h5> {{item.name}} </h5>
-                                      </div>
-                                </div>
-
-                                <div  v-if="item.name == 'Osnovne stvari'" >
-                                      <div class="d-flex justify-content-center w-100">
-                                        <img src="data/sadrzaj_apartmana/things_logo.jpg"  alt="" width="120" height="120"> </img>
-                                      </div>
-
-                                      <div class="d-flex justify-content-center w-100 mt-2">
-                                        <h5> {{item.name}} </h5>
-                                      </div>
-                                </div>
-
-
-
-
-
-
-
-
-
-
-
-
+                        
 
 
                         </div>
 
                     </div>
 
-                </div>   
+                </div>
+
+            </div>   
            
 
-            </div>
+        </div>
 
 
 

@@ -73,6 +73,8 @@ Vue.component("registration", {
 	 				<button class="btn btn-primary btn-lg btn-block mt-5"  type="submit">Registruj</button>
 	 				
 	 			</form>
+
+	 			
  			
 		</div>
 
@@ -120,7 +122,7 @@ Vue.component("registration", {
         		.then( function (response) {
         			if(response.data === true){
         				window.location.href = "/#/apartments";
-        				alert("Uspesno ste registrovali korisnika");       		
+        				alert("Uspesno ste registrovali korisnika");      		
        					return;
         			}       		
         			alert("Korisnik sa vec postoji sa tim korisnickim imenom");		
