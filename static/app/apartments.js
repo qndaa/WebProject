@@ -101,7 +101,7 @@ Vue.component("apartments", {
 			    		<hr>
 			    	</div>
 			    	<div class="d-flex justify-content-between" v-for="c in listOfContent" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" v-bind:value="c.name" v-model="listOfEssentials" v-on:change="filters"> {{c.name}} </p>
+			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" v-bind:value="c.id" v-model="listOfEssentials" v-on:change="filters"> {{c.name}} </p>
 			    	</div>
 			    	
 
@@ -236,6 +236,7 @@ Vue.component("apartments", {
 
     		if(this.typeOfAccommodation.length == 0 || this.typeOfAccommodation.length == 2) return this.withoutFilterApartments;
     		//ovde ako je prosao prvi uslov znaci ima neki filter
+
     		this.flegFilters = true;
     		for (apartment of this.withoutFilterApartments) {
     			if(this.typeOfAccommodation[0] == apartment.typeOfApartment){
@@ -256,15 +257,15 @@ Vue.component("apartments", {
     		let i = 0;
     		
     		if(this.listOfEssentials.length == 0) return listOfApartments;
-    		//ovde mi treba neki fleg da znam da i ako je lista prazna da je filter postavljen
-    		//postavim ga na true
-    		this.flegFilters = true;
+    		
+            this.flegFilters = true;
+    	       //ovo trebad a se prepravi da pretrazuje po id ako sadrzi id
     		for(apartment of listOfApartments){
     			i=0;
-    			if(apartment.content.length >= this.listOfEssentials.length){
-    				for(content of apartment.content){
+    			if(apartment.idContetn.length >= this.listOfEssentials.length){
+    				for(content of apartment.idContetn){
     					for(essentials of this.listOfEssentials){
-    						if(content.name === essentials){
+    						if(content === essentials){
     							i++;
     							if(i == this.listOfEssentials.length){
     								list.push(apartment);
@@ -284,6 +285,7 @@ Vue.component("apartments", {
 
     		
     		this.filterList = [];
+            this.flegFilters = false;
 
     		this.filterList = this.accommodationType();
     		this.filterList =  this.essentialsFilter(this.filterList);
@@ -295,12 +297,12 @@ Vue.component("apartments", {
     		if(this.minPrice == 0 && this.maxPrice == Infinity) return this.withoutFilterApartments;
     		
     		//ako ima pretragu treba da ga stavi na true
-    		this.flegSearch = true;
+    	    this.flegSearch = true;
 
     		if(this.maxPrice == ""){
     			this.maxPrice = Infinity;
     		}
-            alert("cao")
+           
     		let list = [];
     		for(apartment of this.withoutFilterApartments){
     			if(apartment.pricePerNight>= this.minPrice && apartment.pricePerNight <= this.maxPrice){
@@ -315,7 +317,7 @@ Vue.component("apartments", {
     	searchRoom : function (){
     		if(this.minRoom == 0 && this.maxRoom == Infinity) return this.searcList;
 
-    		this.flegSearch = true;
+            this.flegSearch = true;
     		if(this.maxRoom == ""){
     			this.maxRoom = Infinity;
     		}
@@ -334,7 +336,8 @@ Vue.component("apartments", {
     	searchPeople : function (){
     		if(this.minPeople == 0 && this.maxPeople == Infinity) return this.searcList;
 
-    		this.flegSearch = true;
+
+            this.flegSearch = true;
     		if(this.maxPeople == ""){
     			this.maxPeople = Infinity;
     		}
@@ -356,8 +359,8 @@ Vue.component("apartments", {
     		if(this.city.trim() == "") return this.searcList;
 
     		let list = [];
-
-    		this.flegSearch = true;
+            this.flegSearch = true;
+    		
     		for(apartment of this.searcList){
     			if((apartment.location.address.city.toLowerCase() === this.city.trim().toLowerCase())){
     				list.push(apartment);
@@ -368,14 +371,34 @@ Vue.component("apartments", {
 
 
     	},
+        searchCountry : function (){
+            if(this.country.trim() == "") return this.searcList;
+
+            let list = [];
+            this.flegSearch = true;
+            
+            for(apartment of this.searcList){
+                if((apartment.location.address.country.toLowerCase() === this.country.trim().toLowerCase())){
+                    list.push(apartment);
+                }
+            }
+
+            return list;
+
+
+
+        },
+
+
     	search : function(){
     		
     		this.searcList= [];
-
+            this.flegSearch = false;
     		this.searcList = this.searchPrice();
     		this.searcList = this.searchRoom();
     		this.searcList = this.searchPeople();
     		this.searcList = this.searchCity();
+            this.searcList = this.searchCountry();
 
     		this.filterCrossSearch();
 
@@ -384,28 +407,37 @@ Vue.component("apartments", {
     	filterCrossSearch : function(){
     		let list = [];
          
-    		if(this.filterList.length == 0 && this.searcList.length == 0 && !this.flegSearch && !this.flegFilters){
-          
-    			list = this.withoutFilterApartments;
-    		}else if ( this.flegFilters  &&  this.searcList.length == 0 && !this.flegSearch) {
-               
-    			list = this.filterList;
-    		}else if (this.filterList.length == 0 && !this.flegFilters  && this.flegSearch) {
-    			
-    			list= this.searcList;
-    		}else if(this.flegSearch && this.flegFilter){
-    			for(filterApartment of this.filterList){
-    				for(searchApartment of this.searcList){
-    					if(filterApartment.id === searchApartment.id){
-    						list.push(filterApartment);
-    					}
-    				}
-    			}
-    		}else if (!this.flegSearch && !this.flegFilters){
+            //prvo kada su liste prazne
+            if(!this.flegFilters && !this.flegSearch){
                 list = this.withoutFilterApartments;
             }
-    		this.flegFilters = false;
-    		//this.flegSearch  = false;
+            //nema pretrage samo filter
+            if(this.flegFilters && !this.flegSearch){
+                list = this.filterList;
+            }
+
+            //kada ima pretrage a nema filtera
+            if(this.flegSearch && !this.flegFilters){
+                list = this.searcList;
+            }
+
+            //kada je kombinovano
+            if(this.flegSearch && this.flegFilters){
+                for(s of this.searcList){
+                    for(f of this.filterList){
+                        if(s.id === f.id){
+                            list.push(s);
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+
+
     		this.appartments = list;
     		this.sortApartments();
     	},
