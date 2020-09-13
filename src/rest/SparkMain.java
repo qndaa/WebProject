@@ -331,20 +331,14 @@ public class SparkMain {
 			ObjectMapper mapper = new ObjectMapper();
 			Map<String,Object> map = mapper.readValue(playload, Map.class);
 			
-<<<<<<< HEAD
 			double aj = (double) map.get("geographicalWidth");
-=======
-		
->>>>>>> 31e4e4e098a4065d9ebe1b919e361bb573b4b5f3
+
 			
 			TypeOfApartment type = (map.get("typeOfApartment").equals("Soba")) ? TypeOfApartment.ROOM : TypeOfApartment.FULL_APARTMENT;
 			
 			Address address = new Address((String) map.get("street"),Integer.parseInt((String) map.get("numberHouse")),(String) map.get("city"),Integer.parseInt((String) map.get("postNumber")));	
 			address.setCountry((String) map.get("country"));
-<<<<<<< HEAD
-=======
-			
->>>>>>> 31e4e4e098a4065d9ebe1b919e361bb573b4b5f3
+
 			
 			Location location = new Location((Double) map.get("geographicalWidth"),(Double) map.get("geographicalLength"),address);
 			
