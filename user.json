@@ -24,7 +24,7 @@
   "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "HOST",
   "isBlocekd" : false,
-  "idApartment" : [ "java.util.ArrayList", [ 1 ] ],
+  "idApartment" : [ "java.util.ArrayList", [ 1, 2 ] ],
   "userName" : "b"
 } ], [ "beans.Guest", {
   "password" : "neko123",

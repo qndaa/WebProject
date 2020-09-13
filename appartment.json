@@ -26,4 +26,32 @@
   "idContetn" : [ "java.util.ArrayList", [ 2, 3, 1 ] ],
   "reservations" : [ "java.util.ArrayList", [ ] ],
   "activce" : true
+} ], [ "beans.Apartment", {
+  "id" : 2,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 4,
+  "numberOfGuests" : 8,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 825296.6697482807,
+    "geographicalLength" : 5766647.159875516,
+    "address" : [ "beans.Address", {
+      "street" : "Bulevar oslobodjenja",
+      "numberHouse" : 12,
+      "city" : "Novi Sad",
+      "postNumber" : 21000,
+      "country" : "Serbia"
+    } ]
+  } ],
+  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ ] ],
+  "pricePerNight" : 6000.0,
+  "checkInTime" : [ "java.util.Date", 1600002623244 ],
+  "checkOutTime" : [ "java.util.Date", 1600002623244 ],
+  "status" : "PASSIVE",
+  "content" : [ "java.util.ArrayList", [ ] ],
+  "idContetn" : [ "java.util.ArrayList", [ 1, 2 ] ],
+  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "activce" : true
 } ] ] ]
