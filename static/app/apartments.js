@@ -380,7 +380,7 @@ Vue.component("apartments", {
 
 
 
-        }.
+        },
 
 
     	search : function(){
