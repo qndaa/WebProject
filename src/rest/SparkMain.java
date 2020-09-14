@@ -95,6 +95,7 @@ public class SparkMain {
 			}
 			return true;
 		});
+		
 
 		post("/registrationGuest", (req, res) -> {
 			res.type("application/json");
@@ -412,6 +413,13 @@ public class SparkMain {
 			
 			// jos izbrisati iz svih apartmana
 			
+			for(Apartment apartment : appartmentDto.getAppartment()) {
+				if(apartment.getIdContetn().contains(id)) {
+					apartment.getIdContetn().remove(new Integer(id));
+					break;
+				}
+			}
+			
 			
 			
 			contentsOfApartmentDTO.deleteContentsOfApartmentById(id);
@@ -466,7 +474,7 @@ public class SparkMain {
 		post("/deleteApartment", (request, response) -> {
 			int id = Integer.parseInt(request.queryParams("id"));
 			appartmentDto.delete(id);
-			return false;
+			return true;
 			
 		});
 		
@@ -487,6 +495,15 @@ public class SparkMain {
 			Gson g = new Gson();
 			return g.toJson(userDto.getUsers());
 		});
+		
+		post("/approveApartment", (request, response) -> {
+			System.out.println("Aktiviram...");
+			int id = Integer.parseInt(request.queryParams("id"));
+			appartmentDto.approveApartment(id);
+			return true;
+			
+		});
+		
 		
 		
 	}

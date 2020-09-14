@@ -149,6 +149,19 @@ public class ApartmentDTO {
 		}
 		
 	}
+
+
+
+	public void approveApartment(int id) {
+		for(Apartment apartment : appartment) {
+			if(id == apartment.getId()) {
+				apartment.setStatus(StatusApartment.ACTIVE);;
+				saveFile();
+				return;
+			}
+		}
+		
+	}
 	
 	
 	

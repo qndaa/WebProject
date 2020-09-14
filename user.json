@@ -24,7 +24,7 @@
   "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "HOST",
   "isBlocked" : false,
-  "idApartment" : [ "java.util.ArrayList", [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 3, 4, 5 ] ],
+  "idApartment" : [ "java.util.ArrayList", [ 1, 2, 3, 4, 5 ] ],
   "userName" : "b"
 } ], [ "beans.Guest", {
   "password" : "neko123",
@@ -44,7 +44,7 @@
   "gender" : "Muski",
   "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "GUEST",
-  "isBlocked" : true,
+  "isBlocked" : false,
   "rentedApartment" : [ "java.util.ArrayList", [ ] ],
   "resevration" : [ "java.util.ArrayList", [ ] ],
   "userName" : "jovan123"

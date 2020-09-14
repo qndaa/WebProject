@@ -105,7 +105,18 @@ Vue.component("contents-of-apartment", {
 
 			axios
 				.post("/deleteContentsOfApartment", null, {'params' : {'id' : id}})
-				.then(response => (this.data = response.data));
+				.then(response => {
+					this.data = response.data
+					Swal.fire({
+		              position: 'center',
+		              icon: 'success',
+		              title: 'Uspjesno brisanje!',
+		              showConfirmButton: false,
+		              timer: 1200
+	            	})
+
+
+				});
 		},
 
 		addItem : function(event) {
@@ -133,6 +144,14 @@ Vue.component("contents-of-apartment", {
 					this.newItemName = '';
 					this.url = '';
 					this.error = false;
+					Swal.fire({
+		              position: 'center',
+		              icon: 'success',
+		              title: 'Uspjesno dodavanje sadrzaj!',
+		              showConfirmButton: false,
+		              timer: 1200
+	            	})
+
 				});
 		},
 

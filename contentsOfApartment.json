@@ -1,8 +1,4 @@
 [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
-  "id" : 1,
-  "name" : "Wi-Fi",
-  "imagePath" : "/data/contentsOfApartment/Wi-Fi.jpg"
-} ], [ "beans.ContentOfApartment", {
   "id" : 2,
   "name" : "Bazen",
   "imagePath" : "/data/contentsOfApartment/Bazen.jpg"
@@ -30,4 +26,8 @@
   "id" : 8,
   "name" : "Sef",
   "imagePath" : "/data/contentsOfApartment/Sef.jpg"
+} ], [ "beans.ContentOfApartment", {
+  "id" : 9,
+  "name" : "Wi Fi",
+  "imagePath" : "/data/contentsOfApartment/Wi Fi.jpg"
 } ] ] ]

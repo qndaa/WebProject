@@ -141,9 +141,21 @@ Vue.component("apartments", {
 
        					<div><a :href="'#/apartment/' + a.id"><button class="btn bg-primary text-white w-75 mt-3"> Procitaj vise </button></a> </div>
 
-                        <div>
-                            <button type="button" class="btn btn-outline-danger w-75 mt-5" v-on:click="deleteApartment($event, a.id)">Obrisi</button>
+                        <div v-if="mode == 'ADMINISTRATOR' && a.status =='PASSIVE'">
+                            <button type="button" class="btn btn-outline-success w-75 mt-3" v-on:click="approveApartment($event, a.id)">Aktiviraj</button>
                         </div>
+
+                        <div v-if="mode == 'ADMINISTRATOR' || mode == 'HOST'">
+                            <button type="button" class="btn btn-outline-primary w-75 mt-3">Izmijeni</button>
+                        </div>
+
+
+                        <div v-if="mode == 'ADMINISTRATOR' || mode == 'HOST'">
+                            <button type="button" class="btn btn-outline-danger w-75 mt-3" v-on:click="deleteApartment($event, a.id)">Obrisi</button>
+                        </div>
+
+                        
+
        				</div>
 
 
@@ -445,13 +457,44 @@ Vue.component("apartments", {
             
             axios.post('/deleteApartment', null, {params : {'id' : id}})
                 .then(response => {
-                    alert("Uspesno brisanje!")
+    
                     for(var item of this.appartments) {
                         if(item.id === id) {
                         item.isActive = false;
                     }
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Uspjesno brisanje apartmana!',
+                        showConfirmButton: false,
+                        timer: 1200
+                    })
+
+
                 }})
                 .catch(response =>(alert('Greska prilikom brisanja!'))); 
+        },
+
+        approveApartment : function(event, id) {
+            axios.post('/approveApartment', null, {params : {'id' : id}})
+                .then(response => {
+                    for(var item of this.appartments) {
+                        if(item.id === id) {
+                            item.status = 'ACTIVE';
+                        }
+                        Swal.fire({
+                          position: 'center',
+                          icon: 'success',
+                          title: 'Uspjesno aktiviranje apartmana!',
+                          showConfirmButton: false,
+                          timer: 1200
+                        })
+
+
+                    }
+                })
+
         }   
 
 

@@ -69,7 +69,7 @@ Vue.component("apartment", {
                     </div>
 
                     <div class="col w-50 d-flex justify-content-center">
-                        <p class="font-weight-bold"> 3 </p>
+                        <p class="font-weight-bold"> {{apartment.host.idApartment.length}} </p>
 
                     </div>
 
