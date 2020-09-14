@@ -272,6 +272,10 @@ Vue.component("apartment", {
 
 window.onload = init;
 
+
+
+
+
 function init(){
     //alert(x + " " + y);
     var place = [x,y];

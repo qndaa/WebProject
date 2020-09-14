@@ -15,12 +15,12 @@ Vue.component("apartments", {
 
 					<div class="align-self-start mb-3" >
 			    		<p class="mb-1 ">Izaberite datum dolaska:</p>
-			    		 <input  type="date" id="birthday" name="birthday"> 
+			    		 <input   type="text" id="datepicker" name="birthday"> 
 			    	</div>
 
 					<div class="align-self-start mb-3"" >
 			    		<p class="mb-1">Izaberite datum odlaska:</p>
-			    		 <input  type="date" id="birthday" name="birthday"> 
+			    		 <input  id="datepicker2" > 
 			    	</div>
 
 			    	<div class="align-self-start mb-3"" >
@@ -208,6 +208,7 @@ Vue.component("apartments", {
         axios
         .post('/getContentsOfApartment')
         .then(response => (this.listOfContent = response.data));
+
 
 
     },
@@ -505,3 +506,32 @@ Vue.component("apartments", {
 
 
 });
+
+
+
+$(document).ready(function() {       
+
+
+$('#datepicker').datepicker({
+    format: 'yy-mm-dd',
+            startDate: new Date(),
+            autoclose: true,
+            weekStart: 1,
+            calendarWeeks: true,
+            todayHighlight: true,
+});
+
+
+$('#datepicker2').datepicker({
+    format: 'yy-mm-dd',
+            startDate: new Date(),
+            autoclose: true,
+            weekStart: 1,
+            calendarWeeks: true,
+            todayHighlight: true,
+});
+
+
+
+
+}) 

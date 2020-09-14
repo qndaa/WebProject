@@ -52,6 +52,17 @@ Vue.component("log-in", {
         mode : "Korisnik ne postoji!"
       }
     },
+    mounted() {
+     axios
+    .get('/validationlogin')
+    .then()
+    .catch(function(eror){
+      if(eror.response.status == 403){
+         window.location.href = "/#/validationAcces"; 
+      }
+    })
+
+    },
     methods : {
       login : function(event) {
         var lab = document.getElementById("error");
