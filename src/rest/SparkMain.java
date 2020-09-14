@@ -12,7 +12,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -26,6 +25,7 @@ import com.google.gson.Gson;
 
 import beans.Address;
 import beans.Apartment;
+import beans.ContentOfApartment;
 import beans.Guest;
 import beans.Host;
 import beans.Location;
@@ -56,10 +56,8 @@ public class SparkMain {
 		userDto.loadFile();
 		appartmentDto.loadFile();
 		contentsOfApartmentDTO.loadFile();
+		
 		//userDto.createHost();
-
-		
-		
 
 		post("/login", (req, res) -> {
 			res.type("application/json");
@@ -106,7 +104,7 @@ public class SparkMain {
 			Guest user = g.fromJson(playload, Guest.class);
 			user.setTypeOfUser(TypeOfUser.GUEST);
 			user.setImagePath("/data/profile/profile.jpg");
-			user.setIsBlocekd(false);
+			user.setIsBlocked(false);
 			
 			boolean fleg = true;
 			for (User u : userDto.getUsers()) {
@@ -272,8 +270,10 @@ public class SparkMain {
 			}
 			
 			appartmentDto.saveFile();
+			
+			System.out.println("Dodao slike");
 				
-			return null;
+			return true;
 		});
 		
 
@@ -382,6 +382,18 @@ public class SparkMain {
 		
 			Apartment apartment =  appartmentDto.getApartmentById(id);
 			apartment.setHost((Host)userDto.getUserById(apartment.getIdHost()));
+			
+			apartment.setContent(new ArrayList<ContentOfApartment>());
+			
+			for(int i : apartment.getIdContetn()) {
+				ContentOfApartment content = contentsOfApartmentDTO.getContentsOfApartment(i);
+				if(content != null) {
+					apartment.getContent().add(content);
+				}
+			}
+			
+			
+			
 			return g.toJson(appartmentDto.getApartmentById(id));
 		});
 		
@@ -396,6 +408,11 @@ public class SparkMain {
 			response.type("application/json");
 			Gson g = new Gson();
 			int id =  Integer.parseInt(request.queryParams("id"));
+			
+			
+			// jos izbrisati iz svih apartmana
+			
+			
 			
 			contentsOfApartmentDTO.deleteContentsOfApartmentById(id);
 			return g.toJson(contentsOfApartmentDTO.getContentsOfApartment());	
@@ -451,6 +468,24 @@ public class SparkMain {
 			appartmentDto.delete(id);
 			return false;
 			
+		});
+		
+		post("/blockUser", (request, response) -> {
+			String username = request.queryParams("username");
+			userDto.getUserById(username).setIsBlocked(true);
+			userDto.saveFile();
+			
+			Gson g = new Gson();
+			return g.toJson(userDto.getUsers());
+		});
+		
+		post("/unblockUser", (request, response) -> {
+			String username = request.queryParams("username");
+			userDto.getUserById(username).setIsBlocked(false);
+			userDto.saveFile();
+		
+			Gson g = new Gson();
+			return g.toJson(userDto.getUsers());
 		});
 		
 		

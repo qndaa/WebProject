@@ -15,7 +15,7 @@ public class User  {
 	private String gender;
 	private String imagePath;
 	private TypeOfUser typeOfUser;
-	private Boolean isBlocekd;
+	private Boolean isBlocked;
 	
 	public User() {
 		super();
@@ -29,9 +29,9 @@ public class User  {
 		this.name = name;
 		this.surname = surname;
 		this.gender = gender;
-		this.setImagePath("/data/profile/qndaa.jpg");
+		this.setImagePath("/data/profile/profile.jpg");
 		this.typeOfUser = typeOfUser;
-		this.isBlocekd = false;
+		this.isBlocked = false;
 	}
 
 	public String getUserName() {
@@ -82,42 +82,27 @@ public class User  {
 		this.typeOfUser = typeOfUser;
 	}
 
-
-	
-
-
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", name=" + name + ", surname=" + surname
-				+ ", gender=" + gender + ", imagePath=" + imagePath + ", typeOfUser=" + typeOfUser + ", isBlocekd="
-				+ isBlocekd + "]";
-	}
-
-
 	public String getImagePath() {
 		return imagePath;
 	}
-
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
 
-
-	public Boolean getIsBlocekd() {
-		return isBlocekd;
+	public Boolean getIsBlocked() {
+		return isBlocked;
 	}
 
-
-	public void setIsBlocekd(Boolean isBlocekd) {
-		this.isBlocekd = isBlocekd;
+	public void setIsBlocked(Boolean isBlocekd) {
+		this.isBlocked = isBlocekd;
 	}
 
-
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", password=" + password + ", name=" + name + ", surname=" + surname
+				+ ", gender=" + gender + ", imagePath=" + imagePath + ", typeOfUser=" + typeOfUser + ", isBlocekd="
+				+ isBlocked + "]";
+	}
 	
 }

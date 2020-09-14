@@ -52,4 +52,85 @@
   "idContetn" : [ "java.util.ArrayList", [ 1, 6, 5, 2, 7, 3, 4, 8 ] ],
   "reservations" : [ "java.util.ArrayList", [ ] ],
   "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 3,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 4,
+  "numberOfGuests" : 6,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2192888.870569583,
+    "geographicalLength" : 5580331.9034303995,
+    "address" : [ "beans.Address", {
+      "street" : "Milete Jaksica",
+      "numberHouse" : 3,
+      "city" : "Novi Sad",
+      "postNumber" : 21000,
+      "country" : "Serbia"
+    } ]
+  } ],
+  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/3/0.jpg", "/data/apartments/3/1.jpg" ] ],
+  "pricePerNight" : 8.0,
+  "checkInTime" : [ "java.util.Date", 1600044834170 ],
+  "checkOutTime" : [ "java.util.Date", 1600044834170 ],
+  "status" : "PASSIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 3, 7, 6, 1 ] ],
+  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 4,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 3,
+  "numberOfGuests" : 4,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2192888.870569583,
+    "geographicalLength" : 5580331.9034303995,
+    "address" : [ "beans.Address", {
+      "street" : "Simina",
+      "numberHouse" : 27,
+      "city" : "Stari Grad Urban Municipality",
+      "postNumber" : 11108,
+      "country" : "Serbia"
+    } ]
+  } ],
+  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/4/0.jpg", "/data/apartments/4/1.jpg", "/data/apartments/4/2.jpg" ] ],
+  "pricePerNight" : 23.0,
+  "checkInTime" : [ "java.util.Date", 1600045085989 ],
+  "checkOutTime" : [ "java.util.Date", 1600045085989 ],
+  "status" : "PASSIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 2, 6 ] ],
+  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 5,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 3,
+  "numberOfGuests" : 8,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2192888.870569583,
+    "geographicalLength" : 5580331.9034303995,
+    "address" : [ "beans.Address", {
+      "street" : "Trg žrtava Srebrenice",
+      "numberHouse" : 3,
+      "city" : "City of Sarajevo",
+      "postNumber" : 71000,
+      "country" : "Bosnia and Herzegovina"
+    } ]
+  } ],
+  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/5/0.jpg", "/data/apartments/5/1.jpg", "/data/apartments/5/2.jpg" ] ],
+  "pricePerNight" : 25.0,
+  "checkInTime" : [ "java.util.Date", 1600045406396 ],
+  "checkOutTime" : [ "java.util.Date", 1600045406396 ],
+  "status" : "PASSIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 2, 6, 3, 8 ] ],
+  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "active" : true
 } ] ] ]

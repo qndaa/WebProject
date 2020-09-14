@@ -176,19 +176,39 @@ Vue.component("apartment", {
 
                 </div>
 
-                <div  v-if="apartment.content != null">
 
-                    <div class="row mt-2 ml-1">
-                        <h2>Sadrzaj apartmana:</h2>
-                    </div>
 
-                    <div class="row mt-3">
-                        <div v-for="item of apartment.content" class="col-sm-3 d-flex justify-content-center w-25">
+                <div class = "row">
 
-                        
+                    <div class="col-6">
 
+                        <div  v-if="apartment.content != null">
+
+                            <div class="row mt-2 ml-1">
+                                <h3>Sadrzaj apartmana:</h3>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div v-for="item of apartment.content" class="col-6 w-25 mb-3">
+                                    <div class= "d-flex justify-content-center">
+                                        <img v-bind:src="item.imagePath"  alt="Logo" width="80" height="80"> </img>
+                                    </div>
+
+                                    <div class= "d-flex justify-content-center">
+                                        <h5>{{item.name}}</h5>
+                                    </div>                            
+                                </div>
+
+                            </div>
 
                         </div>
+
+                    </div>
+
+
+                    <div class="col-6">
+                        <p> ovdje dodati formu za rezervaciju </p>
+
 
                     </div>
 

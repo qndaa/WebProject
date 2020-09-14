@@ -286,6 +286,16 @@ public class Apartment {
 		this.idContetn = idContetn;
 	}
 
+	@Override
+	public String toString() {
+		return "Apartment [id=" + id + ", typeOfApartment=" + typeOfApartment + ", numberOfRoom=" + numberOfRoom
+				+ ", numberOfGuests=" + numberOfGuests + ", location=" + location + ", releaseDates=" + releaseDates
+				+ ", host=" + host + ", idHost=" + idHost + ", comments=" + comments + ", urlImages=" + urlImages
+				+ ", pricePerNight=" + pricePerNight + ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime
+				+ ", status=" + status + ", content=" + content + ", idContetn=" + idContetn + ", reservations="
+				+ reservations + ", isActive=" + isActive + "]";
+	}
+
 	
 	
 	

@@ -6,7 +6,6 @@ Vue.component("all-users", {
 
     	<div v-if="mode === 'ADMINISTRATOR'">
 
-	    	
 	    	<div class="row">
 
 	    		<div class="col-lg-4 mt-2 mb-3">
@@ -55,9 +54,20 @@ Vue.component("all-users", {
     	        		<h3 class="d-flex justify-content-center text-primary mt-3">{{row.name}}&nbsp;{{row.surname }}</h3>
     	        		<p class="d-flex justify-content-center text-primary"> Uloga: {{row.typeOfUser}} </p>
 
-                        <div v-if="row.typeOfUser == 'GUEST'" class="d-flex justify-content-center">
-                            <button type="button" class="btn btn-outline-success " v-on:click="createHost(event, row)">Kreiraj domacina</button>
+
+                        <div v-if="row.typeOfUser != 'ADMINISTRATOR' && row.isBlocked === false " class="d-flex justify-content-center mt-2">
+                            <button type="button" class="btn btn-outline-danger mb-2 w-75" v-on:click="blockUser($event, row)">Blokiraj</button>
                         </div>
+
+                        <div v-if="row.typeOfUser != 'ADMINISTRATOR' && row.isBlocked === true " class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-outline-success mb-2 w-75" v-on:click="unblockUser($event, row)">Odblokiraj</button>
+                        </div>
+
+                        <div v-if="row.typeOfUser == 'GUEST'" class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-outline-success mb-1 w-75" v-on:click="createHost($event, row)">Kreiraj domacina</button>
+                        </div>
+
+                        
                     </div>
 	      		</div>
 
@@ -183,11 +193,48 @@ Vue.component("all-users", {
 
         createHost : function(event, user) {
 
-            user.typeOfUser = 'HOST';
             axios
                 .post('/createHost', user)
-                .then(response => (this.users = response.data));
+                .then(response => {
+                    this.users = response.data
+                    user.typeOfUser = 'HOST';
+                });
+        }, 
+        blockUser : function(event, user) {
+            axios.post("/blockUser", null, {params : {'username' : user.username}})
+                .then(response => {
+                    this.users = response.data;
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Korisnik uspjesno blokiran!',
+                        showConfirmButton: false,
+                        timer: 1200
+                    })
+
+                    user.isBlocked = true;
+
+                });
+
+        },
+        unblockUser : function(event, user) {
+            axios.post("/unblockUser", null, {params : {'username' : user.username}})
+                .then(response => {
+                    this.users = response.data;
+                        Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Korisnik uspjesno odblokiran!',
+                        showConfirmButton: false,
+                        timer: 1200
+                    })
+
+                    user.isBlocked = false;
+
+                });
         }
+
 
 
 

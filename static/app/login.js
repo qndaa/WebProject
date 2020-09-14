@@ -68,17 +68,29 @@ Vue.component("log-in", {
         axios
         .post('/login', {"username" : this.users.username , "password" : this.users.password})
         .then(function(response){
-
-          Swal.fire({
+          if(!response.data.isBlocked){
+            Swal.fire({
             position: 'center',
             icon: 'success',
             title: 'Uspjesno logovanje!',
             showConfirmButton: false,
             timer: 1000
           })
-          window.location.href = "/#/apartments"; 
-              
-
+          window.location.href = "/#/apartments";
+          } else {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Korsinik je blokiran!',
+              showConfirmButton: false,
+              timer: 1000
+            })
+            axios.get('/logout')
+              .then(function(response){
+                if(response.data == true){
+                  window.location.href = "/#/login"; 
+                }});
+          }
         }).catch(function(error){
             console.log(eror);
             if(eror.response.status == 400){

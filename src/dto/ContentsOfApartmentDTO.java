@@ -86,6 +86,16 @@ public class ContentsOfApartmentDTO {
 		contentsOfApartment.add(new ContentOfApartment(getMaxId()+1, name, path));
 		saveFile();
 	}
+
+	public ContentOfApartment getContentsOfApartment(int i) {
+		for(ContentOfApartment content : contentsOfApartment) {
+			if(content.getId() == i) {
+				return content;
+			}
+		}
+
+		return null;
+	}
 	
 	
 

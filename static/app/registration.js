@@ -106,7 +106,7 @@ Vue.component("registration", {
     	registration : function (){	
     		event.preventDefault();
 
-    		if(this.User.name == ""  || this.User.surName == "" || this.User.username == "" || this.User.password =="" || this.User.gender =="" || this.User.checkPassword == ""){
+    		if(this.User.name == ""  || this.User.surName == "" || this.User.username == "" || this.User.password =="" || this.User.gender =="" || this.User.checkPassword == "" || this.User.checkPassword != this.User.password){
     			this.Blured.nameBlured = true;
 				this.Blured.surnameBlured = true;
 				this.Blured.usernameBlured = true;
@@ -122,10 +122,22 @@ Vue.component("registration", {
         		.then( function (response) {
         			if(response.data === true){
         				window.location.href = "/#/apartments";
-        				alert("Uspesno ste registrovali korisnika");      		
+        				Swal.fire({
+              				position: 'center',
+              				icon: 'success',
+				            title: 'Korsinik je registrovan!',
+				            showConfirmButton: false,
+				            timer: 1000
+            			})      		
        					return;
         			}       		
-        			alert("Korisnik sa vec postoji sa tim korisnickim imenom");		
+        			Swal.fire({
+		              	position: 'center',
+		              	icon: 'error',
+		             	itle: 'Korsinik vec postoji!',
+		             	showConfirmButton: false,
+		            	timer: 1000
+		            })		
         	});  
     		 
 

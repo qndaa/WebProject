@@ -56,6 +56,16 @@ var app = new Vue({
         .then(function(response){
           if(response.data == true){
             this.mode= 'NO_LOGIN';
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Uspjesno ste se odjavili!',
+              showConfirmButton: false,
+              timer: 1200
+            })
+
+
+
             window.location.href = "/#/login"; 
           }
         });

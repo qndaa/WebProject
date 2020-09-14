@@ -338,33 +338,41 @@ Vue.component("add-apartment", {
 
     	
 
-    	axios.post('/addApartment',this.Apartment)
-        .then(response => {
-        	var id = response.data;
-        	
-        	var i = 0;
-        	var fd = new FormData();
-        	for(var item of this.lista){
-        		fd.append(i + ".jpg", item);
-        		i++;
-        	}
-
-
-        	axios.post('/addApartmentPhotos', fd, {params : {'id' : id} , headers: {'Content-Type': 'multipart/form-data'}})
-        		 .then(response => {
-
-
-        		 	alert("Uspesno ste dodali apartman")
-        		 	window.location.href = "/#/createApartment"; 
-
-        		 });
-
-                         
-        }).catch(function(error){
-            if(error.response.status == 400){
-               alert("zahtev odbijen");
-            }
-        });
+    	axios
+    		.post('/addApartment',this.Apartment)
+        	.then(response => {
+	        	var id = response.data;
+	        	
+	        	var i = 0;
+	        	var fd = new FormData();
+	        	for(var item of this.lista){
+	        		fd.append(i + ".jpg", item);
+	        		i++;
+        		}
+        		axios
+        			.post('/addApartmentPhotos', fd, {params : {'id' : id} , headers: {'Content-Type': 'multipart/form-data'}})
+        		 	.then(response => {
+        		 		Swal.fire({
+	              			position: 'center',
+			              	icon: 'success',
+			              	title: 'Apartman je kreiran!',
+			              	showConfirmButton: false,
+			              	timer: 1200
+			            })
+	        		 	window.location.href = "/#/"; 
+        		 }); 
+        	})              
+	        .catch(function(error){
+	            if(error.response.status == 400){
+	               Swal.fire({
+		              position: 'center',
+		              icon: 'error',
+		              title: 'Greska!',
+		              showConfirmButton: false,
+		              timer: 1000
+	            	})
+	            }
+        	});
 
 
 

@@ -53,7 +53,7 @@ public class UserDTO {
 			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("user.json"), users);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		
@@ -125,7 +125,7 @@ public class UserDTO {
 	public void createHost() {
 		//Host h = new Host("b","b","Jovan","Bosnic","Muski",TypeOfUser.HOST);
 		Host h = new Host("a","a","Avater","Avaterovic","Muski",TypeOfUser.HOST);
-		h.setIsBlocekd(false);
+		h.setIsBlocked(false);
 		users.add(h);
 		saveFile();
 	}
