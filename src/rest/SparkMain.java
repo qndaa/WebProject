@@ -25,16 +25,21 @@ import com.google.gson.Gson;
 
 import beans.Address;
 import beans.Apartment;
+import beans.CommentForApartment;
 import beans.ContentOfApartment;
 import beans.Guest;
 import beans.Host;
 import beans.Location;
+import beans.Reservation;
 import beans.User;
 import dto.ApartmentDTO;
+import dto.CommentsDTO;
 import dto.ContentsOfApartmentDTO;
 import dto.ReservationDTO;
 import dto.UserDTO;
 import enums.StatusApartment;
+import enums.StatusOfComment;
+import enums.StatusReservation;
 import enums.TypeOfApartment;
 import enums.TypeOfUser;
 import spark.Session;
@@ -46,7 +51,8 @@ public class SparkMain {
 	public static ApartmentDTO appartmentDto = new ApartmentDTO();
 	public static ReservationDTO reservationDto = new ReservationDTO();
 	public static ContentsOfApartmentDTO contentsOfApartmentDTO = new ContentsOfApartmentDTO(); 
-
+	public static CommentsDTO commentsDTO = new CommentsDTO();
+	
 	public static void main(String[] args) throws Exception {
 		port(9001);
 
@@ -56,6 +62,10 @@ public class SparkMain {
 		userDto.loadFile();
 		appartmentDto.loadFile();
 		contentsOfApartmentDTO.loadFile();
+		
+		reservationDto.loadFile();
+		commentsDTO.loadFile();
+		
 		
 		//userDto.createHost();
 
@@ -504,7 +514,26 @@ public class SparkMain {
 			
 		});
 		
-		
+		post("/createReservation", (request, response) -> {
+			
+			System.out.println("Ovdje sam");
+			int idApartment = Integer.parseInt(request.queryParams("idApartment"));
+			String idGuest = request.queryParams("idGuest");
+			int numberDays = Integer.parseInt(request.queryParams("numberDays"));
+			String message = request.queryParams("message");
+			String startDate = request.queryParams("startDate");
+
+			
+			double price = appartmentDto.getApartmentById(idApartment).getPricePerNight() * numberDays;
+			
+			Reservation reservation = new Reservation(idApartment, idGuest, startDate, numberDays, message, price, StatusReservation.CREATE);
+			
+			reservationDto.add(reservation);
+			
+			reservationDto.saveFile();
+			
+			return true;
+		});
 		
 	}
 }

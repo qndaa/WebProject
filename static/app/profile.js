@@ -176,8 +176,8 @@ Vue.component("profile", {
 		axios
 		.get('/validationAcces')
 		.then()
-		.catch(function(eror){
-			if(eror.response.status == 403){
+		.catch(function(error){
+			if(error.response.status == 403){
 				 window.location.href = "/#/validationAcces"; 
 			}
 		})
@@ -209,7 +209,7 @@ Vue.component("profile", {
 				this.Blured.surnameBlured = true;			
 				this.Blured.genderBlured = true;
 
-				if(this.checkPassword1 != '' && this.checkPassword2 == ''){
+				if(this.checkPassword1 == '' && this.checkPassword2 == ''){
 					this.Blured.checkPasswordBlured = true;
 					this.Blured.passwordBlured = true;
 				}
@@ -222,22 +222,45 @@ Vue.component("profile", {
 				alert("password ne moze biti isti kao postojeci");
 				return;
 			}
-			
 
+			if(this.checkPassword1 != this.checkPassword2){
+				return;
+			}
+			
+			this.user.password = this.checkPassword1;
 			axios.post('/saveChagesUser', this.user)
-			.then(function(response){
+			.then(response =>{
 				if(response.data == true){
 
-					alert("Uspesno ste izmenili podatke");
-				
-				}else{
-					alert("Doslo je do greske");
-				}
-			});
-				this.mode = "NO_MODE";
+					Swal.fire({
+		              position: 'center',
+		              icon: 'success',
+		              title: 'Izmijene sacuvane!',
+		              showConfirmButton: false,
+		              timer: 1000
+		            })
+					this.mode = "NO_MODE";
 				this.checkPassword1 = '';
 				this.checkPassword2 = '';
-				this.backup= null;			
+				this.backup= null;
+				this.Blured.checkPasswordBlured = false;
+				this.Blured.passwordBlured = false;
+
+				
+				}else{
+					Swal.fire({
+		              position: 'center',
+		              icon: 'error',
+		              title: 'Doslo je do greske!',
+		              showConfirmButton: false,
+		              timer: 1000
+		            })
+				}
+
+
+
+			});
+							
 		},
 		validName : function() {
     		return (this.user.name.length > 3) ? true : false;

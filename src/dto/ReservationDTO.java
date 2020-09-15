@@ -19,7 +19,7 @@ import enums.TypeOfApartment;
 
 public class ReservationDTO {
 
- public ArrayList<Reservation> reservation = new ArrayList<Reservation>();
+ public ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 
  	public ReservationDTO() {
  		super();
@@ -32,7 +32,7 @@ public class ReservationDTO {
 		
 		try {
 
-			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("reservation.json"), reservation);
+			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("reservation.json"), reservations);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -51,7 +51,7 @@ public class ReservationDTO {
 			TypeReference<ArrayList<Reservation>> typeReference = new TypeReference<ArrayList<Reservation>>() {
 			};
 			
-			reservation = maper.readValue(is, typeReference);
+			reservations = maper.readValue(is, typeReference);
 			
 			is.close();
 		} catch (Exception e) {
@@ -64,12 +64,17 @@ public class ReservationDTO {
  	
  	
  	
-	public ArrayList<Reservation> getReservation() {
-		return reservation;
+	public ArrayList<Reservation> getReservations() {
+		return reservations;
 	}
 
-	public void setReservation(ArrayList<Reservation> reservation) {
-		this.reservation = reservation;
+	public void setReservations(ArrayList<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+
+	public void add(Reservation reservation) {
+		reservations.add(reservation);
 	}
 	
 	

@@ -1,0 +1,7 @@
+[ "java.util.ArrayList", [ [ "beans.CommentForApartment", {
+  "idGuest" : 1,
+  "idApartment" : 1,
+  "text" : "Dobar apartman!",
+  "mark" : 5,
+  "status" : "ON_HOLD"
+} ] ] ]

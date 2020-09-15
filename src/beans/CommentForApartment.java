@@ -1,12 +1,17 @@
 package beans;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import enums.StatusOfComment;
 
 public class CommentForApartment {
 	
-	
+	@JsonIgnore
 	public Guest guest = new Guest();
+	
+	public int idGuest;
 	
 	@JsonIgnoreProperties(value = {"comments"})
 	@JsonBackReference
@@ -18,7 +23,7 @@ public class CommentForApartment {
 	public String text;
 	public int mark;
 	
-	
+	public StatusOfComment status;
 	
 	public CommentForApartment() {
 		// TODO Auto-generated constructor stub
@@ -32,6 +37,53 @@ public class CommentForApartment {
 		this.apartment = apartment;
 		this.text = text;
 		this.mark = mark;
+	}
+	
+	public CommentForApartment(int idGuest, int idApartment, String text, int mark, StatusOfComment status) {
+		super();
+		this.idGuest = idGuest;
+		this.idApartment = idApartment;
+		this.text = text;
+		this.mark = mark;
+		this.status = status;
+	}
+
+
+	
+	
+	
+	public int getIdGuest() {
+		return idGuest;
+	}
+
+
+
+	public void setIdGuest(int idGuest) {
+		this.idGuest = idGuest;
+	}
+
+
+
+	public int getIdApartment() {
+		return idApartment;
+	}
+
+
+
+	public void setIdApartment(int idApartment) {
+		this.idApartment = idApartment;
+	}
+
+
+
+	public StatusOfComment getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(StatusOfComment status) {
+		this.status = status;
 	}
 
 

@@ -1,0 +1,17 @@
+[ "java.util.ArrayList", [ [ "beans.Reservation", {
+  "idApartment" : 1,
+  "startTime" : "2020-09-23",
+  "numberOfNights" : 3,
+  "price" : 45.0,
+  "message" : "",
+  "idGuest" : "neko123",
+  "statusReseravation" : "CREATE"
+} ], [ "beans.Reservation", {
+  "idApartment" : 1,
+  "startTime" : "2020-09-16",
+  "numberOfNights" : 3,
+  "price" : 45.0,
+  "message" : "",
+  "idGuest" : "neko123",
+  "statusReseravation" : "CREATE"
+} ] ] ]
