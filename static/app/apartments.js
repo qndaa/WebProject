@@ -146,7 +146,7 @@ Vue.component("apartments", {
                         </div>
 
                         <div v-if="mode == 'ADMINISTRATOR' || mode == 'HOST'">
-                            <button type="button" class="btn btn-outline-primary w-75 mt-3">Izmijeni</button>
+                             <a :href="'#/changeApartment/' + a.id">   <button type="button" class="btn btn-outline-primary w-75 mt-3">Izmijeni</button> </a>
                         </div>
 
 
@@ -476,6 +476,7 @@ Vue.component("apartments", {
                 }})
                 .catch(response =>(alert('Greska prilikom brisanja!'))); 
         },
+  
         calendar : function (){
 
 

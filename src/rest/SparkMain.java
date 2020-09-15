@@ -523,6 +523,51 @@ public class SparkMain {
 		});
 		
 		
+		post("/changeApartment", (req, res) -> {
+			res.type("application/json");
+			Gson g = new Gson();
+			
+			String playload = req.body();
+			
+			ObjectMapper mapper = new ObjectMapper();
+			Map<String,Object> map = mapper.readValue(playload, Map.class);
+			Apartment a = appartmentDto.getApartmentById((Integer) map.get("id"));
+			
+			
+	
+			Integer numberofGuest;
+			Integer price;
+			if(map.get("numberOfGuests")== (Object) a.getNumberOfGuests()) {
+				numberofGuest =	(Integer) map.get("numberOfGuests");
+				
+			}else {
+				numberofGuest = Integer.parseInt((String) map.get("numberOfGuests"));
+			}
+			
+			try {
+				price = Integer.parseInt((String) map.get("pricePerNight"));
+				}
+				catch(Exception e) {
+					price =	(Integer) map.get("pricePerNight");
+				}
+			
+			ArrayList<Integer> con = new ArrayList<Integer>();
+			for (Integer s :(ArrayList<Integer>) map.get("idContetn")) {
+				con.add(s);	
+			}
+			
+			a.setPricePerNight(price);
+			a.setNumberOfGuests(numberofGuest);
+			a.setIdContetn(con);
+			
+			
+			appartmentDto.saveFile();
+			
+			
+			return true;
+		});
+		
+		
 		
 	}
 }
