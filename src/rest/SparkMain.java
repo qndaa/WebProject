@@ -535,5 +535,23 @@ public class SparkMain {
 			return true;
 		});
 		
+		get("/validationlogin", (req, res) -> {
+			res.type("application/json");
+			
+			Gson g = new Gson();
+			
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			if(user != null) {
+				res.status(403);
+				return res;
+			}
+			
+			return true;
+		});
+		
+		
+		
 	}
 }
