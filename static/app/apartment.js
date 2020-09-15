@@ -207,9 +207,50 @@ Vue.component("apartment", {
 
 
                     <div class="col-6">
-                        <p> ovdje dodati formu za rezervaciju </p>
+
+                        <div class="m-3 border border-primary rounded" v-if="user.typeOfUser == 'GUEST'">
+
+                            <h3 class=" mt-3 d-flex justify-content-center">Rezervacija: </h3>
+
+                            <form class="needs-validation"  novalidate>
+
+                                <div class="form-group w-100 m-3">
+                                  <label for="startDate" class="col-2 col-form-label">Date</label>
+                                  <div class="col-10">
+                                    <input class="form-control datepicker"  type="date" value="" id="startDate" v-model="startDate">
+                                  </div>
+                                </div>
 
 
+
+                                 <div class="form-group w-100 m-3">
+                                  <label for="numberDays" class="col-2 col-form-label">Number</label>
+                                  <div class="col-10">
+                                    <input class="form-control" type="number" value="0" id="numberDays" v-model="numberDays">
+                                  </div>
+                                  
+                                </div>
+
+                                <div class="form-group w-100 m-3">
+                                  <label for="message" class="col-2 col-form-label">Poruka</label>
+                                  <div class="col-10">
+                                    <input class="form-control" type="text" value="0" id="message" v-model="message">
+                                  </div>
+                                  
+                                </div>   
+                                      
+                                  
+
+                                 <div class="m-3 w-100">
+                                        <div class="col-10">
+                                            <button class="btn btn-success btn-block" v-on:click="reservation">Rezervisi</button>
+                                        </div>
+                                
+
+                                    </div>
+                            </form>
+
+                        </div>
                     </div>
 
                 </div>
@@ -242,11 +283,21 @@ Vue.component("apartment", {
     data : function(){
     	return {
     		apartment : null,
-            id : this.$route.params.id
-    	
+            id : this.$route.params.id,
+            startDate : null,
+            user : null,
+            numberDays : 0,
+            message : ''
     	}
     }
     , mounted() {
+
+         axios
+          .get('/sesion')
+          .then(response => (this.user = response.data))
+
+
+
         axios
             .post("/getApartment", null ,{params : 
                 {id : this.id}})
@@ -261,6 +312,43 @@ Vue.component("apartment", {
     
           init();
 
+
+          },
+
+          reservation : function() {
+
+            if(this.startDate == null || this.numberDays < 1){
+                Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'Nepravilno popunjena forma!',
+                        showConfirmButton: false,
+                        timer: 1200
+                    })
+
+
+                return;
+            }
+
+            axios
+                .post('/createReservation', null, {params : {
+                                                        'idApartment' : this.id, 
+                                                        'startDate' : this.startDate,
+                                                        'numberDays' : this.numberDays, 
+                                                        'message' : this.message, 
+                                                        'idGuest' : this.user.username}})
+                .then(response =>{
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Rezervacija uspjesna!',
+                        showConfirmButton: false,
+                        timer: 1200
+                    })
+
+
+
+                });
 
           }
     

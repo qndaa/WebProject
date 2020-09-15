@@ -17,9 +17,9 @@
   "isBlocked" : false,
   "userName" : "qndaa"
 } ], [ "beans.Host", {
-  "password" : "b",
-  "name" : "J",
-  "surname" : "B",
+  "password" : "jovan",
+  "name" : "Jovan",
+  "surname" : "Bosnic",
   "gender" : "Muski",
   "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "HOST",

@@ -374,13 +374,6 @@ Vue.component("add-apartment", {
 	            }
         	});
 
-
-
-
-
-
-
-
     	},
     	validTypeOfApartment : function() {
     		return (this.Apartment.typeOfApartment.length > 0) ? true : false;

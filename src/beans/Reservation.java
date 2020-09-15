@@ -2,6 +2,7 @@ package beans;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import enums.StatusReservation;
@@ -11,22 +12,29 @@ import enums.StatusReservation;
 public class Reservation {
 
 	@JsonIgnoreProperties(value = "reservations")
+	@JsonIgnore
 	private Apartment reservedApartment = new Apartment();
 	
-	private Date startTime;
+	private int idApartment;
+	
+	
+	private String startTime;
 	private int numberOfNights;
 	private double price;
 	private String message;
 	
 	@JsonIgnoreProperties(value = {"resevration"})
+	@JsonIgnore
 	private Guest guest = new Guest();
+	
+	private String idGuest;
 	private StatusReservation statusReseravation;
 	
 	
 	public Reservation() {
 		
 	}
-	public Reservation(Apartment reservedApartment, Date startTime, int numberOfNights, double price, String message,
+	public Reservation(Apartment reservedApartment, String startTime, int numberOfNights, double price, String message,
 			Guest guest, StatusReservation statusReseravation) {
 		super();
 		this.reservedApartment = reservedApartment;
@@ -39,6 +47,17 @@ public class Reservation {
 	}
 	
 	
+	public Reservation(int idApartment, String idGuest, String date, int numberDays, String message, double price,
+			StatusReservation create) {
+		this.idApartment = idApartment;
+		this.idGuest = idGuest;
+		this.numberOfNights = numberDays;
+		this.message = message;
+		this.startTime = date;
+		this.price = price;
+		this.statusReseravation = create;
+	
+	}
 	public Apartment getReservedApartment() {
 		return reservedApartment;
 	}
@@ -47,11 +66,11 @@ public class Reservation {
 		this.reservedApartment = reservedApartment;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
@@ -93,6 +112,18 @@ public class Reservation {
 
 	public void setStatusReseravation(StatusReservation statusReseravation) {
 		this.statusReseravation = statusReseravation;
+	}
+	public int getIdApartment() {
+		return idApartment;
+	}
+	public void setIdApartment(int idApartment) {
+		this.idApartment = idApartment;
+	}
+	public String getIdGuest() {
+		return idGuest;
+	}
+	public void setIdGuest(String idGuest) {
+		this.idGuest = idGuest;
 	}
 
 

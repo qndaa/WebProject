@@ -53,7 +53,7 @@ public class ApartmentDTO {
 			mapper.writerWithDefaultPrettyPrinter().writeValue(new File("appartment.json"), appartment);
 			
 		} catch (Exception e) {
-			System.out.println("Jel me ti ujebes");
+			e.printStackTrace();
 		}
 		
 	}
