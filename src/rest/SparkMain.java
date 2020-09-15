@@ -522,6 +522,9 @@ public class SparkMain {
 			int numberDays = Integer.parseInt(request.queryParams("numberDays"));
 			String message = request.queryParams("message");
 			String startDate = request.queryParams("startDate");
+			String days = request.queryParams("days");
+			
+			System.out.println(days);
 
 			
 			double price = appartmentDto.getApartmentById(idApartment).getPricePerNight() * numberDays;
@@ -534,6 +537,13 @@ public class SparkMain {
 			
 			return true;
 		});
+		
+		
+		
+		
+		
+		
+		
 		
 		get("/validationlogin", (req, res) -> {
 			res.type("application/json");
@@ -581,6 +591,7 @@ public class SparkMain {
 				}
 			
 			ArrayList<Integer> con = new ArrayList<Integer>();
+			
 			for (Integer s :(ArrayList<Integer>) map.get("idContetn")) {
 				con.add(s);	
 			}

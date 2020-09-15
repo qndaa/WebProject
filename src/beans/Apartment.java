@@ -22,7 +22,7 @@ public class Apartment {
 	private int numberOfGuests;
 	
 	private Location location;
-	private ArrayList<Date> releaseDates = new ArrayList<Date>();
+	private ArrayList<String> busyDays = new ArrayList<String>();
 
 	@JsonIgnoreProperties(value = {"aparment"})
 	@JsonBackReference
@@ -48,6 +48,7 @@ public class Apartment {
 	
 
 	@JsonIgnoreProperties(value = {"reservedApartment"})
+	@JsonIgnore
 	private ArrayList<Reservation> reservations = new ArrayList<Reservation>();
 	
 	private boolean isActive = true;
@@ -125,14 +126,14 @@ public class Apartment {
 
 
 
-	public ArrayList<Date> getReleaseDates() {
-		return releaseDates;
+	public ArrayList<String> getReleaseDates() {
+		return busyDays;
 	}
 
 
 
-	public void setReleaseDates(ArrayList<Date> releaseDates) {
-		this.releaseDates = releaseDates;
+	public void setReleaseDates(ArrayList<String> busyDays) {
+		this.busyDays = busyDays;
 	}
 
 
@@ -289,7 +290,7 @@ public class Apartment {
 	@Override
 	public String toString() {
 		return "Apartment [id=" + id + ", typeOfApartment=" + typeOfApartment + ", numberOfRoom=" + numberOfRoom
-				+ ", numberOfGuests=" + numberOfGuests + ", location=" + location + ", releaseDates=" + releaseDates
+				+ ", numberOfGuests=" + numberOfGuests + ", location=" + location + ", releaseDates=" + busyDays
 				+ ", host=" + host + ", idHost=" + idHost + ", comments=" + comments + ", urlImages=" + urlImages
 				+ ", pricePerNight=" + pricePerNight + ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime
 				+ ", status=" + status + ", content=" + content + ", idContetn=" + idContetn + ", reservations="

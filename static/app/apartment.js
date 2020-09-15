@@ -206,18 +206,18 @@ Vue.component("apartment", {
                             <form class="needs-validation"  novalidate>
 
                                 <div class="form-group w-100 m-3">
-                                  <label for="startDate" class="col-2 col-form-label">Date</label>
+                                  <label for="startDate" class="col-2 col-form-label">Date:</label>
                                   <div class="col-10">
-                                    <input class="form-control datepicker"  type="date" value="" id="startDate" v-model="startDate">
+                                    <input class="form-control"  type="text" placeholder="dd-mm-yy"  id="datepicker3"/>
                                   </div>
                                 </div>
 
 
 
                                  <div class="form-group w-100 m-3">
-                                  <label for="numberDays" class="col-2 col-form-label">Number</label>
+                                  <label for="numberDays" class="col-2 col-form-label">Broj dana:</label>
                                   <div class="col-10">
-                                    <input class="form-control" type="number" value="0" id="numberDays" v-model="numberDays">
+                                    <input class="form-control" type="number" value="0" id="numberDays" v-model="numberDays"/>
                                   </div>
                                   
                                 </div>
@@ -225,7 +225,7 @@ Vue.component("apartment", {
                                 <div class="form-group w-100 m-3">
                                   <label for="message" class="col-2 col-form-label">Poruka</label>
                                   <div class="col-10">
-                                    <input class="form-control" type="text" value="0" id="message" v-model="message">
+                                    <input class="form-control" type="text" value="0" id="message" v-model="message"/>
                                   </div>
                                   
                                 </div>   
@@ -256,13 +256,14 @@ Vue.component("apartment", {
     	return {
     		apartment : null,
             id : this.$route.params.id,
-            startDate : null,
+            startDate : "",
             user : "",
             numberDays : 0,
             message : '',
             xCoordinate : 0,
             yCoordinate : 0,
-            map : ""
+            map : "",
+            busyDates : ['30-09-2020']
     	}
     },
     beforeCreate(){
@@ -283,6 +284,7 @@ Vue.component("apartment", {
                 this.yCoordinate = this.apartment.location.geographicalLength;
                 this.$nextTick(function() {
                     this.initMap();
+                    this.initDatePicker();
                 })
             });
 
@@ -290,7 +292,45 @@ Vue.component("apartment", {
     },
     methods : {
 
-          initMap : function(){
+        initDatePicker : function() {
+
+            $("#datepicker3").datepicker({
+                dateFormat: 'dd-mm-yy',
+                minDate: new Date(), 
+                maxDate: '+1m',
+                beforeShowDay: (day) => {
+
+
+                    var month = (day.getMonth()+1); 
+                    if(day.getMonth()<9) 
+                        month="0"+month; 
+
+
+                    var d = "";
+
+                    if(day.getDate()<10) d+="0"; 
+
+                    d += day.getDate();
+
+                    var date = d + "-" + month + "-" + day.getFullYear(); 
+
+
+                    if ($.inArray(date, this.Apartment.busyDates) != -1) {
+                        return [false, "","unAvailable"]; 
+                    } else{
+                         return [true,"","Available"]; 
+                    }
+                },
+
+                onSelect : (date) => {
+                    this.startDate = date;
+                }
+            });
+
+
+
+        },
+        initMap : function(){
     
             var place = [this.xCoordinate,this.yCoordinate];
             this.map = new ol.Map({
@@ -353,10 +393,40 @@ Vue.component("apartment", {
                         showConfirmButton: false,
                         timer: 1200
                     })
-
-
                 return;
             }
+
+            var tokens = this.startDate.split('-');
+            var newDate = new Date(tokens[2], tokens[1]-1, tokens[0]);
+            var d = new Date();
+
+            var days = [];
+
+
+
+            for (var i = 0; i < this.numberDays; i++) {
+                d.setDate( newDate.getDate() + i);
+                var parts = d.toDateString().split(" ");
+                var month = d.getMonth() + 1;
+
+                var string = parts[2] + "-" + ((month < 10) ? "0" : "") + month + "-" + parts[3]
+                days.push(string);
+            }
+
+            var daysString = "";
+
+            for(var day of days){
+
+                daysString += day
+                for(var item of this.busyDates) {
+                    if(item == day) {
+                        alert("Ne moze!");
+                        return;
+                    }
+                }
+            }
+             
+            
 
             axios
                 .post('/createReservation', null, {params : {
@@ -364,7 +434,9 @@ Vue.component("apartment", {
                                                         'startDate' : this.startDate,
                                                         'numberDays' : this.numberDays, 
                                                         'message' : this.message, 
-                                                        'idGuest' : this.user.username}})
+                                                        'idGuest' : this.user.username,
+                                                        'days' : days
+                                                    }})
                 .then(response =>{
                     Swal.fire({
                         position: 'center',
@@ -376,9 +448,20 @@ Vue.component("apartment", {
 
 
 
-                });
+                })
 
-          }
+            
+
+        },
+
+        compareDates(date1, date2){
+
+            if(date1.toDateString() != date2.toDateString()){
+                return false;
+            }
+
+            return true;
+        }
     
     }
 
