@@ -1,5 +1,3 @@
-var x=2192888.870569583;
-var y= 5580331.9034303995;
 
 Vue.component("apartment", {
 	template : `
@@ -80,23 +78,16 @@ Vue.component("apartment", {
                     <h2>Lokacija na mapi:</h2>
                 </div>
 
-                <div id="map-container-google-1" class="z-depth-1-half map-container d-flex justify-content-center w-100" style="height: 300px">
-                    <!-- 
-                    <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-                     style="border:0" allowfullscreen></iframe>
-                    -->
-
-                 
-                    <div id="js-map" class="map w-100" style="height: 300px" tabindex="0" >
-
-                    </div>
-
+ 
+                <div id="mapLocation" class="map w-100" style="height: 300px" tabindex="0">
 
                 </div>
-                <!--Ovde ide mapa -->
-                    
-             
+
+
             </div>
+
+
+
 
 
 
@@ -256,28 +247,9 @@ Vue.component("apartment", {
                 </div>
 
             </div>   
-           
-
         </div>
-
-
-
-
-
-
-
-
         </div>
-
-
-
     </div>
-
-
-
-
-
-
 
 	`,
     data : function(){
@@ -285,33 +257,89 @@ Vue.component("apartment", {
     		apartment : null,
             id : this.$route.params.id,
             startDate : null,
-            user : null,
+            user : "",
             numberDays : 0,
-            message : ''
+            message : '',
+            xCoordinate : 0,
+            yCoordinate : 0,
+            map : ""
     	}
-    }
-    , mounted() {
-
-         axios
+    },
+    beforeCreate(){
+        axios
           .get('/sesion')
-          .then(response => (this.user = response.data))
-
-
-
+          .then(response => (this.user = response.data));
+ 
+    },
+    mounted() {
         axios
             .post("/getApartment", null ,{params : 
                 {id : this.id}})
 
             
             .then(response => {
-               { this.apartment = response.data;  x=this.apartment.location.geographicalWidth; y=this.apartment.location.geographicalLength; this.init2(); }
+                this.apartment = response.data;  
+                this.xCoordinate = this.apartment.location.geographicalWidth; 
+                this.yCoordinate = this.apartment.location.geographicalLength;
+                this.$nextTick(function() {
+                    this.initMap();
+                })
             });
+
+             
     },
     methods : {
-          init2 : function(){
-    
-          init();
 
+          initMap : function(){
+    
+            var place = [this.xCoordinate,this.yCoordinate];
+            this.map = new ol.Map({
+                view : new ol.View({
+                        center: [this.xCoordinate,this.yCoordinate],
+                        zoom : 15
+                    }),
+
+                    target : 'mapLocation'
+                    })
+        
+            const openLayer = new ol.layer.Tile({
+                  source : new ol.source.OSM(),
+                  visible : true,
+                  title : "OSM"
+
+            })
+
+            const fillStyle = new ol.style.Fill({
+                color : 'blue'
+            })
+
+            const strokeStyle = new ol.style.Stroke({
+                color : 'black',
+                width : 1.2
+            })
+
+            const circleStyle = new ol.style.Circle({
+                fill : new ol.style.Fill({
+                    color :'red'
+                }),
+                radius : 7,
+                stroke : strokeStyle
+            })
+
+            const pointers = new ol.layer.Vector({
+                source : new ol.source.Vector({
+                   features : [new ol.Feature(new ol.geom.Point(place))] 
+                }),
+                visible: true,
+                style : new ol.style.Style({
+                    fill : fillStyle,
+                    stroke : strokeStyle,
+                    image : circleStyle
+                })
+            })
+            this.map.addLayer(openLayer);
+
+            this.map.addLayer(pointers);
 
           },
 
@@ -356,68 +384,5 @@ Vue.component("apartment", {
 
 });
 
-
-
-window.onload = init;
-
-
-
-
-
-function init(){
-    //alert(x + " " + y);
-    var place = [x,y];
-   // alert(place);
-    const map = new ol.Map({
-        view : new ol.View({
-                center: [x,y],
-                zoom : 15
-            }),
-           
-            target : 'js-map'
-            })
-        
-    const openLayer = new ol.layer.Tile({
-          source : new ol.source.OSM(),
-          visible : true,
-          title : "OSM"
-
-    })
-
-    const fillStyle = new ol.style.Fill({
-        color : 'blue'
-    })
-
-    const strokeStyle = new ol.style.Stroke({
-        color : 'black',
-        width : 1.2
-    })
-
-    const circleStyle = new ol.style.Circle({
-        fill : new ol.style.Fill({
-            color :'red'
-        }),
-        radius : 7,
-        stroke : strokeStyle
-    })
-
-    const pointers = new ol.layer.Vector({
-        source : new ol.source.Vector({
-           features : [new ol.Feature(new ol.geom.Point(place))] 
-        }),
-        visible: true,
-        style : new ol.style.Style({
-            fill : fillStyle,
-            stroke : strokeStyle,
-            image : circleStyle
-        })
-    })
-
-    map.addLayer(openLayer);
-
-      map.addLayer(pointers);
-
-
-}
 
 

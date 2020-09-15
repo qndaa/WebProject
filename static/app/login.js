@@ -103,8 +103,8 @@ Vue.component("log-in", {
                 }});
           }
         }).catch(function(error){
-            console.log(eror);
-            if(eror.response.status == 400){
+            console.log(error);
+            if(error.response.status == 400){
                lab.hidden = false;
             }
         });

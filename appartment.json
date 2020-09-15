@@ -133,4 +133,85 @@
   "idContetn" : [ "java.util.ArrayList", [ 2, 6, 3, 8 ] ],
   "reservations" : [ "java.util.ArrayList", [ ] ],
   "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 6,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 2,
+  "numberOfGuests" : 4,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2192888.870569583,
+    "geographicalLength" : 5580331.9034303995,
+    "address" : [ "beans.Address", {
+      "street" : "Simina",
+      "numberHouse" : 27,
+      "city" : "Stari Grad Urban Municipality",
+      "postNumber" : 11108,
+      "country" : "Serbia"
+    } ]
+  } ],
+  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/6/0.jpg" ] ],
+  "pricePerNight" : 4.0,
+  "checkInTime" : [ "java.util.Date", 1600190363262 ],
+  "checkOutTime" : [ "java.util.Date", 1600190363262 ],
+  "status" : "PASSIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 4, 8, 7 ] ],
+  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 7,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 3,
+  "numberOfGuests" : 9,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : -2635369.20288053,
+    "geographicalLength" : 5580331.9034303995,
+    "address" : [ "beans.Address", {
+      "street" : "Ciclovia Eco Macumba",
+      "numberHouse" : 2,
+      "city" : "Rio de Janeiro",
+      "postNumber" : 12312,
+      "country" : "Brazil"
+    } ]
+  } ],
+  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/7/0.jpg" ] ],
+  "pricePerNight" : 100.0,
+  "checkInTime" : [ "java.util.Date", 1600191613454 ],
+  "checkOutTime" : [ "java.util.Date", 1600191613454 ],
+  "status" : "PASSIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 2, 7, 4 ] ],
+  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 8,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 2,
+  "numberOfGuests" : 3,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2207732.635812672,
+    "geographicalLength" : 5660326.087087597,
+    "address" : [ "beans.Address", {
+      "street" : "Mise Dimitrijevica",
+      "numberHouse" : 12,
+      "city" : "Novi Sad",
+      "postNumber" : 21000,
+      "country" : "Serbia"
+    } ]
+  } ],
+  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/8/0.jpg" ] ],
+  "pricePerNight" : 15.0,
+  "checkInTime" : [ "java.util.Date", 1600194504462 ],
+  "checkOutTime" : [ "java.util.Date", 1600194504462 ],
+  "status" : "PASSIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 2, 6, 7 ] ],
+  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "active" : true
 } ] ] ]

@@ -1,10 +1,4 @@
-var x=2192888.870569583;
-var y= 5580331.9034303995;
-var CITY= "";
-var ROAD = "";
-var COUNTRY="";
-var NUMBERHOUSE="";
-var POSTECODE="";
+
 Vue.component("add-apartment", {
 
     template:`
@@ -305,11 +299,121 @@ Vue.component("add-apartment", {
     			geographicalWidthBlured : false,
     			geographicalLengthBlured : false,
     			pricePerNightBlured : false
-    		}
+    		}, 
+    		xCoordinate : 2192888.870569583,
+			yCoordinate : 5580331.9034303995,
+			CITY : "",
+			ROAD : "",
+			COUNTRY : "",
+			NUMBERHOUSE : "",
+			POSTECODE : ""
     		
     	}
     },
+
+    beforeMount(){
+		axios
+		.get('/validationAccesHost')
+		.then()
+		.catch(function(eror){
+			if(eror.response.status == 403){
+				 window.location.href = "/#/validationAcces"; 
+			}
+		});
+
+		
+	},
+	mounted() {
+		axios
+        .post('/getContentsOfApartment')
+        .then(response => {
+        	this.listaContetn = response.data;
+        	
+        });
+          
+        this.initMap();
+
+	},
     methods : {
+    	initMap : function() {
+	    	var place = [this.xCoordinate,this.yCoordinate];
+		    var map = new ol.Map({
+		        view : new ol.View({
+		                center: [this.xCoordinate,this.yCoordinate],
+		                zoom : 5
+		            }),
+		           
+		            target : 'js-map'
+		            })
+        
+		    const openLayer = new ol.layer.Tile({
+		          source : new ol.source.OSM(),
+		          visible : true,
+		          title : "OSM"
+
+		    })
+
+		    const fillStyle = new ol.style.Fill({
+		        color : 'blue'
+		    })
+
+		    const strokeStyle = new ol.style.Stroke({
+		        color : 'black',
+		        width : 1.2
+		    })
+
+		    const circleStyle = new ol.style.Circle({
+		        fill : new ol.style.Fill({
+		            color :'red'
+		        }),
+		        radius : 7,
+		        stroke : strokeStyle
+		    })
+
+		    const pointers = new ol.layer.Vector({
+		        source : new ol.source.Vector({
+		           features : [new ol.Feature(new ol.geom.Point(place))] 
+		        }),
+		        visible: true,
+		        style : new ol.style.Style({
+		            fill : fillStyle,
+		            stroke : strokeStyle,
+		            image : circleStyle
+		        })
+		    })
+	    	map.addLayer(openLayer);
+
+      		map.addLayer(pointers);
+
+
+
+			var geocoder = new Geocoder('nominatim', {
+			  	provider: 'osm',
+				lang: 'en',
+				placeholder: 'Search for ...',
+				limit: 5,
+				debug: false,
+				autoComplete: true,
+				keepOpen: true
+			});
+			map.addControl(geocoder);
+
+			geocoder.on('addresschosen',(event) => {
+				
+				this.CITY = event.address.details.city;
+				this.COUNTRY = event.address.details.country;
+				this.NUMBERHOUSE = event.address.details.houseNumber;
+				this.POSTECODE =  event.address.details.postcode;
+				this.ROAD = event.address.details.road;
+				this.xCoordinate = event.coordinate[0];
+				this.yCoordinate = event.coordinate[1];
+				this.Apartment.geographicalWidth = this.xCoordinate;
+				this.Apartment.geographicalLength = this.yCoordinate;
+			
+			});
+
+    	},
+
     	createApartment : function(){
     		event.preventDefault();
  
@@ -317,7 +421,6 @@ Vue.component("add-apartment", {
     			|| this.Apartment.city == ""  || this.Apartment.street == "" || this.Apartment.numberHouse == ""
     			|| this.Apartment.postNumber == "" || this.Apartment.geographicalWidth == "" || this.Apartment.geographicalLength == ""
     			|| this.Apartment.pricePerNight == ""){
-
 
     			this.Blured.typeOfApartmentBlured = true;
     			this.Blured.numberOfRoomBlured = true;
@@ -329,9 +432,6 @@ Vue.component("add-apartment", {
     			this.Blured.geographicalWidthBlured = true;
     			this.Blured.geographicalLengthBlured = true;
     			this.Blured.pricePerNightBlured = true;
-
-
-
     			return;
     		}
 
@@ -439,135 +539,23 @@ Vue.component("add-apartment", {
 			
 		},
 		takeCoordinate : function(){
-			this.Apartment.geographicalWidth = x;
-			this.Apartment.geographicalLength = y;
-			this.Apartment.city = CITY;
-			this.Apartment.street = ROAD;
-			this.Apartment.postNumber = POSTECODE;
-			this.Apartment.numberHouse = NUMBERHOUSE;
-			this.Apartment.country = COUNTRY;
+			this.Apartment.geographicalWidth = this.xCoordinate;
+			this.Apartment.geographicalLength = this.yCoordinate;
+			this.Apartment.city = this.CITY;
+			this.Apartment.street = this.ROAD;
+			this.Apartment.postNumber = this.POSTECODE;
+			this.Apartment.numberHouse = this.NUMBERHOUSE;
+			this.Apartment.country = this.COUNTRY;
+
 			
 		}
 
 
     }
 
-    ,
-    beforeMount(){
-		axios
-		.get('/validationAccesHost')
-		.then()
-		.catch(function(eror){
-			if(eror.response.status == 403){
-				 window.location.href = "/#/validationAcces"; 
-			}
-		})
-	},
-	mounted() {
-		axios
-        .post('/getContentsOfApartment')
-        .then(response => (this.listaContetn = response.data));
-          	
-
-	}
+    
 
 
 
 });
 
-
-window.onload = init;
-
-function init(){
-    //alert(x + " " + y);
-    var place = [x,y];
-   // alert(place);
-    const map = new ol.Map({
-        view : new ol.View({
-                center: [x,y],
-                zoom : 5
-            }),
-           
-            target : 'js-map'
-            })
-        
-    const openLayer = new ol.layer.Tile({
-          source : new ol.source.OSM(),
-          visible : true,
-          title : "OSM"
-
-    })
-
-    const fillStyle = new ol.style.Fill({
-        color : 'blue'
-    })
-
-    const strokeStyle = new ol.style.Stroke({
-        color : 'black',
-        width : 1.2
-    })
-
-    const circleStyle = new ol.style.Circle({
-        fill : new ol.style.Fill({
-            color :'red'
-        }),
-        radius : 7,
-        stroke : strokeStyle
-    })
-
-    const pointers = new ol.layer.Vector({
-        source : new ol.source.Vector({
-           features : [new ol.Feature(new ol.geom.Point(place))] 
-        }),
-        visible: true,
-        style : new ol.style.Style({
-            fill : fillStyle,
-            stroke : strokeStyle,
-            image : circleStyle
-        })
-    })
-
-
-
-
-    map.addLayer(openLayer);
-
-      map.addLayer(pointers);
-
-
-
-	var geocoder = new Geocoder('nominatim', {
-	  provider: 'osm',
-	  lang: 'en',
-	  placeholder: 'Search for ...',
-	  limit: 5,
-	  debug: false,
-	  autoComplete: true,
-	  keepOpen: true
-	});
-	map.addControl(geocoder);
-
-	geocoder.on('addresschosen', function (evt) {
-	console.info(evt.address.details);
-	CITY = evt.address.details.city;
-	COUNTRY = evt.address.details.country;
-	NUMBERHOUSE = evt.address.details.houseNumber;
-	POSTECODE =  evt.address.details.postcode;
-	ROAD = evt.address.details.road
-
-
-	});
-
-
-	map.on('click', function(e){
-           // console.log(e.coordinate);
-          	 console.log(e);
-             console.log(x=e.coordinate[0]);
-             console.log(y=e.coordinate[1]);
-            
-
-        })
-
-
-
-}
