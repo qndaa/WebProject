@@ -2,7 +2,7 @@
   "id" : 1,
   "typeOfApartment" : "ROOM",
   "numberOfRoom" : 1,
-  "numberOfGuests" : 2,
+  "numberOfGuests" : 3,
   "location" : [ "beans.Location", {
     "geographicalWidth" : 2192888.870569583,
     "geographicalLength" : 5580331.9034303995,
@@ -18,11 +18,11 @@
   "idHost" : "b",
   "comments" : [ "java.util.ArrayList", [ ] ],
   "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/1/0.jpg", "/data/apartments/1/1.jpg" ] ],
-  "pricePerNight" : 15.0,
+  "pricePerNight" : 25.0,
   "checkInTime" : [ "java.util.Date", 1600010549909 ],
   "checkOutTime" : [ "java.util.Date", 1600010549909 ],
   "status" : "ACTIVE",
-  "idContetn" : [ "java.util.ArrayList", [ 1, 5, 7, 8 ] ],
+  "idContetn" : [ "java.util.ArrayList", [ 5, 7, 8, 2, 6 ] ],
   "reservations" : [ "java.util.ArrayList", [ ] ],
   "active" : true
 } ], [ "beans.Apartment", {

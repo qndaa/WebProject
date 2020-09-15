@@ -10,6 +10,7 @@ const ValidationAccess = {template : '<validation-acces> </validation-acces>'}
 const Apartment = {template : '<apartment></apartment>'}
 const CreateApartment = {template : '<add-apartment> </add-apartment>'}
 const ContentOfApartment = {template: '<contents-of-apartment> </contents-of-apartment>'}
+const ChangeApartment = {template: '<changeApartment> </changeApartment>'}
 
 
 const router = new VueRouter({
@@ -27,7 +28,8 @@ const router = new VueRouter({
         { path: '/reservation', component: Reservation},
         { path: '/validationAcces', component: ValidationAccess},
         { path: '/createApartment', component: CreateApartment},
-        { path: '/contentsOfApartment', component: ContentOfApartment}
+        { path: '/contentsOfApartment', component: ContentOfApartment},
+        { path: '/changeApartment/:id', component: ChangeApartment}
     ]
 });
 
