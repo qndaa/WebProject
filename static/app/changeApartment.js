@@ -152,6 +152,16 @@ Vue.component("changeApartment", {
 
 
    },
+   beforeMount(){
+		axios
+		.get('/validationAcces')
+		.then()
+		.catch(function(eror){
+			if(eror.response.status == 403){
+				 window.location.href = "/#/validationAcces"; 
+			}
+		})
+	},
    mounted() {
 		axios
         .post("/getApartment", null ,{params : {id : this.id}})
