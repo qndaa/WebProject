@@ -1,81 +1,9 @@
 [ "java.util.ArrayList", [ [ "beans.Reservation", {
   "idApartment" : 1,
-  "startTime" : "2020-09-23",
-  "numberOfNights" : 3,
-  "price" : 45.0,
-  "message" : "",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 1,
-  "startTime" : "2020-09-16",
-  "numberOfNights" : 3,
-  "price" : 45.0,
-  "message" : "",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 1,
-  "startTime" : "16-09-2020",
-  "numberOfNights" : 4,
-  "price" : 100.0,
-  "message" : "",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 1,
-  "startTime" : "16-09-2020",
-  "numberOfNights" : 4,
-  "price" : 100.0,
-  "message" : "",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 1,
-  "startTime" : "16-09-2020",
-  "numberOfNights" : 4,
-  "price" : 100.0,
-  "message" : "",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 1,
-  "startTime" : "16-09-2020",
-  "numberOfNights" : 5,
-  "price" : 125.0,
-  "message" : "",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 1,
   "startTime" : "17-09-2020",
-  "numberOfNights" : 5,
-  "price" : 125.0,
-  "message" : "",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 1,
-  "startTime" : "16-09-2020",
-  "numberOfNights" : 3,
-  "price" : 75.0,
-  "message" : "",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 1,
-  "startTime" : "23-09-2020",
-  "numberOfNights" : 3,
-  "price" : 75.0,
-  "message" : "",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 1,
-  "startTime" : "21-09-2020",
-  "numberOfNights" : 3,
-  "price" : 75.0,
-  "message" : "",
+  "numberOfNights" : 2,
+  "price" : 47.5,
+  "message" : "Ovo",
   "idGuest" : "neko123",
   "statusReseravation" : "CREATE"
 } ] ] ]

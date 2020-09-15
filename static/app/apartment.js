@@ -203,7 +203,7 @@ Vue.component("apartment", {
 
                             <h3 class=" mt-3 d-flex justify-content-center">Rezervacija: </h3>
 
-                            <form class="needs-validation"  novalidate>
+                          
 
                                 <div class="form-group w-100 m-3">
                                   <label for="startDate" class="col-2 col-form-label">Date:</label>
@@ -239,7 +239,7 @@ Vue.component("apartment", {
                                 
 
                                     </div>
-                            </form>
+                            
 
                         </div>
                     </div>
@@ -263,7 +263,18 @@ Vue.component("apartment", {
             xCoordinate : 0,
             yCoordinate : 0,
             map : "",
-            busyDates : ['30-09-2020']
+            busyDates : ['30-09-2020'],
+            Resevation : {
+                idApartment : "",
+                idGuest : "",
+                numberOfNights :"",
+                message : "",
+                startTime : "",
+                price : "",
+                busyDays : [],
+
+
+            }
     	}
     },
     beforeCreate(){
@@ -315,7 +326,7 @@ Vue.component("apartment", {
                     var date = d + "-" + month + "-" + day.getFullYear(); 
 
 
-                    if ($.inArray(date, this.Apartment.busyDates) != -1) {
+                    if ($.inArray(date, this.apartment.busyDays) != -1) {
                         return [false, "","unAvailable"]; 
                     } else{
                          return [true,"","Available"]; 
@@ -402,23 +413,39 @@ Vue.component("apartment", {
 
             var days = [];
 
+            this.Resevation.idApartment = this.apartment.id;
+            this.Resevation.idGuest = this.user.username;
+            this.Resevation.numberOfNights = this.numberDays;
+            this.Resevation.message = this.message;
+            this.Resevation.startTime = this.startDate;
 
+            var price = 0;
 
             for (var i = 0; i < this.numberDays; i++) {
                 d.setDate( newDate.getDate() + i);
                 var parts = d.toDateString().split(" ");
                 var month = d.getMonth() + 1;
 
+            
+                if(d.getDay() == 5 || d.getDay() == 6 || d.getDay() == 0){
+                    price += this.apartment.pricePerNight - (this.apartment.pricePerNight / 10) ;
+                    
+                }else {
+                     price += this.apartment.pricePerNight
+                }
+
                 var string = parts[2] + "-" + ((month < 10) ? "0" : "") + month + "-" + parts[3]
                 days.push(string);
             }
+            this.Resevation.price = price;
 
             var daysString = "";
 
+            this.Resevation.busyDays = days;
             for(var day of days){
 
                 daysString += day
-                for(var item of this.busyDates) {
+                for(var item of this.apartment.busyDays) {
                     if(item == day) {
                         alert("Ne moze!");
                         return;
@@ -429,14 +456,7 @@ Vue.component("apartment", {
             
 
             axios
-                .post('/createReservation', null, {params : {
-                                                        'idApartment' : this.id, 
-                                                        'startDate' : this.startDate,
-                                                        'numberDays' : this.numberDays, 
-                                                        'message' : this.message, 
-                                                        'idGuest' : this.user.username,
-                                                        'days' : days
-                                                    }})
+                .post('/createReservation',this.Resevation)
                 .then(response =>{
                     Swal.fire({
                         position: 'center',
@@ -445,6 +465,7 @@ Vue.component("apartment", {
                         showConfirmButton: false,
                         timer: 1200
                     })
+                    this.apartment = response.data;
 
 
 

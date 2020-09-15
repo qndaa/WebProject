@@ -126,15 +126,7 @@ public class Apartment {
 
 
 
-	public ArrayList<String> getReleaseDates() {
-		return busyDays;
-	}
-
-
-
-	public void setReleaseDates(ArrayList<String> busyDays) {
-		this.busyDays = busyDays;
-	}
+	
 
 
 
@@ -287,11 +279,19 @@ public class Apartment {
 		this.idContetn = idContetn;
 	}
 
+	public ArrayList<String> getBusyDays() {
+		return busyDays;
+	}
+
+	public void setBusyDays(ArrayList<String> busyDays) {
+		this.busyDays = busyDays;
+	}
+
 	@Override
 	public String toString() {
 		return "Apartment [id=" + id + ", typeOfApartment=" + typeOfApartment + ", numberOfRoom=" + numberOfRoom
-				+ ", numberOfGuests=" + numberOfGuests + ", location=" + location + ", releaseDates=" + busyDays
-				+ ", host=" + host + ", idHost=" + idHost + ", comments=" + comments + ", urlImages=" + urlImages
+				+ ", numberOfGuests=" + numberOfGuests + ", location=" + location + ", busyDays=" + busyDays + ", host="
+				+ host + ", idHost=" + idHost + ", comments=" + comments + ", urlImages=" + urlImages
 				+ ", pricePerNight=" + pricePerNight + ", checkInTime=" + checkInTime + ", checkOutTime=" + checkOutTime
 				+ ", status=" + status + ", content=" + content + ", idContetn=" + idContetn + ", reservations="
 				+ reservations + ", isActive=" + isActive + "]";

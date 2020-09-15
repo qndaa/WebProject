@@ -60,7 +60,9 @@ public class SparkMain {
 
 
 		userDto.loadFile();
+		
 		appartmentDto.loadFile();
+		
 		contentsOfApartmentDTO.loadFile();
 		
 		reservationDto.loadFile();
@@ -515,27 +517,46 @@ public class SparkMain {
 		});
 		
 		post("/createReservation", (request, response) -> {
+			response.type("application/json");
+			Gson g = new Gson();
 			
-			System.out.println("Ovdje sam");
-			int idApartment = Integer.parseInt(request.queryParams("idApartment"));
-			String idGuest = request.queryParams("idGuest");
-			int numberDays = Integer.parseInt(request.queryParams("numberDays"));
-			String message = request.queryParams("message");
-			String startDate = request.queryParams("startDate");
-			String days = request.queryParams("days");
+			String playload = request.body();
 			
-			System.out.println(days);
-
+			ObjectMapper mapper = new ObjectMapper();
+			Map<String,Object> map = mapper.readValue(playload, Map.class);
 			
-			double price = appartmentDto.getApartmentById(idApartment).getPricePerNight() * numberDays;
 			
+			//Apartment a = appartmentDto.getApartmentById((Integer) map.get("id"));
+			
+			int idApartment = (Integer) map.get("idApartment");
+			
+			String idGuest = (String)map.get("idGuest");
+			
+			int numberDays = Integer.parseInt((String) map.get("numberOfNights"));
+		
+			String message = (String)map.get("message");
+			
+			String startDate = (String)map.get("startTime");
+			double price = (Double)map.get("price");
+	
+			Apartment a= appartmentDto.getApartmentById(idApartment);
+			ArrayList<String> dani = new ArrayList<String>();
+			
+			for (String s :(ArrayList<String>) map.get("busyDays")) {
+			
+				a.getBusyDays().add(s);
+			
+			}
 			Reservation reservation = new Reservation(idApartment, idGuest, startDate, numberDays, message, price, StatusReservation.CREATE);
+		
+			
 			
 			reservationDto.add(reservation);
 			
 			reservationDto.saveFile();
+			appartmentDto.saveFile();
 			
-			return true;
+			return g.toJson(a);
 		});
 		
 		

@@ -1,197 +1,8 @@
 [ "java.util.ArrayList", [ [ "beans.Apartment", {
   "id" : 1,
-  "typeOfApartment" : "ROOM",
-  "numberOfRoom" : 1,
-  "numberOfGuests" : 3,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 2192888.870569583,
-    "geographicalLength" : 5580331.9034303995,
-    "address" : [ "beans.Address", {
-      "street" : "Bulevar Cara Lazara",
-      "numberHouse" : 2,
-      "city" : "Novi Sad",
-      "postNumber" : 21102,
-      "country" : "Serbia"
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/1/0.jpg", "/data/apartments/1/1.jpg" ] ],
-  "pricePerNight" : 25.0,
-  "checkInTime" : [ "java.util.Date", 1600010549909 ],
-  "checkOutTime" : [ "java.util.Date", 1600010549909 ],
-  "status" : "ACTIVE",
-  "idContetn" : [ "java.util.ArrayList", [ 5, 7, 8, 2, 6 ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "active" : true
-} ], [ "beans.Apartment", {
-  "id" : 2,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 3,
-  "numberOfGuests" : 6,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 2192888.870569583,
-    "geographicalLength" : 5580331.9034303995,
-    "address" : [ "beans.Address", {
-      "street" : "Simina",
-      "numberHouse" : 27,
-      "city" : "Stari Grad Urban Municipality",
-      "postNumber" : 11108,
-      "country" : "Serbia"
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/2/0.jpg", "/data/apartments/2/1.jpg" ] ],
-  "pricePerNight" : 50.0,
-  "checkInTime" : [ "java.util.Date", 1600018862541 ],
-  "checkOutTime" : [ "java.util.Date", 1600018862541 ],
-  "status" : "PASSIVE",
-  "idContetn" : [ "java.util.ArrayList", [ 1, 6, 5, 2, 7, 3, 4, 8 ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "active" : true
-} ], [ "beans.Apartment", {
-  "id" : 3,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 4,
-  "numberOfGuests" : 6,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 2192888.870569583,
-    "geographicalLength" : 5580331.9034303995,
-    "address" : [ "beans.Address", {
-      "street" : "Milete Jaksica",
-      "numberHouse" : 3,
-      "city" : "Novi Sad",
-      "postNumber" : 21000,
-      "country" : "Serbia"
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/3/0.jpg", "/data/apartments/3/1.jpg" ] ],
-  "pricePerNight" : 8.0,
-  "checkInTime" : [ "java.util.Date", 1600044834170 ],
-  "checkOutTime" : [ "java.util.Date", 1600044834170 ],
-  "status" : "PASSIVE",
-  "idContetn" : [ "java.util.ArrayList", [ 3, 7, 6, 1 ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "active" : true
-} ], [ "beans.Apartment", {
-  "id" : 4,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 3,
-  "numberOfGuests" : 4,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 2192888.870569583,
-    "geographicalLength" : 5580331.9034303995,
-    "address" : [ "beans.Address", {
-      "street" : "Simina",
-      "numberHouse" : 27,
-      "city" : "Stari Grad Urban Municipality",
-      "postNumber" : 11108,
-      "country" : "Serbia"
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/4/0.jpg", "/data/apartments/4/1.jpg", "/data/apartments/4/2.jpg" ] ],
-  "pricePerNight" : 23.0,
-  "checkInTime" : [ "java.util.Date", 1600045085989 ],
-  "checkOutTime" : [ "java.util.Date", 1600045085989 ],
-  "status" : "PASSIVE",
-  "idContetn" : [ "java.util.ArrayList", [ 2, 6 ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "active" : true
-} ], [ "beans.Apartment", {
-  "id" : 5,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 3,
-  "numberOfGuests" : 8,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 2192888.870569583,
-    "geographicalLength" : 5580331.9034303995,
-    "address" : [ "beans.Address", {
-      "street" : "Trg žrtava Srebrenice",
-      "numberHouse" : 3,
-      "city" : "City of Sarajevo",
-      "postNumber" : 71000,
-      "country" : "Bosnia and Herzegovina"
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/5/0.jpg", "/data/apartments/5/1.jpg", "/data/apartments/5/2.jpg" ] ],
-  "pricePerNight" : 25.0,
-  "checkInTime" : [ "java.util.Date", 1600045406396 ],
-  "checkOutTime" : [ "java.util.Date", 1600045406396 ],
-  "status" : "PASSIVE",
-  "idContetn" : [ "java.util.ArrayList", [ 2, 6, 3, 8 ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "active" : true
-} ], [ "beans.Apartment", {
-  "id" : 6,
   "typeOfApartment" : "FULL_APARTMENT",
   "numberOfRoom" : 2,
   "numberOfGuests" : 4,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : 2192888.870569583,
-    "geographicalLength" : 5580331.9034303995,
-    "address" : [ "beans.Address", {
-      "street" : "Simina",
-      "numberHouse" : 27,
-      "city" : "Stari Grad Urban Municipality",
-      "postNumber" : 11108,
-      "country" : "Serbia"
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/6/0.jpg" ] ],
-  "pricePerNight" : 4.0,
-  "checkInTime" : [ "java.util.Date", 1600190363262 ],
-  "checkOutTime" : [ "java.util.Date", 1600190363262 ],
-  "status" : "PASSIVE",
-  "idContetn" : [ "java.util.ArrayList", [ 4, 8, 7 ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "active" : true
-} ], [ "beans.Apartment", {
-  "id" : 7,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 3,
-  "numberOfGuests" : 9,
-  "location" : [ "beans.Location", {
-    "geographicalWidth" : -2635369.20288053,
-    "geographicalLength" : 5580331.9034303995,
-    "address" : [ "beans.Address", {
-      "street" : "Ciclovia Eco Macumba",
-      "numberHouse" : 2,
-      "city" : "Rio de Janeiro",
-      "postNumber" : 12312,
-      "country" : "Brazil"
-    } ]
-  } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
-  "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/7/0.jpg" ] ],
-  "pricePerNight" : 100.0,
-  "checkInTime" : [ "java.util.Date", 1600191613454 ],
-  "checkOutTime" : [ "java.util.Date", 1600191613454 ],
-  "status" : "PASSIVE",
-  "idContetn" : [ "java.util.ArrayList", [ 2, 7, 4 ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
-  "active" : true
-} ], [ "beans.Apartment", {
-  "id" : 8,
-  "typeOfApartment" : "FULL_APARTMENT",
-  "numberOfRoom" : 2,
-  "numberOfGuests" : 3,
   "location" : [ "beans.Location", {
     "geographicalWidth" : 2207732.635812672,
     "geographicalLength" : 5660326.087087597,
@@ -203,15 +14,14 @@
       "country" : "Serbia"
     } ]
   } ],
-  "releaseDates" : [ "java.util.ArrayList", [ ] ],
+  "busyDays" : [ "java.util.ArrayList", [ "17-09-2020", "18-09-2020" ] ],
   "idHost" : "b",
   "comments" : [ "java.util.ArrayList", [ ] ],
-  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/8/0.jpg" ] ],
-  "pricePerNight" : 15.0,
-  "checkInTime" : [ "java.util.Date", 1600194504462 ],
-  "checkOutTime" : [ "java.util.Date", 1600194504462 ],
-  "status" : "PASSIVE",
-  "idContetn" : [ "java.util.ArrayList", [ 2, 6, 7 ] ],
-  "reservations" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/1/0.jpg" ] ],
+  "pricePerNight" : 25.0,
+  "checkInTime" : [ "java.util.Date", 1600207251382 ],
+  "checkOutTime" : [ "java.util.Date", 1600207251382 ],
+  "status" : "ACTIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 2, 7, 3, 8 ] ],
   "active" : true
 } ] ] ]
