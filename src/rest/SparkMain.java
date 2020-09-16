@@ -347,7 +347,7 @@ public class SparkMain {
 			if(user == null || user.getTypeOfUser() == TypeOfUser.GUEST) {
 				return g.toJson(appartmentDto.getAllActiveApartment());
 			}else if(user.getTypeOfUser() == TypeOfUser.HOST) {
-				
+				//ovo vraca samo aktivne
 				return g.toJson(appartmentDto.getAllApartmentFromHost(user));
 			}else {
 				return g.toJson(appartmentDto.getAppartment());
@@ -356,6 +356,30 @@ public class SparkMain {
 			
 			
 		});
+		get("/allAppartmantsPassive", (req, res) -> {
+			res.type("application/json");
+			Gson g = new Gson();
+			
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			
+			if(user.getTypeOfUser() == TypeOfUser.HOST) {
+				//ovo vraca samo neaktivne od domacina
+				return g.toJson(appartmentDto.getAllPassiveApartment(user));
+			}
+			
+			res.status(403);
+			return res;
+			
+		});
+		
+		
+		
+		
+		
+		
+		
 		
 		post("/addApartment", (req, res) -> {
 			res.type("application/json");
@@ -707,6 +731,10 @@ public class SparkMain {
 				
 			return true;
 		});
+		
+		
+		
+		
 		
 		
 	}

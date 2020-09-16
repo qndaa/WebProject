@@ -115,12 +115,26 @@ public class ApartmentDTO {
 	}
 	
 	
-	
+	//aktivni
 	public ArrayList<Apartment> getAllApartmentFromHost(User user){
 		
 		ArrayList<Apartment> a = new ArrayList<Apartment>();
 		for (Apartment ap : appartment) {
-			if(ap.getIdHost().equals(user.getUserName())) {
+			if(ap.getIdHost().equals(user.getUserName()) && ap.getStatus() == StatusApartment.ACTIVE) {
+				a.add(ap);
+			}
+		}
+		
+		
+		return a;
+	}
+	
+	
+	public ArrayList<Apartment> getAllPassiveApartment(User user){
+		
+		ArrayList<Apartment> a = new ArrayList<Apartment>();
+		for (Apartment ap : appartment) {
+			if(ap.getIdHost().equals(user.getUserName()) && ap.getStatus() == StatusApartment.PASSIVE) {
 				a.add(ap);
 			}
 		}

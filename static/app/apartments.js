@@ -5,7 +5,7 @@ Vue.component("apartments", {
 
     	<div class="row">
 
-		    <div class="col-sm-4">
+		    <div class="col-sm-4" v-show="show==='aktivni'">
 		    	
 		    	<div class="anyUsers card p-3 m-3"> 
 		    		<div class=""> 
@@ -162,6 +162,7 @@ Vue.component("apartments", {
     			</div>
 
     			<div class="d-flex justify-content-end p-3"  v-if="mode=='HOST'" ><button class="btn bg-primary text-white" v-on:click="addApartment"> Dodaj novi apartman </button> </div>
+                <div class="d-flex justify-content-end p-3"  v-if="mode=='HOST'" ><button class="btn bg-primary text-white" v-on:click="showApartment"> Prikazi aktivne/neaktivne </button> </div>
 		    </div>
   		</div>
 
@@ -188,7 +189,8 @@ Vue.component("apartments", {
     		searcList: [],
     		flegFilters : false,
     		flegSearch : false,
-            listOfContent : []
+            listOfContent : [],
+            show : 'aktivni'
 
     	
     	}
@@ -566,7 +568,27 @@ $("#datepicker2").datepicker({
                     }
                 })
 
-        }   
+        },
+        showApartment : function(){
+            if(this.show == 'aktivni'){
+              
+                axios.get('/allAppartmantsPassive')
+        .then(response => {this.appartments = response.data;   this.show='neaktivni';})
+        .catch(function(error){
+            if(error.response.status == 403){
+                 window.location.href = "/#/validationAcces"; 
+            }
+        });
+
+
+
+
+            }else{
+               axios.get('/allAppartmants')
+        .then(response => {this.withoutFilterApartments = response.data; this.appartments = this. withoutFilterApartments; this.show='aktivni';});
+                
+            }
+        }
 
 
 
