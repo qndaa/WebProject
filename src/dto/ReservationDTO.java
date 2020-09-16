@@ -79,6 +79,18 @@ public class ReservationDTO {
 	}
 
 
+	public Reservation getReservationById(int id) {
+		for(Reservation reservation : reservations) {
+			if(id == reservation.getIdReservation()) {
+				return reservation;
+			}
+		}
+		
+		return null;
+		
+	}
+
+
 	
 	
 	

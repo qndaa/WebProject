@@ -10,6 +10,8 @@ import enums.StatusReservation;
 
 
 public class Reservation {
+	
+	private int idReservation;
 
 	@JsonIgnoreProperties(value = "reservations")
 	@JsonIgnore
@@ -50,8 +52,9 @@ public class Reservation {
 	}
 	
 	
-	public Reservation(int idApartment, String idGuest, String date, int numberDays, String message, double price,
+	public Reservation(int idReservation, int idApartment, String idGuest, String date, int numberDays, String message, double price,
 			StatusReservation create) {
+		this.setIdReservation(idReservation);
 		this.idApartment = idApartment;
 		this.idGuest = idGuest;
 		this.numberOfNights = numberDays;
@@ -137,6 +140,12 @@ public class Reservation {
 	}
 	public void setIdGuest(String idGuest) {
 		this.idGuest = idGuest;
+	}
+	public int getIdReservation() {
+		return idReservation;
+	}
+	public void setIdReservation(int idReservation) {
+		this.idReservation = idReservation;
 	}
 
 

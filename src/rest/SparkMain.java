@@ -1,4 +1,4 @@
-package rest;
+	package rest;
 
 import static spark.Spark.get;
 import static spark.Spark.port;
@@ -12,7 +12,6 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -451,9 +450,45 @@ public class SparkMain {
 				}
 			}
 			
+			Session ss = request.session(true);
+			User user = ss.attribute("user");
 			
 			
-			return g.toJson(appartmentDto.getApartmentById(id));
+			apartment.setComments(new ArrayList<CommentForApartment>());
+			
+			if(user != null) {
+				if(user.getTypeOfUser() == TypeOfUser.ADMINISTRATOR || user.getTypeOfUser() == TypeOfUser.HOST) {
+					apartment.setComments(commentsDTO.getAllCommentOfApartmentbyIdApartment(apartment.getId()));	
+				} else {
+					
+					for(CommentForApartment com : commentsDTO.getAllCommentOfApartmentbyIdApartment(apartment.getId())) {
+						if(com.getStatus() == StatusOfComment.APPROVED) {
+							apartment.getComments().add(com);
+						}		
+					}	
+				}
+			
+			} else {
+				for(CommentForApartment com : commentsDTO.getAllCommentOfApartmentbyIdApartment(apartment.getId())) {
+					
+					
+					if(com.getStatus() == StatusOfComment.APPROVED) {
+						apartment.getComments().add(com);
+					}		
+				}	
+				
+				
+				
+			}
+				
+			for(CommentForApartment com : apartment.getComments()) {
+				com.setGuest((Guest) userDto.getUserById(com.getIdGuest()));
+			}
+			
+			
+			
+			
+			return g.toJson(apartment);
 		});
 		
 		
@@ -583,7 +618,10 @@ public class SparkMain {
 			String message = (String)map.get("message");
 			
 			String startDate = (String)map.get("startTime");
-			double price = (Double)map.get("price");
+			
+			System.out.println(map.get("price"));
+			
+			double price = Double.parseDouble((map.get("price").toString()));
 	
 			Apartment a= appartmentDto.getApartmentById(idApartment);
 		
@@ -593,7 +631,11 @@ public class SparkMain {
 				a.getBusyDays().add(s);
 			
 			}
-			Reservation reservation = new Reservation(idApartment, idGuest, startDate, numberDays, message, price, StatusReservation.CREATE);
+			
+			int idReservatino = reservationDto.getReservations().size() + 1;
+			
+			
+			Reservation reservation = new Reservation(idReservatino, idApartment, idGuest, startDate, numberDays, message, price, StatusReservation.CREATE);
 		
 			
 			
@@ -699,9 +741,25 @@ public class SparkMain {
 					
 					
 				} else if(user.getTypeOfUser() == TypeOfUser.HOST) {
+					Host host = (Host) user;
+					for(Reservation reservation : reservationDto.getReservations()) {
+						for(int id : host.getIdApartment()) {
+							if(reservation.getIdApartment() == id) {
+								ret.add(reservation);
+							}
+							
+						}
+						
+					}
 					
+					for(Reservation reservation : ret) {
+						reservation.setGuest((Guest) (userDto.getUserById(reservation.getIdGuest())));
+						reservation.setReservedApartment(appartmentDto.getApartmentById(reservation.getIdApartment()));
+						reservation.setHost((Host) userDto.getUserById(reservation.getReservedApartment().getIdHost()));
+					}
 					
-					
+					return g.toJson(ret);
+
 					
 					
 				} else if(user.getTypeOfUser() == TypeOfUser.GUEST) {
@@ -756,6 +814,104 @@ public class SparkMain {
 			return true;
 		});
 		
+		post("/approveComment", (request, response) -> {
+			Gson g = new Gson();
+			
+			System.out.println("Odobrava komentar...");
+			
+			String playload = request.body();
+			CommentForApartment com = g.fromJson(playload, CommentForApartment.class);
+			
+
+			
+			for(CommentForApartment comment : commentsDTO.getComments()) {
+				if((comment.getIdApartment() == com.getIdApartment()) && (comment.getIdGuest().equals(com.getIdGuest())) && (comment.getText().equals(com.getText()))) {
+					comment.setStatus(StatusOfComment.APPROVED);
+					commentsDTO.saveFile();
+					System.out.println("Odobrio!");
+					return true;
+				}
+			}
+			
+			
+			
+			return false;
+		});
+		
+		post("/rejectedComment", (request, response) -> {
+			Gson g = new Gson();
+			
+			System.out.println("Zabranjuje komentar...");
+			
+			String playload = request.body();
+			CommentForApartment com = g.fromJson(playload, CommentForApartment.class);
+			
+			
+			for(CommentForApartment comment : commentsDTO.getComments()) {
+				if((comment.getIdApartment() == com.getIdApartment()) && (comment.getIdGuest().equals(com.getIdGuest())) && (comment.getText().equals(com.getText()))) {
+					
+					comment.setStatus(StatusOfComment.REJECTED);
+					commentsDTO.saveFile();
+					System.out.println("Zabranio!");
+
+					return true;
+				}
+			}
+			
+			
+			
+			return false;
+		});
+		
+		
+		
+		post("/changeReservationStatus", (request, response) -> {
+			int id = Integer.parseInt(request.queryParams("id"));
+			String status = request.queryParams("status");
+			
+			Reservation reservation = reservationDto.getReservationById(id);
+			if(reservation == null) return false;
+			
+			if(status.equals("DECLINE")) {
+				reservation.setStatusReseravation(StatusReservation.DECLINE);
+				reservationDto.saveFile();
+				return true;
+			}
+			
+			if(status.equals("QUITED")) {
+				reservation.setStatusReseravation(StatusReservation.QUITED);
+				reservationDto.saveFile();
+
+				return true;
+			}
+			
+			if(status.equals("CREATE")) {
+				reservation.setStatusReseravation(StatusReservation.CREATE);
+				reservationDto.saveFile();
+
+				return true;
+			}
+			
+			if(status.equals("ACCEPTED")) {
+				reservation.setStatusReseravation(StatusReservation.ACCEPTED);
+				reservationDto.saveFile();
+
+				return true;
+			}
+			
+
+			if(status.equals("COMPLETED")) {
+				reservation.setStatusReseravation(StatusReservation.COMPLETED);
+				reservationDto.saveFile();
+
+				return true;
+			}
+			
+
+			
+			
+			return false;
+		});
 		
 		
 		

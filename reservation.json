@@ -1,24 +1,18 @@
 [ "java.util.ArrayList", [ [ "beans.Reservation", {
+  "idReservation" : 1,
   "idApartment" : 1,
   "startTime" : "17-09-2020",
-  "numberOfNights" : 2,
-  "price" : 47.5,
-  "message" : "Ovo",
+  "numberOfNights" : 5,
+  "price" : 117.5,
+  "message" : "Hitnoo!!",
   "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
+  "statusReseravation" : "DECLINE"
 } ], [ "beans.Reservation", {
-  "idApartment" : 3,
-  "startTime" : "20-09-2020",
-  "numberOfNights" : 13,
-  "price" : 675.0000000000001,
-  "message" : "Hitno!!!",
-  "idGuest" : "neko123",
-  "statusReseravation" : "CREATE"
-} ], [ "beans.Reservation", {
-  "idApartment" : 3,
-  "startTime" : "17-09-2020",
-  "numberOfNights" : 3,
-  "price" : 151.2,
+  "idReservation" : 2,
+  "idApartment" : 2,
+  "startTime" : "23-09-2020",
+  "numberOfNights" : 8,
+  "price" : 385.0,
   "message" : "",
   "idGuest" : "janko",
   "statusReseravation" : "CREATE"

@@ -104,24 +104,24 @@ Vue.component("apartment", {
                   
                   <div class="carousel-inner" role="listbox">
 
-                    <div class="carousel-item" :class="{'active' : index === 0}" v-for="(item,index) in apartment.urlImages">
-                      <img class="d-block w-100" :src="item"
-                        alt="First slide">
-                    </div>
+                        <div class="carousel-item" :class="{'active' : index === 0}" v-for="(item,index) in apartment.urlImages">
+                          <img class="d-block w-100" :src="item"
+                            alt="First slide">
+                        </div>
+                        
                     
-                
-                  <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
+                      <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
                   
                 </div>
 
-
+                </div>
 
                 <div class="row mt-3">
                     <div class="col-sm-3 w-25 d-flex justify-content-center">
@@ -246,8 +246,67 @@ Vue.component("apartment", {
 
                 </div>
 
+                <div>
+
+                    <div class="m-4" v-if="apartment.comments.length > 0">
+                        <h3>Komentari: </h3>
+
+
+                        <div class="row">
+
+                            <div class="col-6 border border-primary rounded p-1" v-for="com in apartment.comments">
+
+                                <div class="m-2">
+
+                                    <div class="d-flex justify-content-left ml-2 mt-4 border-bottom d-flex justify-content-center" >
+                                        <img :src="com.guest.imagePath" class="rounded-circle mt-2" alt="Profile picture" width="40" height="40">
+                                        <h4 class="ml-2   text-primary mt-3">{{com.guest.name}}&nbsp;{{com.guest.surname }}</h4>
+
+                                    </div> 
+
+                                    <h5 class="d-flex justify-content-left text-primary m-2"> Utisak:  </h5>
+                                    <p class="d-flex justify-content-left text-primary ml-2"> {{com.text}}  </p>
+
+                                    <p class="d-flex justify-content-left text-primary font-weight-bold ml-2"> Ocjena: {{com.mark}}  </p>
+
+                                    <p v-if="user.typeOfUser =='HOST' || user.typeOfUser == 'ADMINISTRATOR'" class="d-flex justify-content-left text-primary font-weight-bold ml-2"> Status: {{com.status}}  </p>
+
+                                </div>
+
+                                <div class='row' v-if="user.typeOfUser=='HOST' && com.status == 'ON_HOLD'">
+
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-outline-success w-100 mt-3 " v-on:click="approveComment($event, com)">Odobri</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-outline-danger w-100 mt-3" v-on:click="rejectedComment($event, com)">Zabrani</button>
+                                    </div>
+                                    
+
+                                </div>
+                            </div>  
+
+
+
+                        </div>
+
+                        
+
+
+
+
+                    </div>
+
+                    <div class="m-4 row" v-else>
+
+                        <h3> Nema komentara za ovaj apartman </h3>
+
+                    </div>
+                </div>
+
+
             </div>   
-        </div>
+       
         </div>
     </div>
 
@@ -488,6 +547,68 @@ Vue.component("apartment", {
             }
 
             return true;
+        },
+
+        approveComment : function(event, comment) {
+            
+
+            axios.post('/approveComment', comment) 
+                .then(response => {
+                    if(response.data == true){
+                        comment.status = 'APPROVED';
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Komentar odobren!',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
+
+                    } else {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Greska!',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
+
+
+                    }
+                    
+
+                })
+        }, 
+        rejectedComment : function(event, comment) {
+            axios.post('/rejectedComment', comment)
+                .then(response => {
+
+                    if(response.data == true) {
+                        comment.status = 'REJECTED';
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Komentar zabranjen!',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
+
+                    } else {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: 'Greska!',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
+
+
+
+
+
+                    }
+                    
+                })
         }
     
     }

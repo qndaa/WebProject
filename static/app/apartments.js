@@ -207,7 +207,7 @@ Vue.component("apartments", {
     ,
     mounted() {
     	axios.get('/allAppartmants')
-    	.then(response => {this.withoutFilterApartments = response.data; this.appartments = this. withoutFilterApartments; this.calendar()});
+    	.then(response => {this.withoutFilterApartments = response.data; this.appartments = this. withoutFilterApartments;});
 
         axios
         .post('/getContentsOfApartment')
@@ -276,7 +276,6 @@ Vue.component("apartments", {
     		if(this.listOfEssentials.length == 0) return listOfApartments;
     		
             this.flegFilters = true;
-    	       //ovo trebad a se prepravi da pretrazuje po id ako sadrzi id
     		for(apartment of listOfApartments){
     			i=0;
     			if(apartment.idContetn.length >= this.listOfEssentials.length){
@@ -407,7 +406,8 @@ Vue.component("apartments", {
         },
         searchDate(){
 
-            if(this.startDate == "" && this.endDate == ""){
+            if(this.startDate == "" || this.endDate == ""){
+                alert("Morate unijeti 'od' 'do' datum.")
                 return this.searcList;
             }
             var prvi = this.startDate.split("-");
@@ -427,8 +427,6 @@ Vue.component("apartments", {
                 return;
              }
              else if(razlika == 0){
-                //samo proveravas prvi datum
-                alert("samo prvi datum proveravas");
          
                     d.setDate( DatumJedan.getDate());
                     var parts = d.toDateString().split(" ");
@@ -438,8 +436,6 @@ Vue.component("apartments", {
                     days.push(string);
               
              }else{
-                //ovde treba da napravis sve datume koji odgovaraju
-                alert("svi dani koji se ne pojavljujuj");
                 for (var i = 0; i < razlika; i++) {
                     d.setDate( DatumJedan.getDate() + i);
                     var parts = d.toDateString().split(" ");
@@ -557,77 +553,6 @@ Vue.component("apartments", {
 
                 }})
                 .catch(response =>(alert('Greska prilikom brisanja!'))); 
-        },
-  
-        calendar : function (){
-
-
-
-
-var array2 = ["2020-09-16","2020-09-23"];
-var array = [];
-for(a of array2){  
-    let deo = a.split("-");
-   // alert(++deo[2]);
-   for (var i = 0; i < 5; i++) {
-       let s= deo[0]+ "-" + deo[1] + "-" +(++deo[2]);
-          array.push(s);
-   }
-
-}
-
-
-
-$('#datepicker').datepicker({
-             dateFormat: 'yy-mm-dd',
-            minDate: new Date(),
-             maxDate: '+1m',
-            autoclose: true,
-            weekStart: 1,
-            calendarWeeks: true,
-            todayHighlight: true,
-              autoSize: true,
-        beforeShowDay: function(date){
-        var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-        return [ array.indexOf(string) == -1 ]
-    }
-});
-
-/*
-$('#datepicker2').datepicker({
-    format: 'yy-mm-dd',
-            startDate: new Date(),
-            autoclose: true,
-            weekStart: 1,
-            calendarWeeks: true,
-            todayHighlight: true,
-});
-*/
-availableDates = ['09-30-2020','09-25-2020'];
-
-//
-$("#datepicker2").datepicker({
-     dateFormat: 'dd-mm-yy',
-    minDate: new Date(), 
-    maxDate: '+1m',
-    beforeShowDay: function(d) {
-        var dmy = (d.getMonth()+1); 
-        if(d.getMonth()<9) 
-            dmy="0"+dmy; 
-        dmy+= "-"; 
-        
-        if(d.getDate()<10) dmy+="0"; 
-            dmy+=d.getDate() + "-" + d.getFullYear(); 
-        
-        if ($.inArray(dmy, availableDates) != -1) {
-            return [false, "","unAvailable"]; 
-        } else{
-             return [true,"","Available"]; 
-        }
-    }
-    });
-
-
         },
         approveApartment : function(event, id) {
             axios.post('/approveApartment', null, {params : {'id' : id}})

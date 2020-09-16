@@ -24,7 +24,7 @@
   "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "HOST",
   "isBlocked" : false,
-  "idApartment" : [ "java.util.ArrayList", [ 1, 2, 3, 4] ],
+  "idApartment" : [ "java.util.ArrayList", [ 1, 2, 3, 4 ] ],
   "userName" : "b"
 } ], [ "beans.Guest", {
   "password" : "neko123",
@@ -87,7 +87,7 @@
   "imagePath" : "/data/profile/profile.jpg",
   "typeOfUser" : "HOST",
   "isBlocked" : false,
-  "idApartment" : [ "java.util.ArrayList", [ ] ],
+  "idApartment" : [ "java.util.ArrayList", [ 5 ] ],
   "userName" : "domacin1"
 } ], [ "beans.Guest", {
   "password" : "janko",
