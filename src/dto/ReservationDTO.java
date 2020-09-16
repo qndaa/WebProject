@@ -9,6 +9,7 @@ import java.util.Date;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
+import com.google.gson.JsonElement;
 
 import beans.Apartment;
 import beans.Host;
@@ -76,6 +77,9 @@ public class ReservationDTO {
 	public void add(Reservation reservation) {
 		reservations.add(reservation);
 	}
+
+
+	
 	
 	
  	

@@ -447,7 +447,13 @@ Vue.component("apartment", {
                 daysString += day
                 for(var item of this.apartment.busyDays) {
                     if(item == day) {
-                        alert("Ne moze!");
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Nisu dostupni dani!',
+                            showConfirmButton: false,
+                            timer: 1200
+                        })
                         return;
                     }
                 }
@@ -467,7 +473,7 @@ Vue.component("apartment", {
                     })
                     this.apartment = response.data;
 
-
+                    window.location.href = "/#/reservation";
 
                 })
 

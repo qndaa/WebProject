@@ -254,6 +254,27 @@ public class SparkMain {
 			res.type("application/json");
 			Gson g = new Gson();
 			
+			Session ss = req.session(true);
+			User user = ss.attribute("user");
+			
+			if(user != null) {
+				if(user.getTypeOfUser() == TypeOfUser.HOST) {
+					ArrayList<User> users = new ArrayList<User>();
+					for(Reservation reservation : reservationDto.getReservations()) {
+						User u = userDto.getUserById(reservation.getIdGuest());
+						if(!users.contains(u)) {
+							users.add(u);
+						}
+						
+					}
+					return g.toJson(users);
+				}	
+			}
+			
+			
+			
+			
+			
 			return g.toJson(userDto.getUsers());
 			
 		});
@@ -627,7 +648,65 @@ public class SparkMain {
 			
 			return true;
 		});
+
 		
+		post("/getReservation", (request, response) -> {
+			response.type("application/json");
+			
+			Gson g = new Gson();
+			
+			Session ss = request.session(true);
+			User user = ss.attribute("user");
+			
+			if(user != null) {
+				
+				ArrayList<Reservation> ret = new ArrayList<Reservation>();
+
+				
+				if(user.getTypeOfUser() == TypeOfUser.ADMINISTRATOR) {
+					for(Reservation reservation : reservationDto.getReservations()) {
+						reservation.setGuest((Guest) (userDto.getUserById(reservation.getIdGuest())));
+						reservation.setReservedApartment(appartmentDto.getApartmentById(reservation.getIdApartment()));
+						reservation.setHost((Host) userDto.getUserById(reservation.getReservedApartment().getIdHost()));
+					}
+					
+					return g.toJson(reservationDto.getReservations());
+					
+					
+				} else if(user.getTypeOfUser() == TypeOfUser.HOST) {
+					
+					
+					
+					
+					
+				} else if(user.getTypeOfUser() == TypeOfUser.GUEST) {
+					for(Reservation reservation : reservationDto.getReservations()) {
+						if(user.getUserName().equals(reservation.getIdGuest())) {
+							reservation.setGuest((Guest) (userDto.getUserById(reservation.getIdGuest())));
+							reservation.setReservedApartment(appartmentDto.getApartmentById(reservation.getIdApartment()));
+							reservation.setHost((Host) userDto.getUserById(reservation.getReservedApartment().getIdHost()));
+							ret.add(reservation);
+						}
+					}
+					
+					
+					
+					return g.toJson(ret);
+					
+					
+					
+				}
+				
+				
+				
+				
+				
+			}
+			
+			
+				
+			return true;
+		});
 		
 		
 	}

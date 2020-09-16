@@ -17,6 +17,9 @@ public class Reservation {
 	
 	private int idApartment;
 	
+	@JsonIgnore
+	private Host host = new Host();
+	
 	
 	private String startTime;
 	private int numberOfNights;
@@ -57,6 +60,16 @@ public class Reservation {
 		this.price = price;
 		this.statusReseravation = create;
 	
+	}
+	
+	
+	
+	
+	public Host getHost() {
+		return host;
+	}
+	public void setHost(Host host) {
+		this.host = host;
 	}
 	public Apartment getReservedApartment() {
 		return reservedApartment;

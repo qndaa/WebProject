@@ -6,4 +6,20 @@
   "message" : "Ovo",
   "idGuest" : "neko123",
   "statusReseravation" : "CREATE"
+} ], [ "beans.Reservation", {
+  "idApartment" : 3,
+  "startTime" : "20-09-2020",
+  "numberOfNights" : 13,
+  "price" : 675.0000000000001,
+  "message" : "Hitno!!!",
+  "idGuest" : "neko123",
+  "statusReseravation" : "CREATE"
+} ], [ "beans.Reservation", {
+  "idApartment" : 3,
+  "startTime" : "17-09-2020",
+  "numberOfNights" : 3,
+  "price" : 151.2,
+  "message" : "",
+  "idGuest" : "janko",
+  "statusReseravation" : "CREATE"
 } ] ] ]

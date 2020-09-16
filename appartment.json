@@ -24,4 +24,82 @@
   "status" : "ACTIVE",
   "idContetn" : [ "java.util.ArrayList", [ 2, 7, 3, 8 ] ],
   "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 2,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 4,
+  "numberOfGuests" : 10,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2277782.751971697,
+    "geographicalLength" : 5592976.64633649,
+    "address" : [ "beans.Address", {
+      "street" : "Simina",
+      "numberHouse" : 27,
+      "city" : "Stari Grad Urban Municipality",
+      "postNumber" : 11108,
+      "country" : "Serbia"
+    } ]
+  } ],
+  "busyDays" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/2/0.jpg", "/data/apartments/2/1.jpg", "/data/apartments/2/2.jpg" ] ],
+  "pricePerNight" : 50.0,
+  "checkInTime" : [ "java.util.Date", 1600207889328 ],
+  "checkOutTime" : [ "java.util.Date", 1600207889328 ],
+  "status" : "ACTIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 3, 7, 4, 8, 5, 9, 2, 6 ] ],
+  "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 3,
+  "typeOfApartment" : "ROOM",
+  "numberOfRoom" : 1,
+  "numberOfGuests" : 4,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2145058.504585813,
+    "geographicalLength" : 5225907.294203935,
+    "address" : [ "beans.Address", {
+      "street" : "Trg Golootočkih žrtava",
+      "numberHouse" : 23,
+      "city" : "Podgorica",
+      "postNumber" : 81108,
+      "country" : "Montenegro"
+    } ]
+  } ],
+  "busyDays" : [ "java.util.ArrayList", [ "20-09-2020", "21-09-2020", "22-09-2020", "23-09-2020", "24-09-2020", "25-09-2020", "26-09-2020", "27-09-2020", "28-09-2020", "29-09-2020", "30-09-2020", "01-10-2020", "01-11-2020", "17-09-2020", "18-09-2020", "19-09-2020" ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/3/0.jpg" ] ],
+  "pricePerNight" : 54.0,
+  "checkInTime" : [ "java.util.Date", 1600207995663 ],
+  "checkOutTime" : [ "java.util.Date", 1600207995663 ],
+  "status" : "ACTIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 7, 3, 4, 5 ] ],
+  "active" : true
+} ], [ "beans.Apartment", {
+  "id" : 4,
+  "typeOfApartment" : "FULL_APARTMENT",
+  "numberOfRoom" : 3,
+  "numberOfGuests" : 8,
+  "location" : [ "beans.Location", {
+    "geographicalWidth" : 2209176.09338589,
+    "geographicalLength" : 5659748.499232081,
+    "address" : [ "beans.Address", {
+      "street" : "Narodnog fronta",
+      "numberHouse" : 3,
+      "city" : "Novi Sad",
+      "postNumber" : 21102,
+      "country" : "Serbia"
+    } ]
+  } ],
+  "busyDays" : [ "java.util.ArrayList", [ ] ],
+  "idHost" : "b",
+  "comments" : [ "java.util.ArrayList", [ ] ],
+  "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/4/0.jpg", "/data/apartments/4/1.jpg" ] ],
+  "pricePerNight" : 43.0,
+  "checkInTime" : [ "java.util.Date", 1600208131421 ],
+  "checkOutTime" : [ "java.util.Date", 1600208131421 ],
+  "status" : "PASSIVE",
+  "idContetn" : [ "java.util.ArrayList", [ 2, 7, 4, 8 ] ],
+  "active" : true
 } ] ] ]
