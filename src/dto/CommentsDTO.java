@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 import beans.CommentForApartment;
 
@@ -71,6 +72,29 @@ public class CommentsDTO {
 		
 	}
 	
+	
+	public ArrayList<CommentForApartment> getAllCommentOfApartmentbyIdApartment(int idApartment){
+		ArrayList<CommentForApartment> lista = new ArrayList<CommentForApartment>();
+		
+		for (CommentForApartment commentForApartment : comments) {
+			if(commentForApartment.getIdApartment() == idApartment) {
+				lista.add(commentForApartment);
+			}
+		}
+		
+		return lista;
+	}
+	
+	public Boolean checkIfGuestPlaceAllreadyComments(int idApartment, String idGuest){
+		
+		for (CommentForApartment commentForApartment : comments) {
+			if(commentForApartment.getIdApartment() == idApartment && commentForApartment.getIdGuest().equals(idGuest)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 	
 }

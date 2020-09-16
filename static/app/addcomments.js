@@ -74,7 +74,11 @@ Vue.component("comments", {
           		if(response.data == true){
           			alert("uspesno ste ostasvili komentar");
           		}
-          });
+          }).catch(function(eror){
+          	if(eror.response.status == 400){
+				alert("Moguce je komentarisati samo jednom apartman");
+			}
+		});
 
 
     	},

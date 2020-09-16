@@ -10,4 +10,10 @@
   "text" : "svaka cast",
   "mark" : 4,
   "status" : "ON_HOLD"
+} ], [ "beans.CommentForApartment", {
+  "idGuest" : "neko123",
+  "idApartment" : 3,
+  "text" : "asd",
+  "mark" : 2,
+  "status" : "ON_HOLD"
 } ] ] ]

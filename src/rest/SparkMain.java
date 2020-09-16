@@ -741,6 +741,14 @@ public class SparkMain {
 			CommentForApartment com = g.fromJson(playload, CommentForApartment.class);
 			
 			com.setStatus(StatusOfComment.ON_HOLD);
+			//pokupi sve komentare koje imaju id apartmana
+			
+			Boolean check = commentsDTO.checkIfGuestPlaceAllreadyComments(com.getIdApartment(), com.getIdGuest());
+			
+			if(check) {
+				res.status(400);
+				return res;
+			}
 			
 			commentsDTO.getComments().add(com);
 			commentsDTO.saveFile();
