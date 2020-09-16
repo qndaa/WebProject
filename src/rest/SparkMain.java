@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -585,7 +586,7 @@ public class SparkMain {
 			double price = (Double)map.get("price");
 	
 			Apartment a= appartmentDto.getApartmentById(idApartment);
-			ArrayList<String> dani = new ArrayList<String>();
+		
 			
 			for (String s :(ArrayList<String>) map.get("busyDays")) {
 			
@@ -732,7 +733,20 @@ public class SparkMain {
 			return true;
 		});
 		
-		
+		post("/saveComment", (req,res)->{
+			res.type("application/json");
+			Gson g = new Gson();
+			
+			String playload = req.body();
+			CommentForApartment com = g.fromJson(playload, CommentForApartment.class);
+			
+			com.setStatus(StatusOfComment.ON_HOLD);
+			
+			commentsDTO.getComments().add(com);
+			commentsDTO.saveFile();
+			
+			return true;
+		});
 		
 		
 		

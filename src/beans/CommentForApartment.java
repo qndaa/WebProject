@@ -11,7 +11,7 @@ public class CommentForApartment {
 	@JsonIgnore
 	public Guest guest = new Guest();
 	
-	public int idGuest;
+	public String idGuest;
 	
 	@JsonIgnoreProperties(value = {"comments"})
 	@JsonBackReference
@@ -39,7 +39,7 @@ public class CommentForApartment {
 		this.mark = mark;
 	}
 	
-	public CommentForApartment(int idGuest, int idApartment, String text, int mark, StatusOfComment status) {
+	public CommentForApartment(String idGuest, int idApartment, String text, int mark, StatusOfComment status) {
 		super();
 		this.idGuest = idGuest;
 		this.idApartment = idApartment;
@@ -52,13 +52,13 @@ public class CommentForApartment {
 	
 	
 	
-	public int getIdGuest() {
+	public String getIdGuest() {
 		return idGuest;
 	}
 
 
 
-	public void setIdGuest(int idGuest) {
+	public void setIdGuest(String idGuest) {
 		this.idGuest = idGuest;
 	}
 
@@ -132,6 +132,14 @@ public class CommentForApartment {
 
 	public void setMark(int mark) {
 		this.mark = mark;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "CommentForApartment [guest=" + guest + ", idGuest=" + idGuest + ", apartment=" + apartment
+				+ ", idApartment=" + idApartment + ", text=" + text + ", mark=" + mark + ", status=" + status + "]";
 	}
 	
 	

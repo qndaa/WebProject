@@ -64,7 +64,7 @@ Vue.component("reservation", {
 
 
 	                        <div v-if="mode == 'GUEST'">
-	                            <button type="button" class="btn btn-outline-primary w-100 mt-3">Ostavi komentar</button>
+	                          <a :href="'#/comments/' + row.idApartment">  <button type="button" class="btn btn-outline-primary w-100 mt-3">Ostavi komentar</button> </a>
 	                        </div>
 
 
@@ -115,6 +115,9 @@ Vue.component("reservation", {
           	  	this.reservations = response.data;
           	  });  
           });
+    },
+    methods : {
+    	
     }
     
 });

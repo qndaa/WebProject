@@ -2,7 +2,7 @@ Vue.component("changeApartment", {
 
     template:`
 
-    <div class="container w-50 p-3 border""> 
+    <div class="container w-50 p-3 border"> 
     <form class="needs-validation"  @submit="change"  method="post" novalidate>
     	<div class="py-5 text-center">
         	<h2 class="h2 mb-3 text-primary">Izmena apartmana</h2>
