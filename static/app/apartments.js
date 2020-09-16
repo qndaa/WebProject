@@ -15,12 +15,12 @@ Vue.component("apartments", {
 
 					<div class="align-self-start mb-3" >
 			    		<p class="mb-1 ">Izaberite datum dolaska:</p>
-			    		 <input   type="text" id="datepicker" name="birthday"> 
+			    		 <input   type="date" id="datepicker1" name="birthday" v-model="startDate"> 
 			    	</div>
 
 					<div class="align-self-start mb-3"" >
 			    		<p class="mb-1">Izaberite datum odlaska:</p>
-			    		 <input  id="datepicker2" > 
+			    		 <input type="date" id="datepicker21" v-model="endDate" > 
 			    	</div>
 
 			    	<div class="align-self-start mb-3"" >
@@ -190,7 +190,9 @@ Vue.component("apartments", {
     		flegFilters : false,
     		flegSearch : false,
             listOfContent : [],
-            show : 'aktivni'
+            show : 'aktivni',
+            startDate : "",
+            endDate : ""
 
     	
     	}
@@ -403,6 +405,84 @@ Vue.component("apartments", {
 
 
         },
+        searchDate(){
+
+            if(this.startDate == "" && this.endDate == ""){
+                return this.searcList;
+            }
+            var prvi = this.startDate.split("-");
+            var drugi = this.endDate.split("-");
+
+            var DatumJedan =  new Date(prvi[0], prvi[1]-1, prvi[2]);
+            var DatumDva = new Date(drugi[0], drugi[1]-1, drugi[2]);
+            
+            var razlika = Math.round((DatumDva-DatumJedan)/(1000*60*60*24));
+
+            var d = new Date();  
+            
+            var days = [];
+
+            if(razlika <0){
+                alert("Mora prvi datum biti manji od drugog");
+                return;
+             }
+             else if(razlika == 0){
+                //samo proveravas prvi datum
+                alert("samo prvi datum proveravas");
+         
+                    d.setDate( DatumJedan.getDate());
+                    var parts = d.toDateString().split(" ");
+                    var month = d.getMonth() + 1;
+
+                    var string = parts[2] + "-" + ((month < 10) ? "0" : "") + month + "-" + parts[3]
+                    days.push(string);
+              
+             }else{
+                //ovde treba da napravis sve datume koji odgovaraju
+                alert("svi dani koji se ne pojavljujuj");
+                for (var i = 0; i < razlika; i++) {
+                    d.setDate( DatumJedan.getDate() + i);
+                    var parts = d.toDateString().split(" ");
+                    var month = d.getMonth() + 1;
+
+                    var string = parts[2] + "-" + ((month < 10) ? "0" : "") + month + "-" + parts[3]
+                    days.push(string);
+                }
+
+            }
+            var list =[];
+            var fleg = true;
+            var i = 0;
+            this.flegSearch = true;
+           for(apartment of this.searcList){
+                alert("cao");
+                i=0;
+                fleg=true;
+                if(apartment.busyDays.length == 0){
+                    //dodaj u listu apartman
+                    list.push(apartment);
+                }else{
+                    for(day of apartment.busyDays){
+                        for(d of days){
+                            i++;
+                            alert(d);
+                            alert(days);
+                            if(day == d){
+                                
+                                fleg = false;
+                            }
+                            if(i == apartment.busyDays.length && fleg){
+                                list.push(apartment);
+                            }
+                        }//for od do dani
+                    }//for zauzeti dani apartmana
+                }//else
+           }//prvi for
+
+
+            return list;
+        }   
+        ,
 
 
     	search : function(){
@@ -414,7 +494,7 @@ Vue.component("apartments", {
     		this.searcList = this.searchPeople();
     		this.searcList = this.searchCity();
             this.searcList = this.searchCountry();
-
+            this.searcList = this.searchDate();
     		this.filterCrossSearch();
 
     	},
