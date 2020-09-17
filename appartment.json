@@ -14,15 +14,9 @@
       "country" : "Serbia"
     } ]
   } ],
-  "busyDays" : [ "java.util.ArrayList", [ "17-09-2020", "18-09-2020", "19-09-2020", "20-09-2020", "21-09-2020" ] ],
+  "busyDays" : [ "java.util.ArrayList", [ "17-09-2020", "18-09-2020", "19-09-2020", "20-09-2020", "21-09-2020", "23-09-2020", "24-09-2020", "25-09-2020", "28-09-2020", "29-09-2020" ] ],
   "idHost" : "b",
-  "comments" : [ "java.util.ArrayList", [ [ "beans.CommentForApartment", {
-    "idGuest" : "janko",
-    "idApartment" : 1,
-    "text" : "Dobar apartman!",
-    "mark" : 5,
-    "status" : "APPROVED"
-  } ] ] ],
+  "comments" : [ "java.util.ArrayList", [ ] ],
   "urlImages" : [ "java.util.ArrayList", [ "/data/apartments/1/0.jpg" ] ],
   "pricePerNight" : 25.0,
   "checkInTime" : [ "java.util.Date", 1600207251382 ],

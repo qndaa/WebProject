@@ -15,5 +15,23 @@
   "price" : 385.0,
   "message" : "",
   "idGuest" : "janko",
-  "statusReseravation" : "CREATE"
+  "statusReseravation" : "DECLINE"
+} ], [ "beans.Reservation", {
+  "idReservation" : 3,
+  "idApartment" : 1,
+  "startTime" : "23-09-2020",
+  "numberOfNights" : 3,
+  "price" : 72.5,
+  "message" : "",
+  "idGuest" : "neko123",
+  "statusReseravation" : "COMPLETED"
+} ], [ "beans.Reservation", {
+  "idReservation" : 4,
+  "idApartment" : 1,
+  "startTime" : "28-09-2020",
+  "numberOfNights" : 2,
+  "price" : 50.0,
+  "message" : "",
+  "idGuest" : "neko123",
+  "statusReseravation" : "QUITED"
 } ] ] ]

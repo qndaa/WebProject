@@ -17,7 +17,7 @@ Vue.component("apartment", {
                     <img v-bind:src="apartment.host.imagePath" class="rounded-circle " alt="Profile picture" width="150" height="150"> </img>
                 </div>
 
-                <div class="row mt-4" >
+                <div class="row mt-4">
                     <div class="col w-50 d-flex justify-content-center">
                         <p>Ime:</p>
 
@@ -27,8 +27,6 @@ Vue.component("apartment", {
                         <p class="font-weight-bold"> {{apartment.host.name}}</p>
 
                     </div>
-
-
                 </div>
 
                 <div class="row mt-2" >
@@ -97,12 +95,12 @@ Vue.component("apartment", {
 
                 <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel" >
                   
-                  <ol class="carousel-indicators">
+                    <ol class="carousel-indicators">
                         <li data-target="#carousel-example-1z" v-bind="{'data-slide-to' : index}" :class="{'active' : index === 0, }" v-for="(item, index) in apartment.urlImages"></li>
 
-                  </ol>
+                    </ol>
                   
-                  <div class="carousel-inner" role="listbox">
+                    <div class="carousel-inner" role="listbox">
 
                         <div class="carousel-item" :class="{'active' : index === 0}" v-for="(item,index) in apartment.urlImages">
                           <img class="d-block w-100" :src="item"
@@ -110,16 +108,16 @@ Vue.component("apartment", {
                         </div>
                         
                     
-                      <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                      <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                      </a>
+                        <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
                   
-                </div>
+                    </div>
 
                 </div>
 
@@ -206,39 +204,69 @@ Vue.component("apartment", {
                           
 
                                 <div class="form-group w-100 m-3">
-                                  <label for="startDate" class="col-2 col-form-label">Date:</label>
-                                  <div class="col-10">
-                                    <input class="form-control"  type="text" placeholder="dd-mm-yy"  id="datepicker3"/>
-                                  </div>
+                                    <label for="startDate" class="col-2 col-form-label">Date:</label>
+                                    <div class="col-10">
+                                        <input class="form-control"  type="text" placeholder="dd-mm-yy"  id="datepicker3"/>
+                                    </div>
                                 </div>
 
 
 
-                                 <div class="form-group w-100 m-3">
-                                  <label for="numberDays" class="col-2 col-form-label">Broj dana:</label>
-                                  <div class="col-10">
-                                    <input class="form-control" type="number" value="0" id="numberDays" v-model="numberDays"/>
-                                  </div>
+                                <div class="form-group w-100 m-3">
+                                    <label for="numberDays" class="col-2 col-form-label">Broj dana:</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="number" value="0" id="numberDays" v-model="numberDays" @change="changeNumber"/>
+                                    </div>
                                   
                                 </div>
 
                                 <div class="form-group w-100 m-3">
-                                  <label for="message" class="col-2 col-form-label">Poruka</label>
-                                  <div class="col-10">
-                                    <input class="form-control" type="text" value="0" id="message" v-model="message"/>
-                                  </div>
-                                  
+                                    <label for="message" class="col-2 col-form-label">Poruka</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="text" value="0" id="message" v-model="message"/>
+                                    </div>  
+                                </div> 
+
+                                <div v-if="listCount.length > 0" class="m-3">
+
+                                    <div class="row m-3">
+                                        <div class="col-6  d-flex justify-content-center">
+                                            Datum:
+                                            </div>
+
+                                            <div class="col-6 d-flex justify-content-center">
+                                                Cena:
+                                            </div>
+                                        </div>
+                                    <div v-for="i in listCount" class="m-3 row" >
+                                        <div class="col-6 d-flex justify-content-center">
+                                        {{i.day}}
+                                        </div>
+
+                                        <div class="col-6 d-flex justify-content-center">
+                                            {{i.price}}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row m-3 d-flex justify-content-center">
+                                        <label class="text-success">Ukupno: {{count}} </label>
+
+                                            
+                                    </div>
+
+
+
                                 </div>   
-                                      
                                   
 
-                                 <div class="m-3 w-100">
-                                        <div class="col-10">
-                                            <button class="btn btn-success btn-block" v-on:click="reservation">Rezervisi</button>
+                                 <div class=" w-100 ">
+                                        <div class="col-10 m-3">
+                                            <button class="btn btn-success btn-block d-flex justify-content-center" v-on:click="reservation">Rezervisi</button>
                                         </div>
                                 
 
-                                    </div>
+                                </div>
                             
 
                         </div>
@@ -315,8 +343,11 @@ Vue.component("apartment", {
     	return {
     		apartment : null,
             id : this.$route.params.id,
+            holidays : [],
             startDate : "",
             user : "",
+            count : "",
+            listCount : "",
             numberDays : 0,
             message : '',
             xCoordinate : 0,
@@ -357,7 +388,11 @@ Vue.component("apartment", {
                     this.initDatePicker();
                 })
             });
+        axios.post("/getHolidays")
+        .then((response) => {
+            this.holidays = response.data;
 
+        });
              
     },
     methods : {
@@ -394,7 +429,12 @@ Vue.component("apartment", {
 
                 onSelect : (date) => {
                     this.startDate = date;
+                    this.changeNumber();
                 }
+                
+                    
+                    
+                
             });
 
 
@@ -496,8 +536,8 @@ Vue.component("apartment", {
                 var string = parts[2] + "-" + ((month < 10) ? "0" : "") + month + "-" + parts[3]
                 days.push(string);
             }
-            this.Resevation.price = price;
-
+            //this.Resevation.price = price;
+            this.Resevation.price = this.count;
             var daysString = "";
 
             this.Resevation.busyDays = days;
@@ -609,6 +649,61 @@ Vue.component("apartment", {
                     }
                     
                 })
+        }, 
+        changeNumber : function() {
+
+            this.count = 0;
+            this.listCount = [];
+            if(this.startDate != "" && this.numberDays > 0) {
+
+                var tokens = this.startDate.split('-');
+                var newDate = new Date(tokens[2], tokens[1]-1, tokens[0]);
+        
+
+                
+                var date = this.startDate;
+                
+
+                for (var i = 0; i < this.numberDays; i++) {
+                    var d = new Date();
+                    d.setDate( newDate.getDate() + i);
+
+
+                    var parts = d.toDateString().split(" ");
+                    var month = d.getMonth() + 1;
+                    var string = parts[2] + "-" + ((month < 10) ? "0" : "") + month + "-" + parts[3]
+                    var price = 0;
+
+                    for(var holi of this.holidays) {
+                        if(holi == string) {
+                            price = this.apartment.pricePerNight + (this.apartment.pricePerNight * 0.05);
+                            break;
+                        }
+                    }
+
+                    if(price > 0) {
+                        this.count += price;
+                        this.listCount.push({'day' : string, 'price' : price});
+                        continue;
+                    }
+
+            
+                    if(d.getDay() == 5 || d.getDay() == 6 || d.getDay() == 0){
+                        price += this.apartment.pricePerNight - (this.apartment.pricePerNight * 0.1) ;
+                        
+                    }else {
+                         price += this.apartment.pricePerNight
+                    }
+
+
+                    this.count += price;
+                    this.listCount.push({'day' : string, 'price' : price});
+                }
+            
+            }
+
+
+
         }
     
     }

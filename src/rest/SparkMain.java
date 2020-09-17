@@ -35,6 +35,7 @@ import beans.User;
 import dto.ApartmentDTO;
 import dto.CommentsDTO;
 import dto.ContentsOfApartmentDTO;
+import dto.HolidaysDTO;
 import dto.ReservationDTO;
 import dto.UserDTO;
 import enums.StatusApartment;
@@ -52,6 +53,7 @@ public class SparkMain {
 	public static ReservationDTO reservationDto = new ReservationDTO();
 	public static ContentsOfApartmentDTO contentsOfApartmentDTO = new ContentsOfApartmentDTO(); 
 	public static CommentsDTO commentsDTO = new CommentsDTO();
+	public static HolidaysDTO holidaysDTO = new HolidaysDTO();
 	
 	public static void main(String[] args) throws Exception {
 		port(9001);
@@ -68,8 +70,8 @@ public class SparkMain {
 		reservationDto.loadFile();
 		commentsDTO.loadFile();
 		
-		
-		//userDto.createHost();
+		holidaysDTO.loadFile();
+
 
 		post("/login", (req, res) -> {
 			res.type("application/json");
@@ -913,6 +915,11 @@ public class SparkMain {
 			return false;
 		});
 		
+		
+		post("/getHolidays", (request, response) ->{
+			Gson g = new Gson();		
+			return g.toJson(holidaysDTO.getHolidays());		
+		});
 		
 		
 	}

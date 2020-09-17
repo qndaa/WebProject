@@ -1,8 +1,4 @@
 [ "java.util.ArrayList", [ [ "beans.ContentOfApartment", {
-  "id" : 2,
-  "name" : "Bazen",
-  "imagePath" : "/data/contentsOfApartment/Bazen.jpg"
-} ], [ "beans.ContentOfApartment", {
   "id" : 3,
   "name" : "Terasa",
   "imagePath" : "/data/contentsOfApartment/Terasa.jpg"
