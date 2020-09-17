@@ -512,6 +512,7 @@ Vue.component("apartments", {
                 list = this.searcList;
             }
 
+
             //kada je kombinovano
             if(this.flegSearch && this.flegFilters){
                 for(s of this.searcList){
