@@ -13,9 +13,85 @@ Vue.component("reservation", {
 	    		</div>
 	    	</div>
 
+	    	<div class="row mt-4">
+	    		<div class="card col-3  p-3 m-3">
+			    	<div > 
+			    		<h3 class="text-primary">Sortiraj po ceni </h3>
+			    		<hr>
+			    	</div>
+			    	<div class="d-flex justify-content-between" >
+			    		<p><input type="radio"  value="growing" v-model="sortingType" v-on:change="sortReservations"> Rastuce </p>
+			    	</div>
+			    	<div class=" d-flex justify-content-between" >
+			    		<p><input type="radio"  value="descending" v-model="sortingType" v-on:change="sortReservations"> Opadajuce</p>
+			    	</div>
+
+		    	</div>
+
+		    	<div class="card col-5 p-3 m-3 border">
+		    		<div > 
+			    		<h3 class="text-primary">Filtr po statusu</h3>
+			    		<hr>
+			    	</div>
+			    	<div class="row ">
+			    		<div class="col-6 ">
+			    		<div  >
+			    			<label><input type="checkbox" value="CREATE" v-model="listOfStatusReservation" v-on:change="filter"> Kreirana  </label>
+			    		</div>
+			    		 </div>
+			    		 <div class="col-6 ">
+			    			<div  >
+			    			<label><input type="checkbox" value="ACCEPTED" v-model="listOfStatusReservation" v-on:change="filter" > Prihvacena  </label>
+			    			</div>
+			    		 </div>
+			    	</div>
+			    	<div class="row ">
+			    		<div class="col-6 ">
+			    		<div  >
+			    			<label><input type="checkbox" value="QUITED" v-model="listOfStatusReservation" v-on:change="filter"> Odustanak  </label>
+			    		</div>
+			    		 </div>
+			    		 <div class="col-6 ">
+			    			<div  >
+			    			<label><input type="checkbox" value="DECLINE" v-model="listOfStatusReservation" v-on:change="filter"> Odbiejena  </label>
+			    			</div>
+			    		 </div>
+			    	</div>
+			    	<div class="row ">
+			    		<div class="col-6 ">
+			    		<div  >
+			    			<label><input type="checkbox" value="COMPLETED" v-model="listOfStatusReservation" v-on:change="filter"> Zavrsena  </label>
+			    		</div>
+			    		 </div>
+			    			
+			    	</div>
+
+
+			    	
+
+
+		    	</div>
+		    	<div class="card col p-3 m-3 border"  v-if="mode=='ADMINISTRATOR' || mode == 'GUEST'">
+		    		<div > 
+			    		<h3  class="text-primary">Pretraga po korisnickom imenu</h3>
+			    		<hr>
+			    	</div>
+
+		    		<div>
+			    		<label>Pretraga: </label>
+			    		<input type="text" v-model="usernamaSearch" />
+			    	</div>
+		    		<div class="d-flex justify-content-end">
+		    		<button class="btn bg-primary"  v-on:click="search">Pretrazi </button>
+		    		</div>
+		    	</div>
+
+	    	</div>
 
 
 	    	<div class="row mt-4"  >
+
+
 	    		
 	      		<div class="col-12 border border-primary rounded m-3" v-for="row in reservations">
 
@@ -128,8 +204,16 @@ Vue.component("reservation", {
     data : function(){
     	return {
     		mode : 'NO_LOGIN',
-    		reservations : []	
-    	}
+    		reservations : [],
+    		sortingType : "",
+    		listOfStatusReservation : [],
+    		withoutFilterReservation : [],
+    		filterList : [],
+    		searchList : [],
+    		flegFilter : false,
+    		flegSearch : false,
+    		usernamaSearch : ""
+     	}
     },
 
     beforeMount(){
@@ -152,6 +236,7 @@ Vue.component("reservation", {
     	  	  .post('/getReservation')
           	  .then(response => {
           	  	this.reservations = response.data;
+          	  	this.withoutFilterReservation = this.reservations;
           	  });  
           });
     },
@@ -190,7 +275,123 @@ Vue.component("reservation", {
 
 
     			});
+    	},
+
+    	sortReservations : function(){
+
+    		if(this.sortingType === "") return;
+
+    		if(this.sortingType === 'growing'){
+    			for (var i = 0; i < this.reservations.length-1 ; i++) {
+    				for (var j = i+1; j < this.reservations.length; j++) {
+    					if(this.reservations[i].price>this.reservations[j].price){
+    						let temp = this.reservations[i];
+    						this.reservations[i] = this.reservations[j];
+    						this.reservations[j] = temp;
+    					}
+    				}	
+    			}
+    		}else{
+    			for (var i = 0; i < this.reservations.length-1 ; i++) {
+    				for (var j = i+1; j < this.reservations.length; j++) {
+    					if(this.reservations[i].price<	this.reservations[j].price){
+    						let temp = this.reservations[i];
+    						this.reservations[i] = this.reservations[j];
+    						this.reservations[j] = temp;
+    					}
+    				}	
+    			}
+    		}
+
+    	},
+    	filterByStatusOfReservation : function(){
+
+    		if(this.listOfStatusReservation.length == 0) {
+
+    			return this.withoutFilterReservation;
+    		}
+
+    		this.flegFilter = true;
+    		var list = [];
+    		for(res of this.withoutFilterReservation){
+    			for(status of this.listOfStatusReservation){
+    				alert(status);
+    				if(res.statusReseravation == status){
+    					list.push(res);
+    				}
+    			}
+    		}
+
+    		return  list;
+
+    	},
+    	filter : function(){
+    		this.filterList = [];
+    		this.flegFilter = false;
+
+    		this.filterList = this.filterByStatusOfReservation();
+
+    		this.crosSearchFilters();
+
+    	},
+    	searchByUsernameOfGuest : function (){
+
+    		if(this.usernamaSearch == "") return this.withoutFilterReservation;
+
+    		this.flegSearch = true;  		
+    		var list = [];
+    		for(res of this.withoutFilterReservation){
+    			if(res.guest.username == this.usernamaSearch){	
+    				list.push(res);
+    				return list;
+    			}
+    		}
+
+    	},
+    	search : function() {
+    		this.searchList = [];
+    		this.flegSearch = false;
+    		this.searchList = this.searchByUsernameOfGuest();
+
+    		this.crosSearchFilters();
+
+
+    	},
+    	crosSearchFilters : function(){
+    		let list = [];
+    		if(!this.flegSearch && !this.flegFilter){
+    			list = this.withoutFilterReservation;
+    		}
+    		if(this.flegFilter && !this.flegSearch){
+                list = this.filterList;
+            }
+            if(!this.flegFilter && this.flegSearch){
+                list = this.searchList;
+            }
+
+            if(this.flegSearch && this.flegFilter){
+            	for(fi of this.filterList){
+            		for(se of this.searchList){
+            			if(fi.idReservation == se.idReservation){
+            				list.push(fi);
+            			}
+            		}
+            	}
+            }
+
+            this.reservations = list;
+            this.sortReservations();
+
+
     	}
+
+
+
+
+
+
+
+
     	
     }
     

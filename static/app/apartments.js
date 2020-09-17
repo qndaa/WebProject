@@ -72,10 +72,10 @@ Vue.component("apartments", {
 			    		<hr>
 			    	</div>
 			    	<div class="d-flex justify-content-between" >
-			    		<p><input type="radio" id="vehicle1" name="vehicle1" value="growing" v-model="sortingType" v-on:change="sortApartments"> Rastuce </p>
+			    		<p><input type="radio"  value="growing" v-model="sortingType" v-on:change="sortApartments"> Rastuce </p>
 			    	</div>
 			    	<div class=" d-flex justify-content-between" >
-			    		<p><input type="radio" id="vehicle1" name="vehicle1" value="descending" v-model="sortingType" v-on:change="sortApartments"> Opadajuce</p>
+			    		<p><input type="radio"  value="descending" v-model="sortingType" v-on:change="sortApartments"> Opadajuce</p>
 			    	</div>
 
 		    	</div>
@@ -86,11 +86,11 @@ Vue.component("apartments", {
 			    		<hr>
 			    	</div>
 			    	<div class="d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="FULL_APARTMENT" v-model="typeOfAccommodation" v-on:change="filters"> Ceo apartman </p>
+			    		<p><input type="checkbox"  value="FULL_APARTMENT" v-model="typeOfAccommodation" v-on:change="filters"> Ceo apartman </p>
 			    		<span class="badge text-muted"> 10 </span>
 			    	</div>
 			    	<div class=" d-flex justify-content-between" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" value="ROOM" v-model="typeOfAccommodation" v-on:change="filters"> Soba </p>
+			    		<p><input type="checkbox"  value="ROOM" v-model="typeOfAccommodation" v-on:change="filters"> Soba </p>
 			    		<span class="badge text-muted"> 10 </span>
 			    	</div>
 		    	</div>
@@ -101,7 +101,7 @@ Vue.component("apartments", {
 			    		<hr>
 			    	</div>
 			    	<div class="d-flex justify-content-between" v-for="c in listOfContent" >
-			    		<p><input type="checkbox" id="vehicle1" name="vehicle1" v-bind:value="c.id" v-model="listOfEssentials" v-on:change="filters"> {{c.name}} </p>
+			    		<p><input type="checkbox"  v-bind:value="c.id" v-model="listOfEssentials" v-on:change="filters"> {{c.name}} </p>
 			    	</div>
 			    	
 
