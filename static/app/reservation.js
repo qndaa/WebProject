@@ -208,10 +208,10 @@ Vue.component("reservation", {
     		sortingType : "",
     		listOfStatusReservation : [],
     		withoutFilterReservation : [],
-    		filterList : [],
-    		searchList : [],
-    		flegFilter : false,
-    		flegSearch : false,
+    		filterList2 : [],
+    		searchList2 : [],
+    		flegFilter2 : false,
+    		flegSearch2 : false,
     		usernamaSearch : ""
      	}
     },
@@ -278,8 +278,8 @@ Vue.component("reservation", {
     	},
 
     	sortReservations : function(){
-
-    		if(this.sortingType === "") return;
+    		
+    		if(this.sortingType === "" || this.reservations === undefined) return;
 
     		if(this.sortingType === 'growing'){
     			for (var i = 0; i < this.reservations.length-1 ; i++) {
@@ -311,11 +311,10 @@ Vue.component("reservation", {
     			return this.withoutFilterReservation;
     		}
 
-    		this.flegFilter = true;
+    		this.flegFilter2 = true;
     		var list = [];
     		for(res of this.withoutFilterReservation){
     			for(status of this.listOfStatusReservation){
-    				alert(status);
     				if(res.statusReseravation == status){
     					list.push(res);
     				}
@@ -326,10 +325,10 @@ Vue.component("reservation", {
 
     	},
     	filter : function(){
-    		this.filterList = [];
-    		this.flegFilter = false;
+    		this.filterList2 = [];
+    		this.flegFilter2 = false;
 
-    		this.filterList = this.filterByStatusOfReservation();
+    		this.filterList2 = this.filterByStatusOfReservation();
 
     		this.crosSearchFilters();
 
@@ -338,7 +337,7 @@ Vue.component("reservation", {
 
     		if(this.usernamaSearch == "") return this.withoutFilterReservation;
 
-    		this.flegSearch = true;  		
+    		this.flegSearch2 = true;  		
     		var list = [];
     		for(res of this.withoutFilterReservation){
     			if(res.guest.username == this.usernamaSearch){	
@@ -349,29 +348,31 @@ Vue.component("reservation", {
 
     	},
     	search : function() {
-    		this.searchList = [];
-    		this.flegSearch = false;
-    		this.searchList = this.searchByUsernameOfGuest();
+    		this.searchList2 = [];
+    		this.flegSearch2 = false;
+    		this.searchList2 = this.searchByUsernameOfGuest();
 
     		this.crosSearchFilters();
 
 
     	},
     	crosSearchFilters : function(){
+
     		let list = [];
-    		if(!this.flegSearch && !this.flegFilter){
+    		if(!this.flegSearch2 && !this.flegFilter2){
     			list = this.withoutFilterReservation;
     		}
-    		if(this.flegFilter && !this.flegSearch){
-                list = this.filterList;
+    		if(this.flegFilter2 && !this.flegSearch2){
+                list = this.filterList2;
             }
-            if(!this.flegFilter && this.flegSearch){
-                list = this.searchList;
+            if(!this.flegFilter2 && this.flegSearch2){
+                list = this.searchList2;
             }
 
-            if(this.flegSearch && this.flegFilter){
-            	for(fi of this.filterList){
-            		for(se of this.searchList){
+
+            if(this.flegSearch && this.flegFilter2){
+            	for(fi of this.filterList2){
+            		for(se of this.searchList2){
             			if(fi.idReservation == se.idReservation){
             				list.push(fi);
             			}
